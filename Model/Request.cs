@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class Request : BaseEntity
+    public class Requests : BaseEntity
     {
+        private Parents parentsId;
+        private BabySitterTeens babysitterId;
         private string status;
         private DateTime TimeOfRequest;
 

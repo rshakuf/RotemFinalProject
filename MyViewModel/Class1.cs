@@ -1,4 +1,4 @@
-﻿namespace ViewModel
+﻿namespace MyViewModel
 {
     public class Class1
     {
