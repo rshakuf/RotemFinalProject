@@ -39,8 +39,8 @@ namespace ViewModel
             if (reader["TotalPayment"] != DBNull.Value) jh.TotalPayment = Convert.ToInt32(reader["totalPayment"]);
             if (reader["BabySitterId"] != DBNull.Value)
                 jh.BabySitterTeensid = BabySitterTeensDB.SelectById(Convert.ToInt32(reader["BabysitterId"]));
-            if (reader["ParentsId"] != DBNull.Value)
-                jh.Parentsid = ParentsDB.SelectById(Convert.ToInt32(reader["ParentsId"]));
+            if (reader["ParentId"] != DBNull.Value)
+                jh.Parentid = ParentsDB.SelectById(Convert.ToInt32(reader["ParentId"]));
 
             base.CreateModel(jh);
             return jh;
@@ -62,7 +62,7 @@ namespace ViewModel
                 "VALUES (?,?,?,?,?)";
 
             cmd.Parameters.Add(new OleDbParameter("@BabySitterTeensid", DbVal(jh.BabySitterTeensid?.Id)));
-            cmd.Parameters.Add(new OleDbParameter("@Parentsid", DbVal(jh.Parentsid?.Id)));
+            cmd.Parameters.Add(new OleDbParameter("@Parentsid", DbVal(jh.Parentid?.Id)));
             cmd.Parameters.Add(new OleDbParameter("@startTime", jh.StartTime));
             cmd.Parameters.Add(new OleDbParameter("@endTime", jh.EndTime));
             cmd.Parameters.Add(new OleDbParameter("@totalPayment", jh.TotalPayment));
@@ -77,7 +77,7 @@ namespace ViewModel
                 "WHERE id=?";
 
             cmd.Parameters.Add(new OleDbParameter("@BabySitterTeensid", DbVal(jh.BabySitterTeensid?.Id)));
-            cmd.Parameters.Add(new OleDbParameter("@Parentsid", DbVal(jh.Parentsid?.Id)));
+            cmd.Parameters.Add(new OleDbParameter("@Parentsid", DbVal(jh.Parentid?.Id)));
             cmd.Parameters.Add(new OleDbParameter("@startTime", jh.StartTime));
             cmd.Parameters.Add(new OleDbParameter("@endTime", jh.EndTime));
             cmd.Parameters.Add(new OleDbParameter("@totalPayment", jh.TotalPayment));

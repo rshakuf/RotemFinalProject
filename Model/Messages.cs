@@ -9,12 +9,12 @@ namespace Model
     public class Messages : BaseEntity
     {
         private int senderId;
-        private int reciver;
+        private int receiver;
         private string messageText;
         private DateTime timeSent;
 
         public int SenderId { get => senderId; set => senderId = value; }
-        public int Reciver { get => reciver; set => reciver = value; }
+        public int Receiver { get => receiver; set => receiver = value; }
         public string MessageText { get => messageText; set => messageText = value; }
         public DateTime TimeSent { get => timeSent; set => timeSent = value; }
     }

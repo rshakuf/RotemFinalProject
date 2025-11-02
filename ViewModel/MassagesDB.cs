@@ -21,7 +21,7 @@ namespace ViewModel
         {
             Messages msg = entity as Messages;
             msg.SenderId = int.Parse(reader["senderId"].ToString());
-            msg.Reciver = int.Parse(reader["reciver"].ToString());
+            msg.Receiver = int.Parse(reader["receiver"].ToString());
             msg.MessageText = reader["messageText"].ToString();
             msg.TimeSent = DateTime.Parse(reader["timeSent"].ToString());
 
@@ -62,12 +62,12 @@ namespace ViewModel
             Messages m = entity as Messages;
             if (m != null)
             {
-                string sqlStr = $"INSERT INTO Messages (senderId, reciver, messageText, timeSent) " +
+                string sqlStr = $"INSERT INTO Messages (senderId, receiver, messageText, timeSent) " +
                                 $"VALUES (@sender, @reciver, @text, @time)";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@sender", m.SenderId));
-                command.Parameters.Add(new OleDbParameter("@reciver", m.Reciver));
+                command.Parameters.Add(new OleDbParameter("@receiver", m.Receiver));
                 command.Parameters.Add(new OleDbParameter("@text", m.MessageText));
                 command.Parameters.Add(new OleDbParameter("@time", m.TimeSent));
             }
@@ -79,12 +79,12 @@ namespace ViewModel
             if (m != null)
             {
                 string sqlStr = $"UPDATE MessagesTbl " +
-                                $"SET senderId=@sender, reciver=@reciver, messageText=@text, timeSent=@time " +
+                                $"SET senderId=@sender, receiver=@receiver, messageText=@text, timeSent=@time " +
                                 $"WHERE id=@id";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@sender", m.SenderId));
-                command.Parameters.Add(new OleDbParameter("@reciver", m.Reciver));
+                command.Parameters.Add(new OleDbParameter("@receiver", m.Receiver));
                 command.Parameters.Add(new OleDbParameter("@text", m.MessageText));
                 command.Parameters.Add(new OleDbParameter("@time", m.TimeSent));
                 command.Parameters.Add(new OleDbParameter("@id", m.Id));

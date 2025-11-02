@@ -38,10 +38,10 @@ namespace ViewModel
             var cop = entity as ChildOfParent ?? new ChildOfParent();
 
             if (reader["id"] != DBNull.Value)
-                cop.IdChild = UserDB.SelectById(Convert.ToInt32(reader["id"]));
+                cop.Id = UserDB.SelectById(Convert.ToInt32(reader["id"]));
 
-            if (reader["Parentsid"] != DBNull.Value)
-                cop.Parent = ParentsDB.SelectById(Convert.ToInt32(reader["Parentsid"]));
+            if (reader["idParent"] != DBNull.Value)
+                cop.IdParent = ParentsDB.SelectById(Convert.ToInt32(reader["idParent"]));
 
             base.CreateModel(cop);
             return cop;
@@ -62,8 +62,8 @@ namespace ViewModel
                 "INSERT INTO ChildOfParent (idChild, Parentsid) " +
                 "VALUES (?,?)";
 
-            cmd.Parameters.Add(new OleDbParameter("@idChild", DbVal(cop.IdChild?.Id)));
-            cmd.Parameters.Add(new OleDbParameter("@Parentsid", DbVal(cop.Parent?.Id)));
+            cmd.Parameters.Add(new OleDbParameter("@id", DbVal(cop.Id?.Id)));
+            cmd.Parameters.Add(new OleDbParameter("@idParents", DbVal(cop.IdParent?.Id)));
         }
 
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
@@ -74,9 +74,8 @@ namespace ViewModel
                 "UPDATE ChildOfParent SET idChild=?, Parentsid=? " +
                 "WHERE id=?";
 
-            cmd.Parameters.Add(new OleDbParameter("@idChild", DbVal(cop.IdChild?.Id)));
-            cmd.Parameters.Add(new OleDbParameter("@Parentsid", DbVal(cop.Parent?.Id)));
-            cmd.Parameters.Add(new OleDbParameter("@id", cop.Id));
+            cmd.Parameters.Add(new OleDbParameter("@id", DbVal(cop.Id?.Id)));
+            cmd.Parameters.Add(new OleDbParameter("@idParents", DbVal(cop.IdParent?.Id)));
         }
     }
 }

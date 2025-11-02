@@ -12,7 +12,7 @@ namespace ViewModel
     {
         public UserList SelectAll()
         {
-            command.CommandText = "SELECT * FROM UserTbl";
+            command.CommandText = "SELECT [User].* FROM   [User]";
             UserList list = new UserList(base.Select());
             return list;
         }

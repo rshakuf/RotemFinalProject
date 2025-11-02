@@ -8,11 +8,10 @@ namespace Model
 {
     public class ChildOfParent : User
     {
-        private User idChild;
-        private Parents parent;
+        private User id;
+        private Parents idParent;
 
-        
-        public User IdChild { get => idChild; set => idChild = value; }
-        public Parents Parent { get => parent; set => parent = value; }
+        public User Id { get => id; set => id = value; }
+        public Parents IdParent { get => idParent; set => idParent = value; }
     }
 }

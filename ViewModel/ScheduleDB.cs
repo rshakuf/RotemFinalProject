@@ -9,10 +9,10 @@ namespace ViewModel
     {
         public override BaseEntity NewEntity() => new Schedule();
 
-        public List<Schedule> SelectAll()
+        public ScheduleList SelectAll()
         {
             command.CommandText = "SELECT * FROM Schedule";
-            var list = new List<Schedule>();
+            var list = new ScheduleList();
             foreach (var e in Select())
                 list.Add(e as Schedule);
             return list;
@@ -21,7 +21,7 @@ namespace ViewModel
         public static Schedule SelectById(int id)
         {
             var db = new ScheduleDB();
-            db.command.CommandText = "SELECT * FROM Schedule WHERE id=?";
+            db.command.CommandText = "SELECT * FROM Schedule WHERE id=@id";
             db.command.Parameters.Clear();
             db.command.Parameters.Add(new OleDbParameter("@id", id));
             var list = new List<Schedule>();
@@ -38,16 +38,13 @@ namespace ViewModel
                 s.BabysitterId = BabySitterTeensDB.SelectById(Convert.ToInt32(reader["babysitterId"]));
 
             if (reader["dayOfWeek"] != DBNull.Value)
-                s.DayOfWeek = Convert.ToDateTime(reader["DayOfWeek"]);
+                s.DayOfWeek = Convert.ToString(reader["DayOfWeek"]);
 
             if (reader["startTime"] != DBNull.Value)
                 s.StartTime = Convert.ToDateTime(reader["startTime"]);
 
             if (reader["endTime"] != DBNull.Value)
                 s.EndTime = Convert.ToDateTime(reader["endTime"]);
-
-            if (reader["breakTime"] != DBNull.Value)
-                s.BreakTime = Convert.ToDateTime(reader["breakTime"]);
 
             base.CreateModel(s);
             return s;
@@ -56,7 +53,7 @@ namespace ViewModel
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
         {
             if (entity is not Schedule s) return;
-            cmd.CommandText = "DELETE FROM Schedule WHERE id=?";
+            cmd.CommandText = "DELETE FROM Schedule WHERE id=@id";
             cmd.Parameters.Add(new OleDbParameter("@id", s.Id));
         }
 
@@ -72,7 +69,6 @@ namespace ViewModel
             cmd.Parameters.Add(new OleDbParameter("@dayOfWeek", s.DayOfWeek));
             cmd.Parameters.Add(new OleDbParameter("@startTime", s.StartTime));
             cmd.Parameters.Add(new OleDbParameter("@endTime", s.EndTime));
-            cmd.Parameters.Add(new OleDbParameter("@breakTime", s.BreakTime));
         }
 
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
@@ -80,14 +76,13 @@ namespace ViewModel
             if (entity is not Schedule s) return;
 
             cmd.CommandText =
-                "UPDATE Schedule SET babysitterId=?, dayOfWeek=?, startTime=?, endTime=?, breakTime=? " +
+                "UPDATE Schedule SET babysitterId=?, dayOfWeek=?, startTime=?, endTime=? " +
                 "WHERE id=?";
 
             cmd.Parameters.Add(new OleDbParameter("@babysitterId", DbVal(s.BabysitterId?.Id)));
             cmd.Parameters.Add(new OleDbParameter("@dayOfWeek", s.DayOfWeek));
             cmd.Parameters.Add(new OleDbParameter("@startTime", s.StartTime));
             cmd.Parameters.Add(new OleDbParameter("@endTime", s.EndTime));
-            cmd.Parameters.Add(new OleDbParameter("@breakTime", s.BreakTime));
             cmd.Parameters.Add(new OleDbParameter("@id", s.Id));
         }
     }

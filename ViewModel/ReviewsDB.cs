@@ -34,11 +34,11 @@ namespace ViewModel
         {
             var r = entity as Reviews ?? new Reviews();
 
-            if (reader["parentsid"] != DBNull.Value)
-                r.Parentsid = ParentsDB.SelectById(Convert.ToInt32(reader["parentsid"]));
+            if (reader["parentId"] != DBNull.Value)
+                r.ParentId = ParentsDB.SelectById(Convert.ToInt32(reader["parentId"]));
 
-            if (reader["babySitterTeensid"] != DBNull.Value)
-                r.BabySitterTeensid = BabySitterTeensDB.SelectById(Convert.ToInt32(reader["babySitterTeensid"]));
+            if (reader["babySitterId"] != DBNull.Value)
+                r.BabySitterId = BabySitterTeensDB.SelectById(Convert.ToInt32(reader["babySitterId"]));
 
             if (reader["reviewDate"] != DBNull.Value)
                 r.ReviewDate = Convert.ToDateTime(reader["reviewDate"]);
@@ -62,11 +62,11 @@ namespace ViewModel
             if (entity is not Reviews r) return;
 
             cmd.CommandText =
-                "INSERT INTO Reviews (parentsid, babySitterTeensid, reviewDate, rating) " +
+                "INSERT INTO Reviews (parentId, babySitterId, reviewDate, rating) " +
                 "VALUES (?,?,?,?)";
 
-            cmd.Parameters.Add(new OleDbParameter("@parentsid", DbVal(r.Parentsid?.Id)));
-            cmd.Parameters.Add(new OleDbParameter("@babySitterTeensid", DbVal(r.BabySitterTeensid?.Id)));
+            cmd.Parameters.Add(new OleDbParameter("@parentId", DbVal(r.ParentId?.Id)));
+            cmd.Parameters.Add(new OleDbParameter("@babySitterId", DbVal(r.BabySitterId?.Id)));
             cmd.Parameters.Add(new OleDbParameter("@reviewDate", r.ReviewDate));
             cmd.Parameters.Add(new OleDbParameter("@rating", r.Rating));
         }
@@ -76,11 +76,11 @@ namespace ViewModel
             if (entity is not Reviews r) return;
 
             cmd.CommandText =
-                "UPDATE Reviews SET parentsid=?, babySitterTeensid=?, reviewDate=?, rating=? " +
+                "UPDATE Reviews SET parentId=?, babySitterId=?, reviewDate=?, rating=? " +
                 "WHERE id=?";
 
-            cmd.Parameters.Add(new OleDbParameter("@parentsid", DbVal(r.Parentsid?.Id)));
-            cmd.Parameters.Add(new OleDbParameter("@babySitterTeensid", DbVal(r.BabySitterTeensid?.Id)));
+            cmd.Parameters.Add(new OleDbParameter("@parentId", DbVal(r.ParentId?.Id)));
+            cmd.Parameters.Add(new OleDbParameter("@babySitterId", DbVal(r.BabySitterId?.Id)));
             cmd.Parameters.Add(new OleDbParameter("@reviewDate", r.ReviewDate));
             cmd.Parameters.Add(new OleDbParameter("@rating", r.Rating));
             cmd.Parameters.Add(new OleDbParameter("@id", r.Id));

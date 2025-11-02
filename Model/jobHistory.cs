@@ -9,7 +9,7 @@ namespace Model
     public class JobHistory : BaseEntity
     {
         private BabySitterTeens babySitterTeensid;
-        private Parents parentsid;
+        private Parents parentId;
         private DateTime startTime;
         private DateTime endTime;
         private int totalPayment;
@@ -18,12 +18,12 @@ namespace Model
         public DateTime EndTime { get => endTime; set => endTime = value; }
         public int TotalPayment { get => totalPayment; set => totalPayment = value; }
         
-        public Parents Parentsid { get => parentsid; set => parentsid = value; }
+        public Parents Parentid { get => parentId; set => parentId = value; }
         public BabySitterTeens BabySitterTeensid { get => babySitterTeensid; set => babySitterTeensid = value; }
 
         public override string ToString()
         {
-            return startTime + " - " + endTime + " - " + totalPayment + " for "+ parentsid.FirstName+" "+parentsid.LastName;
+            return startTime + " - " + endTime + " - " + totalPayment + " for "+ parentId.FirstName+" "+parentId.LastName;
         }
     }
     

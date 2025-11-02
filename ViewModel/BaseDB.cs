@@ -12,9 +12,11 @@ namespace ViewModel
     {
         //protected static readonly string connectionString = "@Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\User\\source\repos\\RotemFinalProject\\ViewModel\\rotembabysitter.laccdb";
 
-        protected static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source="
-                      + System.IO.Path.GetFullPath(System.Reflection.Assembly.GetExecutingAssembly().Location
-                      + "/../../../../../ViewModel/rotembabysitter.accdb");
+        //protected static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source="
+        //              + System.IO.Path.GetFullPath(System.Reflection.Assembly.GetExecutingAssembly().Location
+        //              + "/../../../../../ViewModel/rotembabysitter.accdb");
+
+        protected static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Downloads\RotemFinalProject-master (3)\RotemFinalProject-master\ViewModel\rotembabysitter.accdb";
 
         protected static OleDbConnection connection;
         protected OleDbCommand command;

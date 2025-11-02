@@ -27,12 +27,12 @@ public class Program
         //foreach (ChildOfParent p in list)
         //    Console.WriteLine(p.Id + " " + p.FirstName);
 
-        //לא עובד
+        // עובד
 
-        JobHistoryDB jhdb = new();
-        JobHistoryList jhlist = jhdb.SelectAll();
-        foreach (JobHistory jh in jhlist)
-            Console.WriteLine(jh.StartTime);
+        //JobHistoryDB jhdb = new();
+        //JobHistoryList jhlist = jhdb.SelectAll();
+        //foreach (JobHistory jh in jhlist)
+        //    Console.WriteLine(jh.StartTime);
 
 
         //עובד
@@ -50,29 +50,29 @@ public class Program
         //foreach (BabySitterRate p in list)
         //    Console.WriteLine(p.Id );
 
-        //לא עובד
+        // עובד
         //MessagesDB msg = new();
         //MessagesList grouplist = msg.SelectAll();
         //foreach (Messages p in grouplist)
         //    Console.WriteLine(p.SenderId);
 
-        //לא עובד
+        // עובד
         //RequestsDB db = new();
         //RequestsList list = db.SelectAll();
         //foreach (Requests p in list)
         //    Console.WriteLine(p.BabysitterId);
 
-        //לא עובד
+        // עובד
         //ReviewsDB db = new();
         //ReviewsList list = db.SelectAll();
         //foreach (Reviews p in list)
-        //    Console.WriteLine(p.BabySitterTeensid);
+        //    Console.WriteLine(p.BabySitterId);
 
-
-        //BabySitterRateDB db = new();
-        //BabySitterRateList list = db.SelectAll();
-        //foreach (BabySitterRate p in list)
-        //    Console.WriteLine(p.Id );
+        //לא עובד
+        ScheduleDB db = new();
+        ScheduleList list = db.SelectAll();
+        foreach (Schedule p in list)
+            Console.WriteLine(p.BabysitterId);
 
 
         //BabySitterRateDB db = new();
