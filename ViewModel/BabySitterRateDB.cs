@@ -9,10 +9,10 @@ namespace ViewModel
     {
         public override BaseEntity NewEntity() => new BabySitterRate();
 
-        public List<BabySitterRate> SelectAll()
+        public BabySitterRateList SelectAll()
         {
-            command.CommandText = "SELECT * FROM BabySitterRate";
-            var list = new List<BabySitterRate>();
+            command.CommandText = "SELECT BabySitterRate.*FROM BabySitterRate";
+            var list = new BabySitterRateList();
             foreach (var e in Select())
                 list.Add(e as BabySitterRate);
             return list;
@@ -21,7 +21,7 @@ namespace ViewModel
         public static BabySitterRate SelectById(int id)
         {
             var db = new BabySitterRateDB();
-            db.command.CommandText = "SELECT * FROM BabySitterRate WHERE id=?";
+            db.command.CommandText = "SELECT BabySitterRate.* FROM BabySitterRate WHERE id=@id";
             db.command.Parameters.Clear();
             db.command.Parameters.Add(new OleDbParameter("@id", id));
             var list = new List<BabySitterRate>();
@@ -49,7 +49,7 @@ namespace ViewModel
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
         {
             if (entity is not BabySitterRate r) return;
-            cmd.CommandText = "DELETE FROM BabySitterRate WHERE id=?";
+            cmd.CommandText = "DELETE BabySitterRate.* FROM BabySitterRate WHERE id=@id";
             cmd.Parameters.Add(new OleDbParameter("@id", r.Id));
         }
 
@@ -73,7 +73,7 @@ namespace ViewModel
 
             cmd.CommandText =
                 "UPDATE BabySitterRate SET stars=?, idBabySitter=?, idParent=?, DateOfRate=? " +
-                "WHERE id=?";
+                "WHERE id=@id";
 
             cmd.Parameters.Add(new OleDbParameter("@stars", r.Stars));
             cmd.Parameters.Add(new OleDbParameter("@idBabySitter", DbVal(r.IdBabySitter?.Id)));

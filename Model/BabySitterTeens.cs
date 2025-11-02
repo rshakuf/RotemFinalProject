@@ -1,6 +1,6 @@
 ﻿namespace Model
 {
-    public class BabySitterTeens : BaseEntity
+    public class BabySitterTeens : User
     {
         private string mailOfRecommender;
         private int priceForAnHour;

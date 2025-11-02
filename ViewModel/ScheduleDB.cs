@@ -38,7 +38,7 @@ namespace ViewModel
                 s.BabysitterId = BabySitterTeensDB.SelectById(Convert.ToInt32(reader["babysitterId"]));
 
             if (reader["dayOfWeek"] != DBNull.Value)
-                s.DayOfWeek = reader["dayOfWeek"].ToString();
+                s.DayOfWeek = Convert.ToDateTime(reader["DayOfWeek"]);
 
             if (reader["startTime"] != DBNull.Value)
                 s.StartTime = Convert.ToDateTime(reader["startTime"]);

@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace ViewModel
 {
-    public class BabySitterTeensDB : BaseDB
+    public class BabySitterTeensDB : UserDB
     {
         public BabySitterTeensList SelectAll()
         {
-            command.CommandText = $"SELECT * FROM BabySitterTeensTbl";
+            command.CommandText = $"SELECT [User].DateOfBirth, [User].firstName, [User].LastName, [User].CityName, [User].CityNameId, BabysitterTeens.MailOfRecommender, BabysitterTeens.PriceForAnHour, BabysitterTeens.ProfilePicture, BabysitterTeens.Id FROM (BabysitterTeens INNER JOIN [User] ON BabysitterTeens.Id = [User].id)";
             BabySitterTeensList groupList = new BabySitterTeensList(base.Select());
             return groupList;
         }

@@ -5,7 +5,7 @@ using Model;
 
 namespace ViewModel
 {
-    public class ReviewsDBR : BaseDB
+    public class ReviewsDB : BaseDB
     {
         public override BaseEntity NewEntity() => new Reviews();
 

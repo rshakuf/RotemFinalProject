@@ -10,6 +10,6 @@ namespace Model
     {
         private string cityName;
 
-        public string CityName { get => CityName; set => CityName = value; }
+        public string CityName { get => cityName; set => cityName = value; }
     }
 }

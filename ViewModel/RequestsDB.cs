@@ -38,7 +38,7 @@ namespace ViewModel
                 r.Status = reader["status"].ToString();
 
             if (reader["TimeOfRequest"] != DBNull.Value)
-                r.TimeOfRequest1 = Convert.ToDateTime(reader["TimeOfRequest"]);
+                r.TimeOfRequest = Convert.ToDateTime(reader["TimeOfRequest"]);
 
             if (reader["parentsId"] != DBNull.Value)
                 r.ParentsId = ParentsDB.SelectById(Convert.ToInt32(reader["parentsId"]));
@@ -66,7 +66,7 @@ namespace ViewModel
                 "VALUES (?,?,?,?)";
 
             cmd.Parameters.Add(new OleDbParameter("@status", r.Status));
-            cmd.Parameters.Add(new OleDbParameter("@TimeOfRequest", r.TimeOfRequest1));
+            cmd.Parameters.Add(new OleDbParameter("@TimeOfRequest", r.TimeOfRequest));
             cmd.Parameters.Add(new OleDbParameter("@parentsId", DbVal(r.ParentsId?.Id)));
             cmd.Parameters.Add(new OleDbParameter("@babysitterId", DbVal(r.BabysitterId?.Id)));
         }
@@ -80,7 +80,7 @@ namespace ViewModel
                 "WHERE id=?";
 
             cmd.Parameters.Add(new OleDbParameter("@status", r.Status));
-            cmd.Parameters.Add(new OleDbParameter("@TimeOfRequest", r.TimeOfRequest1));
+            cmd.Parameters.Add(new OleDbParameter("@TimeOfRequest", r.TimeOfRequest));
             cmd.Parameters.Add(new OleDbParameter("@parentsId", DbVal(r.ParentsId?.Id)));
             cmd.Parameters.Add(new OleDbParameter("@babysitterId", DbVal(r.BabysitterId?.Id)));
             cmd.Parameters.Add(new OleDbParameter("@id", r.Id));

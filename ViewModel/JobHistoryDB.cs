@@ -9,10 +9,10 @@ namespace ViewModel
     {
         public override BaseEntity NewEntity() => new JobHistory();
 
-        public List<JobHistory> SelectAll()
+        public JobHistoryList SelectAll()
         {
-            command.CommandText = "SELECT * FROM JobHistory";
-            var list = new List<JobHistory>();
+            command.CommandText = "SELECT JobHistory.* FROM JobHistory";
+            var list = new JobHistoryList();
             foreach (var e in Select())
                 list.Add(e as JobHistory);
             return list;

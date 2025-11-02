@@ -12,23 +12,33 @@ namespace ViewModel
 
     public class CityDB : BaseDB
     {
-        public override BaseEntity NewEntity() => new City();
+        public CityList SelectAll()
+        {
+            command.CommandText = $"SELECT * FROM city";
+            CityList groupList = new CityList(base.Select());
+            return groupList;
+        }
 
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
-            City city = entity as City;
-            city.Id = Convert.ToInt32(reader["id"]);
-            city.CityName = reader["cityName"].ToString();
-            return city;
+            City ct = entity as City;
+            ct.CityName = reader["CityName"].ToString();
+            base.CreateModel(entity);
+            return ct;
         }
-
-        public List<City> GetAllCities()
+        public override BaseEntity NewEntity()
         {
-            command.CommandText = "SELECT * FROM City";
-            var list = new List<City>();
-            foreach (var e in Select())
-                list.Add(e as City);
-            return list;
+            return new City();
+        }
+        static private CityList list = new CityList();
+
+        public static City SelectById(int id)
+        {
+            CityDB db = new CityDB();
+            list = db.SelectAll();
+
+            City g = list.Find(item => item.Id == id);
+            return g;
         }
 
         protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
@@ -52,5 +62,6 @@ namespace ViewModel
             cmd.CommandText = "DELETE FROM City WHERE id=@id";
             cmd.Parameters.AddWithValue("@id", city.Id);
         }
+
     }
 }

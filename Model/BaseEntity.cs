@@ -14,6 +14,10 @@ namespace Model
             get { return ID; }
             set { ID = value; }
         }
+        public override string ToString()
+        {
+            return ID + " ";
+        }
 
 
     }

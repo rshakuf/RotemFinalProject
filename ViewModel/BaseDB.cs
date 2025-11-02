@@ -9,11 +9,11 @@ namespace ViewModel
 {
     public abstract class BaseDB
     {
-        protected static readonly string connectionString =
-            @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
-            System.IO.Path.GetFullPath(
-                System.Reflection.Assembly.GetExecutingAssembly().Location +
-                "/../../../../../ViewModel/sherio.accdb");
+        protected static readonly string connectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\User\\source\\repos\\RotemFinalProject\\Model\\rotembabysitterreal.accdb;";
+            //@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
+            //System.IO.Path.GetFullPath(
+            //    System.Reflection.Assembly.GetExecutingAssembly().Location +
+            //    "/../../../../../ViewModel/sherio.accdb");
 
         protected static OleDbConnection connection;
         protected OleDbCommand command;
