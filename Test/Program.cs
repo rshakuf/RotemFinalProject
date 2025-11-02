@@ -6,7 +6,6 @@ public class Program
 {
     public static void Main(string[]args)
     {
-        //עובד
         //Console.ForegroundColor = ConsoleColor.Yellow;
         //Console.WriteLine("City");
         //Console.ResetColor();
