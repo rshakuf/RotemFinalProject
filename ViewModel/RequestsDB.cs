@@ -9,10 +9,10 @@ namespace ViewModel
     {
         public override BaseEntity NewEntity() => new Requests();
 
-        public List<Requests> SelectAll()
+        public RequestsList SelectAll()
         {
             command.CommandText = "SELECT * FROM Requests";
-            var list = new List<Requests>();
+            var list = new RequestsList();
             foreach (var e in Select())
                 list.Add(e as Requests);
             return list;

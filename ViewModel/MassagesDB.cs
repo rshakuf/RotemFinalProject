@@ -12,7 +12,7 @@ namespace ViewModel
     {
         public MessagesList SelectAll()
         {
-            command.CommandText = $"SELECT * FROM MessagesTbl";
+            command.CommandText = $"SELECT Messages.* FROM Messages";
             MessagesList groupList = new MessagesList(base.Select());
             return groupList;
         }
@@ -62,7 +62,7 @@ namespace ViewModel
             Messages m = entity as Messages;
             if (m != null)
             {
-                string sqlStr = $"INSERT INTO MessagesTbl (senderId, reciver, messageText, timeSent) " +
+                string sqlStr = $"INSERT INTO Messages (senderId, reciver, messageText, timeSent) " +
                                 $"VALUES (@sender, @reciver, @text, @time)";
 
                 command.CommandText = sqlStr;

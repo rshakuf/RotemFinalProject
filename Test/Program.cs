@@ -7,6 +7,9 @@ public class Program
     public static void Main(string[]args)
     {
         //עובד
+        //Console.ForegroundColor = ConsoleColor.Yellow;
+        //Console.WriteLine("City");
+        //Console.ResetColor();
         //CityDB cdb = new();
         //CityList cList = cdb.SelectAll();
         //foreach (City c in cList)
@@ -25,13 +28,17 @@ public class Program
         //    Console.WriteLine(p.Id + " " + p.FirstName);
 
         //לא עובד
-        //JobHistoryDB jhdb = new();
-        //JobHistoryList jhlist = jhdb.SelectAll();
-        //foreach (JobHistory jh in jhlist)
-        //    Console.WriteLine(jh);
+
+        JobHistoryDB jhdb = new();
+        JobHistoryList jhlist = jhdb.SelectAll();
+        foreach (JobHistory jh in jhlist)
+            Console.WriteLine(jh.StartTime);
 
 
         //עובד
+        //Console.ForegroundColor = ConsoleColor.Yellow;
+        //Console.WriteLine("BabySitterTeens");
+        //Console.ResetColor();
         //BabySitterTeensDB bst = new();
         //BabySitterTeensList groupList = bst.SelectAll();
         //foreach (BabySitterTeens p in groupList)
@@ -43,23 +50,23 @@ public class Program
         //foreach (BabySitterRate p in list)
         //    Console.WriteLine(p.Id );
 
-
+        //לא עובד
         //MessagesDB msg = new();
         //MessagesList grouplist = msg.SelectAll();
         //foreach (Messages p in grouplist)
-        //    Console.WriteLine(p.senderId);
+        //    Console.WriteLine(p.SenderId);
 
-
+        //לא עובד
         //RequestsDB db = new();
         //RequestsList list = db.SelectAll();
         //foreach (Requests p in list)
-        //    Console.WriteLine(p.babysitterId);
+        //    Console.WriteLine(p.BabysitterId);
 
-
-        //BabySitterRateDB db = new();
-        //BabySitterRateList list = db.SelectAll();
-        //foreach (BabySitterRate p in list)
-        //    Console.WriteLine(p.Id );
+        //לא עובד
+        //ReviewsDB db = new();
+        //ReviewsList list = db.SelectAll();
+        //foreach (Reviews p in list)
+        //    Console.WriteLine(p.BabySitterTeensid);
 
 
         //BabySitterRateDB db = new();

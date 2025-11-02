@@ -34,13 +34,13 @@ namespace ViewModel
         {
             var jh = entity as JobHistory ?? new JobHistory();
 
-            if (reader["startTime"] != DBNull.Value) jh.StartTime = Convert.ToDateTime(reader["startTime"]);
-            if (reader["endTime"] != DBNull.Value) jh.EndTime = Convert.ToDateTime(reader["endTime"]);
-            if (reader["totalPayment"] != DBNull.Value) jh.TotalPayment = Convert.ToInt32(reader["totalPayment"]);
-            if (reader["BabySitterTeensid"] != DBNull.Value)
-                jh.BabySitterTeensid = BabySitterTeensDB.SelectById(Convert.ToInt32(reader["BabySitterTeensid"]));
-            if (reader["Parentsid"] != DBNull.Value)
-                jh.Parentsid = ParentsDB.SelectById(Convert.ToInt32(reader["Parentsid"]));
+            if (reader["StartTime"] != DBNull.Value) jh.StartTime = Convert.ToDateTime(reader["StartTime"]);
+            if (reader["EndTime"] != DBNull.Value) jh.EndTime = Convert.ToDateTime(reader["EndTime"]);
+            if (reader["TotalPayment"] != DBNull.Value) jh.TotalPayment = Convert.ToInt32(reader["totalPayment"]);
+            if (reader["BabySitterId"] != DBNull.Value)
+                jh.BabySitterTeensid = BabySitterTeensDB.SelectById(Convert.ToInt32(reader["BabysitterId"]));
+            if (reader["ParentsId"] != DBNull.Value)
+                jh.Parentsid = ParentsDB.SelectById(Convert.ToInt32(reader["ParentsId"]));
 
             base.CreateModel(jh);
             return jh;
