@@ -51,7 +51,7 @@ namespace ViewModel
             Messages m = entity as Messages;
             if (m != null)
             {
-                string sqlStr = $"DELETE FROM MessagesTbl WHERE id=@pid";
+                string sqlStr = $"DELETE FROM Messages WHERE id=@pid";
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@pid", m.Id));
             }
@@ -78,7 +78,7 @@ namespace ViewModel
             Messages m = entity as Messages;
             if (m != null)
             {
-                string sqlStr = $"UPDATE MessagesTbl " +
+                string sqlStr = $"UPDATE Messages " +
                                 $"SET senderId=@sender, receiver=@receiver, messageText=@text, timeSent=@time " +
                                 $"WHERE id=@id";
 
@@ -107,7 +107,7 @@ namespace ViewModel
         //    command.Parameters.Add(new OleDbParameter("@time", m.TimeSent));
         //}
 
-     
+
         //public override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand command)
         //{
         //    Messages m = entity as Messages;
@@ -126,5 +126,5 @@ namespace ViewModel
         //    command.Parameters.Add(new OleDbParameter("@time", m.TimeSent));
         //    command.Parameters.Add(new OleDbParameter("@id", m.Id));
         //}
-}
+    }
 }

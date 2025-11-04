@@ -12,7 +12,7 @@ namespace ViewModel
     {
         public UserProfileList SelectAll()
         {
-            command.CommandText = "SELECT * FROM UserProfileTbl";
+            command.CommandText = "SELECT * FROM UserProfile";
             UserProfileList list = new UserProfileList(base.Select());
             return list;
         }
@@ -46,7 +46,7 @@ namespace ViewModel
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
         {
             var up = entity as UserProfile;
-            cmd.CommandText = "DELETE FROM UserProfileTbl WHERE id=@pid";
+            cmd.CommandText = "DELETE FROM UserProfile WHERE id=@id";
             cmd.Parameters.Add(new OleDbParameter("@pid", up.Id));
         }
 
@@ -54,7 +54,7 @@ namespace ViewModel
         {
             var up = entity as UserProfile;
             cmd.CommandText =
-                "INSERT INTO UserProfileTbl (email, pass, cityId) VALUES (@mail, @pass, @city)";
+                "INSERT INTO UserProfile (email, pass, cityId) VALUES (@mail, @pass, @city)";
             cmd.Parameters.Add(new OleDbParameter("@mail", up.Email));
             cmd.Parameters.Add(new OleDbParameter("@pass", up.Pass));
             cmd.Parameters.Add(new OleDbParameter("@city", up.CityId));
@@ -64,7 +64,7 @@ namespace ViewModel
         {
             var up = entity as UserProfile;
             cmd.CommandText =
-                "UPDATE UserProfileTbl SET email=@mail, pass=@pass, cityId=@city WHERE id=@id";
+                "UPDATE UserProfile SET email=@mail, pass=@pass, cityId=@city WHERE id=@id";
             cmd.Parameters.Add(new OleDbParameter("@mail", up.Email));
             cmd.Parameters.Add(new OleDbParameter("@pass", up.Pass));
             cmd.Parameters.Add(new OleDbParameter("@city", up.CityId));
