@@ -15,6 +15,23 @@ public class Program
             Console.WriteLine(c.CityName);
 
 
+        //Console.WriteLine("thrt");
+        //City cityToUpdate = cList[1];
+        //cityToUpdate.CityName = "Ramle";
+        //cdb.Update(cityToUpdate);
+        //int x = cdb.SaveChanges();
+        //Console.WriteLine($"{x} rows were updated");
+
+
+        City cityToUpdate = cList[0];
+        cityToUpdate.CityName += "Rehovot";
+        cdb.Update(cityToUpdate);
+        int x=cdb.SaveChanges();
+        Console.WriteLine($"{x} rows were updated");
+
+
+
+
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("parents id and last name");
         Console.ResetColor();
@@ -105,5 +122,9 @@ public class Program
         UserProfileList uplist = updb.SelectAll();
         foreach (UserProfile p in uplist)
             Console.WriteLine(p.Pass);
+
+
+       
+
     }
 }
