@@ -97,11 +97,11 @@ namespace ViewModel
             Parents p = entity as Parents;
             if (p != null)
             {
-                string sqlStr = $"UPDATE ParentsTbl SET firstName=@fname, lastName=@lname, cityCode=@city WHERE ID=@id";
+                string sqlStr = $"UPDATE ParentsTbl SET firstName=@fname, lastName=@lname, cityName=@city WHERE ID=@id";
                 cmd.CommandText = sqlStr;
-                //cmd.Parameters.Add(new OleDbParameter("@fname", p.FirstName));
-                //cmd.Parameters.Add(new OleDbParameter("@lname", p.LastName));
-                //cmd.Parameters.Add(new OleDbParameter("@city", p.LivingCity.Id));
+                cmd.Parameters.Add(new OleDbParameter("@fname", p.FirstName));
+                cmd.Parameters.Add(new OleDbParameter("@lname", p.LastName));
+                cmd.Parameters.Add(new OleDbParameter("@city", p.CityName.Id));
                 cmd.Parameters.Add(new OleDbParameter("@id", p.Id));
             }
         }
