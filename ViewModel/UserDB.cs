@@ -23,6 +23,7 @@ namespace ViewModel
             u.FirstName = reader["firstName"].ToString();
             u.LastName = reader["lastName"].ToString();
             u.DateOfBirth = DateTime.Parse(reader["dateOfBirth"].ToString());
+            u.CityNameId = int.Parse(reader["CityNameId"].ToString());
 
             base.CreateModel(entity); 
             return u;
@@ -46,29 +47,41 @@ namespace ViewModel
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
         {
             var u = entity as User;
-            cmd.CommandText = "DELETE FROM UserTbl WHERE id=@pid";
+            cmd.CommandText = "DELETE FROM User WHERE id=@pid";
             cmd.Parameters.Add(new OleDbParameter("@pid", u.Id));
         }
 
+
+        public override void Insert(BaseEntity entity)
+        {
+            BaseEntity reqEntity = this.NewEntity(); ;
+            if (entity != null & entity.GetType() == reqEntity.GetType())
+            {
+                //inserted.Add(new ChangeEntity(base.CreateInsertdSQL, entity));
+                inserted.Add(new ChangeEntity(this.CreateInsertdSQL, entity));
+            }
+        }
 
         protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
         {
             var u = entity as User;
             cmd.CommandText =
-                "INSERT INTO UserTbl (firstName, lastName, dateOfBirth) VALUES (@fn, @ln, @dob)";
+                "INSERT INTO [User] (firstName, lastName, dateOfBirth, cityNameId) VALUES (?, ?, ?, ?)";
             cmd.Parameters.Add(new OleDbParameter("@fn", u.FirstName));
             cmd.Parameters.Add(new OleDbParameter("@ln", u.LastName));
             cmd.Parameters.Add(new OleDbParameter("@dob", u.DateOfBirth));
+            cmd.Parameters.Add(new OleDbParameter("@cni", u.CityNameId));
         }
 
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
         {
             var u = entity as User;
             cmd.CommandText =
-                "UPDATE UserTbl SET firstName=@fn, lastName=@ln, dateOfBirth=@dob WHERE id=@id";
+                "UPDATE [User] SET firstName=@fn, LastName=@ln, DateOfBirth=@dob, CityNameId=@cni WHERE ID=@id";
             cmd.Parameters.Add(new OleDbParameter("@fn", u.FirstName));
             cmd.Parameters.Add(new OleDbParameter("@ln", u.LastName));
             cmd.Parameters.Add(new OleDbParameter("@dob", u.DateOfBirth));
+            cmd.Parameters.Add(new OleDbParameter("@cni", u.CityNameId));
             cmd.Parameters.Add(new OleDbParameter("@id", u.Id));
         }
     }

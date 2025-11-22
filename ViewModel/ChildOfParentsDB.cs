@@ -37,8 +37,8 @@ namespace ViewModel
         {
             var cop = entity as ChildOfParent ?? new ChildOfParent();
 
-            if (reader["id"] != DBNull.Value)
-                cop.Id = UserDB.SelectById(Convert.ToInt32(reader["id"]));
+            //if (reader["id"] != DBNull.Value)
+            //    cop.Id = UserDB.SelectById(Convert.ToInt32(reader["id"]));
 
             if (reader["idParent"] != DBNull.Value)
                 cop.IdParent = ParentsDB.SelectById(Convert.ToInt32(reader["idParent"]));
@@ -54,28 +54,43 @@ namespace ViewModel
             cmd.Parameters.Add(new OleDbParameter("@id", cop.Id));
         }
 
+        public override void Insert(BaseEntity entity)
+        {
+            BaseEntity reqEntity = this.NewEntity(); ;
+            if (entity != null & entity.GetType() == reqEntity.GetType())
+            {
+                inserted.Add(new ChangeEntity(base.CreateInsertdSQL, entity));
+                inserted.Add(new ChangeEntity(this.CreateInsertdSQL, entity));
+            }
+        }
+
         protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            if (entity is not ChildOfParent cop) return;
+            ChildOfParent cop= entity as ChildOfParent;
 
             cmd.CommandText =
-                "INSERT INTO ChildOfParent (idChild, Parentsid) " +
+                "INSERT INTO ChildOfParent (ID, idParent) " +
                 "VALUES (?,?)";
-
-            cmd.Parameters.Add(new OleDbParameter("@id", DbVal(cop.Id?.Id)));
-            cmd.Parameters.Add(new OleDbParameter("@idParents", DbVal(cop.IdParent?.Id)));
+            cmd.Parameters.AddWithValue("@ID", cop.Id);
+            cmd.Parameters.AddWithValue("@idParent", DbVal(cop.IdParent?.Id));
         }
 
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
         {
             if (entity is not ChildOfParent cop) return;
 
-            cmd.CommandText =
-                "UPDATE ChildOfParent SET idChild=?, Parentsid=? " +
-                "WHERE id=?";
+            cmd.CommandText = "UPDATE ChildOfParent " + "SET idParent = @idParent " + "WHERE id = @id";
 
-            cmd.Parameters.Add(new OleDbParameter("@id", DbVal(cop.Id?.Id)));
-            cmd.Parameters.Add(new OleDbParameter("@idParents", DbVal(cop.IdParent?.Id)));
+            cmd.Parameters.Add(new OleDbParameter("@idParent", DbVal(cop.IdParent?.Id)));
+            cmd.Parameters.Add(new OleDbParameter("@id", DbVal(cop.Id)));
+
+
+
+            //    "UPDATE ChildOfParent SET idChild=?, Parentsid=? " +
+            //    "WHERE id=?";
+
+            //cmd.Parameters.Add(new OleDbParameter("@id", DbVal(cop.Id?.Id)));
+            //cmd.Parameters.Add(new OleDbParameter("@idParents", DbVal(cop.IdParent?.Id)));
         }
     }
 }

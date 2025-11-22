@@ -11,7 +11,7 @@ namespace ViewModel
 
         public BabySitterRateList SelectAll()
         {
-            command.CommandText = "SELECT BabySitterRate.*FROM BabySitterRate";
+            command.CommandText = "SELECT        BabySitterRate.* FROM BabySitterRate";
             var list = new BabySitterRateList();
             foreach (var e in Select())
                 list.Add(e as BabySitterRate);
@@ -72,8 +72,8 @@ namespace ViewModel
             if (entity is not BabySitterRate r) return;
 
             cmd.CommandText =
-                "UPDATE BabySitterRate SET stars=?, idBabySitter=?, idParent=?, DateOfRate=? " +
-                "WHERE id=@id";
+                "UPDATE BabySitterRate SET stars=@stars, idBabySitter=@idBabySitter, idParent=@idParent, DateOfRate=@DateOfRate " +
+                "WHERE ID=@id";
 
             cmd.Parameters.Add(new OleDbParameter("@stars", r.Stars));
             cmd.Parameters.Add(new OleDbParameter("@idBabySitter", DbVal(r.IdBabySitter?.Id)));

@@ -10,7 +10,7 @@ namespace ViewModel
        
         public ParentsList SelectAll()
         {
-            command.CommandText = $"SELECT Parents.Id,[User].DateOfBirth,[User].firstName,[User].LastName, [User].CityName, [User].CityNameId FROM (Parents INNER JOIN [User] ON Parents.Id = [User].id)";
+            command.CommandText = $"SELECT Parents.Id,[User].DateOfBirth,[User].firstName,[User].LastName, [User].CityNameId FROM (Parents INNER JOIN [User] ON Parents.Id = [User].id)";
             ParentsList pList = new ParentsList(base.Select());
             return pList;
         }
@@ -39,7 +39,7 @@ namespace ViewModel
             Parents p = entity as Parents;
             //p.FirstName = reader["firstName"].ToString();
             //p.LastName = reader["lastName"].ToString();
-            //p.CityName = CityDB.SelectById((int)reader["cityCode"]);
+            //p.CityNameId = UserDB.SelectById((int)reader["cityNameId"]);
             base.CreateModel(entity);
             return p;
         }
@@ -64,44 +64,47 @@ namespace ViewModel
             Parents p = entity as Parents;
             if (p != null)
             {
-                string sqlStr = $"DELETE FROM ParentsTbl WHERE ID=@pid";
+                string sqlStr = $"DELETE FROM Parents WHERE ID=@pid";
                 cmd.CommandText = sqlStr;
                 cmd.Parameters.Add(new OleDbParameter("@pid", p.Id));
             }
         }
-        //protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
-        //{
-        //    if (entity is not Parents o) return;
+       
 
-        //}
+        public override void Insert(BaseEntity entity)
+        {
+            BaseEntity reqEntity = this.NewEntity(); ;
+            if (entity != null & entity.GetType() == reqEntity.GetType())
+            {
+                inserted.Add(new ChangeEntity(base.CreateInsertdSQL, entity));
+                inserted.Add(new ChangeEntity(this.CreateInsertdSQL, entity));
+            }
+        }
         protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
         {
             Parents p = entity as Parents;
             if (p != null)
             {
-                string sqlStr = $"INSERT INTO ParentsTbl (firstName, lastName, cityCode) VALUES (@fname, @lname, @city)";
+                string sqlStr = @"INSERT INTO Parents (ID) VALUES (?);";
+
                 cmd.CommandText = sqlStr;
-                //cmd.Parameters.Add(new OleDbParameter("@fname", p.FirstName));
-                //cmd.Parameters.Add(new OleDbParameter("@lname", p.LastName));
-                //cmd.Parameters.Add(new OleDbParameter("@city", p.CityName.Id));
+                cmd.Parameters.AddWithValue("@ID", p.Id);
+
             }
         }
 
-        //protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
-        //{
-        //    if (entity is not Parents o) return;
-
-        //}
+      
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
         {
             Parents p = entity as Parents;
             if (p != null)
             {
-                string sqlStr = $"UPDATE ParentsTbl SET firstName=@fname, lastName=@lname, cityName=@city WHERE ID=@id";
+                string sqlStr = "UPDATE  [User] SET firstName = @fname, lastName = @lname, CityNameId = @cityId WHERE ID = @id";
+
                 cmd.CommandText = sqlStr;
                 cmd.Parameters.Add(new OleDbParameter("@fname", p.FirstName));
                 cmd.Parameters.Add(new OleDbParameter("@lname", p.LastName));
-                cmd.Parameters.Add(new OleDbParameter("@city", p.CityName.Id));
+                cmd.Parameters.Add(new OleDbParameter("@cityId", p.CityNameId));
                 cmd.Parameters.Add(new OleDbParameter("@id", p.Id));
             }
         }

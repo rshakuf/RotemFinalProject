@@ -51,10 +51,20 @@ namespace ViewModel
             BabySitterTeens b = entity as BabySitterTeens;
             if (b != null)
             {
-                string sqlStr = $"DELETE FROM BabySitterTeensTbl WHERE id=@pid";
+                string sqlStr = $"DELETE FROM BabySitterTeens WHERE id=@pid";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@pid", b.Id));
+            }
+        }
+
+        public override void Insert(BaseEntity entity)
+        {
+            BaseEntity reqEntity = this.NewEntity(); ;
+            if (entity != null & entity.GetType() == reqEntity.GetType())
+            {
+                inserted.Add(new ChangeEntity(base.CreateInsertdSQL, entity));
+                inserted.Add(new ChangeEntity(this.CreateInsertdSQL, entity));
             }
         }
 
@@ -64,13 +74,14 @@ namespace ViewModel
             if (b != null)
             {
                 string sqlStr =
-                    $"INSERT INTO BabySitterTeensTbl (mailOfRecommender, priceForAnHour, profilePicture) " +
-                    $"VALUES (@mail, @price, @pic)";
+                    $"INSERT INTO BabySitterTeens (ID, mailOfRecommender, priceForAnHour, profilePicture) " +
+                    $"VALUES (?, ?, ?, ?)";
 
                 command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@mail", b.MailOfRecommender));
-                command.Parameters.Add(new OleDbParameter("@price", b.PriceForAnHour));
-                command.Parameters.Add(new OleDbParameter("@pic", b.ProfilePicture));
+                command.Parameters.AddWithValue("@ID", b.Id);
+                command.Parameters.AddWithValue("@mailOfRecommender", b.MailOfRecommender);
+                command.Parameters.AddWithValue("@priceForAnHour", b.PriceForAnHour);
+                command.Parameters.AddWithValue("@profilePicture", b.ProfilePicture);
             }
         }
 
@@ -80,7 +91,7 @@ namespace ViewModel
             if (b != null)
             {
                 string sqlStr =
-                    $"UPDATE BabySitterTeensTbl " +
+                    $"UPDATE BabySitterTeens " +
                     $"SET mailOfRecommender=@mail, priceForAnHour=@price, profilePicture=@pic " +
                     $"WHERE id=@id";
 

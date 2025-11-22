@@ -41,6 +41,16 @@ namespace ViewModel
             return g;
         }
 
+        public override void Insert(BaseEntity entity)
+        {
+            BaseEntity reqEntity = this.NewEntity(); ;
+            if (entity != null & entity.GetType() == reqEntity.GetType())
+            {
+                //inserted.Add(new ChangeEntity(base.CreateInsertdSQL, entity));
+                inserted.Add(new ChangeEntity(this.CreateInsertdSQL, entity));
+            }
+        }
+
         protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
         {
             City city = (City)entity;

@@ -11,7 +11,7 @@ namespace ViewModel
 
         public ReviewsList SelectAll()
         {
-            command.CommandText = "SELECT * FROM Reviews";
+            command.CommandText = "SELECT Reviews.* FROM Reviews";
             var list = new ReviewsList();
             foreach (var e in Select())
                 list.Add(e as Reviews);
@@ -21,7 +21,7 @@ namespace ViewModel
         public static Reviews SelectById(int id)
         {
             var db = new ReviewsDB();
-            db.command.CommandText = "SELECT * FROM Reviews WHERE id=?";
+            db.command.CommandText = "SELECT Reviews.* FROM Reviews WHERE id=?";
             db.command.Parameters.Clear();
             db.command.Parameters.Add(new OleDbParameter("@id", id));
             var list = new List<Reviews>();
@@ -55,6 +55,16 @@ namespace ViewModel
             if (entity is not Reviews r) return;
             cmd.CommandText = "DELETE FROM Reviews WHERE id=?";
             cmd.Parameters.Add(new OleDbParameter("@id", r.Id));
+        }
+
+        public override void Insert(BaseEntity entity)
+        {
+            BaseEntity reqEntity = this.NewEntity(); ;
+            if (entity != null & entity.GetType() == reqEntity.GetType())
+            {
+                //inserted.Add(new ChangeEntity(base.CreateInsertdSQL, entity));
+                inserted.Add(new ChangeEntity(this.CreateInsertdSQL, entity));
+            }
         }
 
         protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
