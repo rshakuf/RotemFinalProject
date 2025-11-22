@@ -72,13 +72,13 @@ namespace ViewModel
             if (entity is not Schedule s) return;
 
             cmd.CommandText =
-                "INSERT INTO Schedule (babysitterId, dayOfWeek, startTime, endTime, breakTime) " +
-                "VALUES (?,?,?,?,?)";
+                "INSERT INTO Schedule (babysitterId, dayOfWeek, startTime, endTime) " +
+                "VALUES (?,?,?,?)";
 
-            cmd.Parameters.Add(new OleDbParameter("@babysitterId", DbVal(s.BabysitterId?.Id)));
-            cmd.Parameters.Add(new OleDbParameter("@dayOfWeek", s.DayOfWeek));
-            cmd.Parameters.Add(new OleDbParameter("@startTime", s.StartTime));
-            cmd.Parameters.Add(new OleDbParameter("@endTime", s.EndTime));
+            cmd.Parameters.AddWithValue("@babysitterId", DbVal(s.BabysitterId?.Id));
+            cmd.Parameters.AddWithValue("@dayOfWeek", s.DayOfWeek);
+            cmd.Parameters.AddWithValue("@startTime", s.StartTime);
+            cmd.Parameters.AddWithValue("@endTime", s.EndTime);
         }
 
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)

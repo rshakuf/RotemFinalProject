@@ -73,13 +73,13 @@ namespace ViewModel
             if (m != null)
             {
                 string sqlStr = $"INSERT INTO Messages (senderId, receiver, messageText, timeSent) " +
-                                $"VALUES (@sender, @reciver, @text, @time)";
+                                $"VALUES (?,?,?,?)";
 
                 command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@sender", m.SenderId));
-                command.Parameters.Add(new OleDbParameter("@receiver", m.Receiver));
-                command.Parameters.Add(new OleDbParameter("@text", m.MessageText));
-                command.Parameters.Add(new OleDbParameter("@time", m.TimeSent));
+                command.Parameters.AddWithValue("@sender", m.SenderId);
+                command.Parameters.AddWithValue("@receiver", m.Receiver);
+                command.Parameters.AddWithValue("@text", m.MessageText);
+                command.Parameters.AddWithValue("@time", m.TimeSent);
             }
         }
 

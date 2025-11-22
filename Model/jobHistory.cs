@@ -8,7 +8,7 @@ namespace Model
 {
     public class JobHistory : BaseEntity
     {
-        private BabySitterTeens babySitterTeensId;
+        private BabySitterTeens babySitterId;
         private Parents parentId;
         private DateTime startTime;
         private DateTime endTime;
@@ -19,7 +19,7 @@ namespace Model
         public int TotalPayment { get => totalPayment; set => totalPayment = value; }
         
         public Parents Parentid { get => parentId; set => parentId = value; }
-        public BabySitterTeens BabySitterTeensId { get => babySitterTeensId; set => babySitterTeensId = value; }
+        public BabySitterTeens BabySitterId { get => babySitterId; set => babySitterId = value; }
 
         public override string ToString()
         {

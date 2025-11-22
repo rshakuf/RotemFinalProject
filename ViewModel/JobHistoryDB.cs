@@ -38,7 +38,7 @@ namespace ViewModel
             if (reader["EndTime"] != DBNull.Value) jh.EndTime = Convert.ToDateTime(reader["EndTime"]);
             if (reader["TotalPayment"] != DBNull.Value) jh.TotalPayment = Convert.ToInt32(reader["totalPayment"]);
             if (reader["BabySitterId"] != DBNull.Value)
-                jh.BabySitterTeensId = BabySitterTeensDB.SelectById(Convert.ToInt32(reader["BabysitterId"]));
+                jh.BabySitterId = BabySitterTeensDB.SelectById(Convert.ToInt32(reader["BabysitterId"]));
             if (reader["ParentId"] != DBNull.Value)
                 jh.Parentid = ParentsDB.SelectById(Convert.ToInt32(reader["ParentId"]));
 
@@ -68,14 +68,14 @@ namespace ViewModel
             if (entity is not JobHistory jh) return;
 
             cmd.CommandText =
-                "INSERT INTO JobHistory (BabySitterTeensid, Parentsid, startTime, endTime, totalPayment) " +
+                "INSERT INTO JobHistory (BabySitterid, ParentId, startTime, endTime, totalPayment) " +
                 "VALUES (?,?,?,?,?)";
 
-            cmd.Parameters.Add(new OleDbParameter("@BabySitterTeensid", DbVal(jh.BabySitterTeensId?.Id)));
-            cmd.Parameters.Add(new OleDbParameter("@Parentsid", DbVal(jh.Parentid?.Id)));
-            cmd.Parameters.Add(new OleDbParameter("@startTime", jh.StartTime));
-            cmd.Parameters.Add(new OleDbParameter("@endTime", jh.EndTime));
-            cmd.Parameters.Add(new OleDbParameter("@totalPayment", jh.TotalPayment));
+            cmd.Parameters.AddWithValue("@BabySitterid", DbVal(jh.BabySitterId?.Id));
+            cmd.Parameters.AddWithValue("@ParentId", DbVal(jh.Parentid?.Id));
+            cmd.Parameters.AddWithValue("@startTime", jh.StartTime);
+            cmd.Parameters.AddWithValue("@endTime", jh.EndTime);
+            cmd.Parameters.AddWithValue("@totalPayment", jh.TotalPayment);
         }
 
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
@@ -83,9 +83,10 @@ namespace ViewModel
             if (entity is not JobHistory jh) return;
 
             cmd.CommandText =
-                "UPDATE JobHistory SET  Parentid=@Parentsid, startTime=@startTime, endTime=@endTime, totalPayment=@totalPayment " +
+                "UPDATE JobHistory SET  BabySitterid=@BabySitterid Parentid=@Parentid, startTime=@startTime, endTime=@endTime, totalPayment=@totalPayment " +
                 "WHERE id=@id";
 
+            cmd.Parameters.Add(new OleDbParameter("@BabySitterid", jh.BabySitterId));
             cmd.Parameters.Add(new OleDbParameter("@Parentsid", DbVal(jh.Parentid?.Id)));
             cmd.Parameters.Add(new OleDbParameter("@startTime", jh.StartTime));
             cmd.Parameters.Add(new OleDbParameter("@endTime", jh.EndTime));

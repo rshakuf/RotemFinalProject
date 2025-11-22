@@ -132,13 +132,13 @@ public class Program
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("Messages Receiver");
         Console.ResetColor();
-        MessagesDB msg = new();
-        MessagesList mlist = msg.SelectAll();
+        MessagesDB msgdb = new();
+        MessagesList mlist = msgdb.SelectAll();
 
         Messages MessagesToUpdate = mlist[0];
         MessagesToUpdate.MessageText = "hi how u doing";
-        msg.Update(MessagesToUpdate);
-        int t = msg.SaveChanges();
+        msgdb.Update(MessagesToUpdate);
+        int t = msgdb.SaveChanges();
         Console.WriteLine($"{t} rows were updated");
 
         foreach (Messages p in mlist)
@@ -243,33 +243,33 @@ public class Program
         Console.WriteLine($"\n[ChildOfParent INSERT] rows={rows} | new ID={ChildOfParentInserted.Id}");
 
         City CityInserted = new City { CityName = "New CityName" };
-        db.Insert(ChildOfParentInserted);
-        rows = db.SaveChanges();
+        cdb.Insert(ChildOfParentInserted);
+        rows = cdb.SaveChanges();
         Console.WriteLine($"\n[City INSERT] rows={rows} | new ID={CityInserted.Id}");
 
-        JobHistory JobHistoryInserted = new JobHistory { StartTime = DateTime.Now.Date, EndTime = DateTime.Now.Date, TotalPayment = 100 };
-        db.Insert(JobHistoryInserted);
-        rows = db.SaveChanges();
-        Console.WriteLine($"\n[JobHistory INSERT] rows={rows} | new ID={JobHistoryInserted.BabySitterTeensId}");
+        JobHistory JobHistoryInserted = new JobHistory { BabySitterId=jhlist[0].BabySitterId, Parentid=jhlist[0].Parentid, StartTime = DateTime.Now.Date, EndTime = DateTime.Now.Date, TotalPayment = 100 };
+        jhdb.Insert(JobHistoryInserted);
+        rows = jhdb.SaveChanges();
+        Console.WriteLine($"\n[JobHistory INSERT] rows={rows} | new ID={JobHistoryInserted.BabySitterId}");
 
-        Messages MessagesInserted = new Messages { MessageText = "segf", TimeSent = DateTime.Now.Date };
-        db.Insert(MessagesInserted);
-        rows = db.SaveChanges();
+        Messages MessagesInserted = new Messages { SenderId=mlist[0].SenderId, MessageText = "segf", TimeSent = DateTime.Now.Date };
+        msgdb.Insert(MessagesInserted);
+        rows = msgdb.SaveChanges();
         Console.WriteLine($"\n[Messages INSERT] rows={rows} | new ID={MessagesInserted.Id}");
 
         Requests RequestsInserted = new Requests { Status = "avb", TimeOfRequest = DateTime.Now.Date };
-        db.Insert(RequestsInserted);
-        rows = db.SaveChanges();
+        rdb.Insert(RequestsInserted);
+        rows = rdb.SaveChanges();
         Console.WriteLine($"\n[Requests INSERT] rows={rows} | new ID={RequestsInserted.Id}");
 
         Reviews ReviewsInserted = new Reviews { Rating = 5, ReviewDate = DateTime.Now.Date };
-        db.Insert(ReviewsInserted);
-        rows = db.SaveChanges();
+        rvdb.Insert(ReviewsInserted);
+        rows = rvdb.SaveChanges();
         Console.WriteLine($"\n[Reviews INSERT] rows={rows} | new ID={ReviewsInserted.Id}");
 
-        Schedule ScheduleInserted = new Schedule { DayOfWeek = "Monday", StartTime = DateTime.Now.Date, EndTime = DateTime.Now.Date };
-        db.Insert(ScheduleInserted);
-        rows = db.SaveChanges();
+        Schedule ScheduleInserted = new Schedule { BabysitterId = slist[0].BabysitterId, DayOfWeek = "Monday", StartTime = DateTime.Now.Date, EndTime = DateTime.Now.Date };
+        sdb.Insert(ScheduleInserted);
+        rows = sdb.SaveChanges();
         Console.WriteLine($"\n[Schedule INSERT] rows={rows} | new ID={ScheduleInserted.Id}");
 
         
