@@ -105,29 +105,29 @@ public class Program
 
 
 
-        //Console.ForegroundColor = ConsoleColor.Yellow;
-        //Console.WriteLine("BabySitterRate id");
-        //Console.ResetColor();
-        //BabySitterRateDB bdb = new();
-        //BabySitterRateList blist = bdb.SelectAll();
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine("BabySitterRate id");
+        Console.ResetColor();
+        BabySitterRateDB bdb = new();
+        BabySitterRateList blist = bdb.SelectAll();
 
-        //if (blist.Count > 0)
-        //{
-        //    BabySitterRate BabySitterRateToUpdate = blist[0];
-        //    BabySitterRateToUpdate.Stars = 5;
-        //    bdb.Update(BabySitterRateToUpdate);
-        //    int l = bdb.SaveChanges();
-        //    Console.WriteLine($"{l} rows were updated");
+        if (blist.Count > 0)
+        {
+            BabySitterRate BabySitterRateToUpdate = blist[0];
+            BabySitterRateToUpdate.Stars = 5;
+            bdb.Update(BabySitterRateToUpdate);
+            int l = bdb.SaveChanges();
+            Console.WriteLine($"{l} rows were updated");
 
-        //    foreach (BabySitterRate p in blist)
-        //        Console.WriteLine(p.Stars);
-        //}
-        //else
-        //{
-        //    Console.ForegroundColor = ConsoleColor.Red;
-        //    Console.WriteLine("BabySitterRate read is 0!!!");
-        //    Console.ResetColor();
-        //}
+            foreach (BabySitterRate p in blist)
+                Console.WriteLine(p.Stars);
+        }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("BabySitterRate read is 0!!!");
+            Console.ResetColor();
+        }
 
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("Messages Receiver");

@@ -11,7 +11,7 @@ namespace ViewModel
 
         public BabySitterRateList SelectAll()
         {
-            command.CommandText = "SELECT        BabySitterRate.* FROM BabySitterRate";
+            command.CommandText = "SELECT  * FROM BabySitterRate";
             var list = new BabySitterRateList();
             foreach (var e in Select())
                 list.Add(e as BabySitterRate);
@@ -39,8 +39,8 @@ namespace ViewModel
                 r.IdBabySitter = BabySitterTeensDB.SelectById(Convert.ToInt32(reader["idBabySitter"]));
             if (reader["idParent"] != DBNull.Value)
                 r.IdParent = ParentsDB.SelectById(Convert.ToInt32(reader["idParent"]));
-            if (reader["DateOfRate"] != DBNull.Value)
-                r.DateOfRate = Convert.ToDateTime(reader["DateOfRate"]);
+            if (reader["dateOfRate"] != DBNull.Value)
+                r.DateOfRate = Convert.ToDateTime(reader["dateOfRate"]);
 
             base.CreateModel(r);
             return r;
