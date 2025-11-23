@@ -24,6 +24,7 @@ public class Program
         Console.ResetColor();
         CityDB cdb = new();
         CityList cList = cdb.SelectAll();
+        
 
         City cityToUpdate = cList[0];
         cityToUpdate.CityName = "Rehovot";
@@ -31,9 +32,9 @@ public class Program
         int x = cdb.SaveChanges();
         Console.WriteLine($"{x} rows were updated");
 
-        foreach (City c in cList)
-            Console.WriteLine(c.CityName);
-
+        //foreach (City c in cList)
+        //    Console.WriteLine(c.CityName);
+        cdb.PrintTable("city");
 
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("parents id and last name");
@@ -48,26 +49,27 @@ public class Program
         int y = pdb.SaveChanges();
         Console.WriteLine($"{y} rows were updated");
 
-        foreach (Parents p in pList)
-            Console.WriteLine(p.Id + " " + p.LastName);
-
+        //foreach (Parents p in pList)
+        //    Console.WriteLine(p.Id + " " + p.LastName);
+        pdb.PrintTable("Parents");
 
 
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("ChildOfParent id and first name");
         Console.ResetColor();
-        ChildOfParentDB db = new();
-        ChildOfParentList list = db.SelectAll();
+        ChildOfParentDB copdb = new();
+        ChildOfParentList list = copdb.SelectAll();
 
         ChildOfParent ChildOfParentToUpdate = list[0];
         //ChildOfParentToUpdate.Id = "7";
         ChildOfParentToUpdate.FirstName = "rotem";
-        db.Update(ChildOfParentToUpdate);
-        int z = db.SaveChanges();
+        copdb.Update(ChildOfParentToUpdate);
+        int z = copdb.SaveChanges();
         Console.WriteLine($"{z} rows were updated");
 
-        foreach (ChildOfParent p in list)
-            Console.WriteLine(p.Id + " " + p.FirstName);
+        //foreach (ChildOfParent p in list)
+        //    Console.WriteLine(p.Id + " " + p.FirstName);
+        copdb.PrintTable("ChildOfParent");
 
 
         Console.ForegroundColor = ConsoleColor.Yellow;
@@ -83,9 +85,9 @@ public class Program
         int k = jhdb.SaveChanges();
         Console.WriteLine($"{k} rows were updated");
 
-        foreach (JobHistory jh in jhlist)
-            Console.WriteLine(jh.StartTime);
-
+        //foreach (JobHistory jh in jhlist)
+        //    Console.WriteLine(jh.StartTime);
+        jhdb.PrintTable("JobHistory");
 
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("BabySitterTeens id and last name");
@@ -100,8 +102,9 @@ public class Program
         int a = bst.SaveChanges();
         Console.WriteLine($"{a} rows were updated");
 
-        foreach (BabySitterTeens p in groupList)
-            Console.WriteLine(p.Id);
+        //foreach (BabySitterTeens p in groupList)
+        //    Console.WriteLine(p.Id);
+        bst.PrintTable("BabySitterTeens");
 
 
 
@@ -119,8 +122,10 @@ public class Program
             int l = bdb.SaveChanges();
             Console.WriteLine($"{l} rows were updated");
 
-            foreach (BabySitterRate p in blist)
-                Console.WriteLine(p.Stars);
+            //foreach (BabySitterRate p in blist)
+            //    Console.WriteLine(p.Stars);
+            bdb.PrintTable("BabySitterRate");
+
         }
         else
         {
@@ -141,8 +146,9 @@ public class Program
         int t = msgdb.SaveChanges();
         Console.WriteLine($"{t} rows were updated");
 
-        foreach (Messages p in mlist)
-            Console.WriteLine(p.MessageText);
+        //foreach (Messages p in mlist)
+        //    Console.WriteLine(p.MessageText);
+        msgdb.PrintTable("Messages");
 
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("Requests BabysitterId");
@@ -156,8 +162,9 @@ public class Program
         int w = rdb.SaveChanges();
         Console.WriteLine($"{w} rows were updated");
 
-        foreach (Requests p in rlist)
-            Console.WriteLine(p.Status);
+        //foreach (Requests p in rlist)
+        //    Console.WriteLine(p.Status);
+        rdb.PrintTable("Requests");
 
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("Reviews BabysitterId");
@@ -171,8 +178,9 @@ public class Program
         int q = rvdb.SaveChanges();
         Console.WriteLine($"{q} rows were updated");
 
-        foreach (Reviews p in rvlist)
-            Console.WriteLine(p.Rating);
+        //foreach (Reviews p in rvlist)
+        //    Console.WriteLine(p.Rating);
+        rvdb.PrintTable("Reviews");
 
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("Schedule BabysitterId");
@@ -186,8 +194,9 @@ public class Program
         int n = sdb.SaveChanges();
         Console.WriteLine($"{n} rows were updated");
 
-        foreach (Schedule p in slist)
-            Console.WriteLine(p.DayOfWeek);
+        //foreach (Schedule p in slist)
+        //    Console.WriteLine(p.DayOfWeek);
+        sdb.PrintTable("Schedule");
 
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("User Id");
@@ -201,8 +210,9 @@ public class Program
         int u = udb.SaveChanges();
         Console.WriteLine($"{u} rows were updated");
 
-        foreach (User p in ulist)
-            Console.WriteLine(p.CityNameId);
+        //foreach (User p in ulist)
+        //    Console.WriteLine(p.CityNameId);
+        udb.PrintTable("User");
 
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("UserProfile Pass");
@@ -216,8 +226,9 @@ public class Program
         int h = updb.SaveChanges();
         Console.WriteLine($"{h} rows were updated");
 
-        foreach (UserProfile p in uplist)
-            Console.WriteLine(p.Pass);
+        //foreach (UserProfile p in uplist)
+        //    Console.WriteLine(p.Pass);
+        updb.PrintTable("UserProfile");
 
 
         int rows;
@@ -238,8 +249,8 @@ public class Program
         Console.WriteLine($"\n[BabySitterTeens INSERT] rows={rows} | new ID={BabySitterTeensInserted.Id}");
 
         ChildOfParent ChildOfParentInserted = new ChildOfParent { FirstName = "New ChildOfParent", LastName = "asdasd", CityNameId = 1, DateOfBirth = DateTime.Now.Date };
-        db.Insert(ChildOfParentInserted);
-        rows = db.SaveChanges();
+        copdb.Insert(ChildOfParentInserted);
+        rows = copdb.SaveChanges();
         Console.WriteLine($"\n[ChildOfParent INSERT] rows={rows} | new ID={ChildOfParentInserted.Id}");
 
         City CityInserted = new City { CityName = "New CityName" };

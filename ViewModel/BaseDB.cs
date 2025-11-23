@@ -197,5 +197,50 @@ namespace ViewModel
         }
 
         public delegate void CreateSql(BaseEntity entity, OleDbCommand command);
+
+        public void PrintTable(string tableName)
+        {
+            try
+            {
+                if (connection.State != ConnectionState.Open)
+                    connection.Open();
+
+                command = connection.CreateCommand();
+                command.CommandText = $"SELECT * FROM [{tableName}]";
+
+                reader = command.ExecuteReader();
+
+                if (reader == null)
+                {
+                    Console.WriteLine("No data.");
+                    return;
+                }
+
+                int fieldCount = reader.FieldCount;
+
+                // Print column headers
+                for (int i = 0; i < fieldCount; i++)
+                    Console.Write($"{reader.GetName(i),-20}");
+                Console.WriteLine();
+                Console.WriteLine(new string('-', fieldCount * 20));
+
+                // Print rows
+                while (reader.Read())
+                {
+                    for (int i = 0; i < fieldCount; i++)
+                    {
+                        object val = reader.IsDBNull(i) ? "NULL" : reader.GetValue(i);
+                        Console.Write($"{val,-20}");
+                    }
+                    Console.WriteLine();
+                }
+            }
+            finally
+            {
+                reader?.Close();
+                // do NOT close the connection here if your DB layer keeps it open
+            }
+        }
+
     }
 }
