@@ -83,11 +83,11 @@ namespace ViewModel
             if (entity is not JobHistory jh) return;
 
             cmd.CommandText =
-                "UPDATE JobHistory SET  BabySitterid=@BabySitterid Parentid=@Parentid, startTime=@startTime, endTime=@endTime, totalPayment=@totalPayment " +
-                "WHERE id=@id";
+                "UPDATE JobHistory SET  BabysitterId=@BabysitterId, ParentId=@ParentId, StartTime=@startTime, EndTime=@endTime, TotalPayment=@totalPayment " +
+                "WHERE ID=@id";
 
-            cmd.Parameters.Add(new OleDbParameter("@BabySitterid", jh.BabySitterId));
-            cmd.Parameters.Add(new OleDbParameter("@Parentsid", DbVal(jh.Parentid?.Id)));
+            cmd.Parameters.Add(new OleDbParameter("@BabysitterId", jh.BabySitterId));
+            cmd.Parameters.Add(new OleDbParameter("@ParentId", DbVal(jh.Parentid?.Id)));
             cmd.Parameters.Add(new OleDbParameter("@startTime", jh.StartTime));
             cmd.Parameters.Add(new OleDbParameter("@endTime", jh.EndTime));
             cmd.Parameters.Add(new OleDbParameter("@totalPayment", jh.TotalPayment));

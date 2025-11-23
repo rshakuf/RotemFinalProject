@@ -78,7 +78,7 @@ public class Program
 
         JobHistory JobHistoryToUpdate = jhlist[0];
         //ChildOfParentToUpdate.Id = "7";
-        //JobHistoryToUpdate.Parentid = pList[0];
+        JobHistoryToUpdate.Parentid = pList[0];
         jhdb.Update(JobHistoryToUpdate);
         int k = jhdb.SaveChanges();
         Console.WriteLine($"{k} rows were updated");
@@ -243,7 +243,7 @@ public class Program
         Console.WriteLine($"\n[ChildOfParent INSERT] rows={rows} | new ID={ChildOfParentInserted.Id}");
 
         City CityInserted = new City { CityName = "New CityName" };
-        cdb.Insert(ChildOfParentInserted);
+        cdb.Insert(CityInserted);
         rows = cdb.SaveChanges();
         Console.WriteLine($"\n[City INSERT] rows={rows} | new ID={CityInserted.Id}");
 
