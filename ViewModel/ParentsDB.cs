@@ -59,6 +59,8 @@ namespace ViewModel
         //    cmd.CommandText = "DELETE FROM Parents WHERE ID=@id";
         //    cmd.Parameters.Add(new OleDbParameter("@id", o.Id));
         //}
+
+       
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
         {
             Parents p = entity as Parents;
@@ -69,7 +71,17 @@ namespace ViewModel
                 cmd.Parameters.Add(new OleDbParameter("@pid", p.Id));
             }
         }
-       
+
+        public virtual void Delete(BaseEntity entity)
+        {
+            BaseEntity reqEntity = this.NewEntity();
+            if (entity != null & entity.GetType() == reqEntity.GetType())
+            {
+                deleted.Add(new ChangeEntity(this.CreateDeletedSQL, entity));
+                deleted.Add(new ChangeEntity(base.CreateUpdatedSQL, entity));
+            }
+        }
+
 
         public override void Insert(BaseEntity entity)
         {

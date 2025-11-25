@@ -45,13 +45,13 @@ namespace ViewModel
             return g;
         }
 
-
+       
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
         {
             Messages m = entity as Messages;
             if (m != null)
             {
-                string sqlStr = $"DELETE FROM Messages WHERE id=@pid";
+                string sqlStr = $"DELETE FROM Messages WHERE ID=@pid";
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@pid", m.Id));
             }

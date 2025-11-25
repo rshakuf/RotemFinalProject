@@ -47,12 +47,30 @@ namespace ViewModel
             return cop;
         }
 
+        public virtual void Delete(BaseEntity entity)
+        {
+            BaseEntity reqEntity = this.NewEntity();
+            if (entity != null & entity.GetType() == reqEntity.GetType())
+            {
+                deleted.Add(new ChangeEntity(this.CreateDeletedSQL, entity));
+                deleted.Add(new ChangeEntity(base.CreateUpdatedSQL, entity));
+            }
+        }
+
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            if (entity is not ChildOfParent cop) return;
-            cmd.CommandText = "DELETE FROM ChildOfParent WHERE id=?";
-            cmd.Parameters.Add(new OleDbParameter("@id", cop.Id));
+            ChildOfParent p = entity as ChildOfParent;
+            if (p != null)
+            {
+                string sqlStr = "DELETE FROM ChildOfParent where ID=@pid";
+
+                command.CommandText = sqlStr;
+
+                command.Parameters.Add(new OleDbParameter("@pid", p.Id));
+
+            }
         }
+
 
         public override void Insert(BaseEntity entity)
         {

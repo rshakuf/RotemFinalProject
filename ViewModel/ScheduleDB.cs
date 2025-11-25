@@ -52,9 +52,16 @@ namespace ViewModel
 
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            if (entity is not Schedule s) return;
-            cmd.CommandText = "DELETE FROM Schedule WHERE id=@id";
-            cmd.Parameters.Add(new OleDbParameter("@id", s.Id));
+            Schedule p = entity as Schedule;
+            if (p != null)
+            {
+                string sqlStr = "DELETE FROM Schedule where ID=@pid";
+
+                command.CommandText = sqlStr;
+
+                command.Parameters.Add(new OleDbParameter("@pid", p.Id));
+
+            }
         }
 
         public override void Insert(BaseEntity entity)

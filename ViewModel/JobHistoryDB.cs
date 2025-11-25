@@ -48,10 +48,19 @@ namespace ViewModel
 
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            if (entity is not JobHistory jh) return;
-            cmd.CommandText = "DELETE FROM JobHistory WHERE id=?";
-            cmd.Parameters.Add(new OleDbParameter("@id", jh.Id));
+            JobHistory p = entity as JobHistory;
+            if (p != null)
+            {
+                string sqlStr = "DELETE FROM JobHistory where ID=@pid";
+
+                command.CommandText = sqlStr;
+
+                command.Parameters.Add(new OleDbParameter("@pid", p.Id));
+
+            }
         }
+
+       
 
         public override void Insert(BaseEntity entity)
         {

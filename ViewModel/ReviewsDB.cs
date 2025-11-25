@@ -52,9 +52,16 @@ namespace ViewModel
 
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            if (entity is not Reviews r) return;
-            cmd.CommandText = "DELETE FROM Reviews WHERE id=?";
-            cmd.Parameters.Add(new OleDbParameter("@id", r.Id));
+            Reviews p = entity as Reviews;
+            if (p != null)
+            {
+                string sqlStr = "DELETE FROM Reviews where ID=@pid";
+
+                command.CommandText = sqlStr;
+
+                command.Parameters.Add(new OleDbParameter("@pid", p.Id));
+
+            }
         }
 
         public override void Insert(BaseEntity entity)

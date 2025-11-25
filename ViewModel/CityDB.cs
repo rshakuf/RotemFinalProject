@@ -68,10 +68,24 @@ namespace ViewModel
 
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            City city = (City)entity;
-            cmd.CommandText = "DELETE FROM City WHERE id=@id";
-            cmd.Parameters.AddWithValue("@id", city.Id);
+            City p = entity as City;
+            if (p != null)
+            {
+                string sqlStr = "DELETE FROM City where ID=@pid";
+
+                command.CommandText = sqlStr;
+
+                command.Parameters.Add(new OleDbParameter("@pid", p.Id));
+
+            }
         }
+
+        //protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
+        //{
+        //    City city = (City)entity;
+        //    cmd.CommandText = "DELETE FROM City WHERE id=@id";
+        //    cmd.Parameters.AddWithValue("@id", city.Id);
+        //}
 
     }
 }

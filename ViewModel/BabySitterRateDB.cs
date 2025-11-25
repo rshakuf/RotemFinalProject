@@ -48,10 +48,19 @@ namespace ViewModel
 
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            if (entity is not BabySitterRate r) return;
-            cmd.CommandText = "DELETE BabySitterRate.* FROM BabySitterRate WHERE id=@id";
-            cmd.Parameters.Add(new OleDbParameter("@id", r.Id));
+            BabySitterRate p = entity as BabySitterRate;
+            if (p != null)
+            {
+                string sqlStr = "DELETE FROM BabySitterRate where ID=@pid";
+
+                command.CommandText = sqlStr;
+
+                command.Parameters.Add(new OleDbParameter("@pid", p.Id));
+
+            }
         }
+
+     
 
         protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
         {

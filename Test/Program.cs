@@ -10,31 +10,33 @@ public class Program
     {
         bool test_insert = true, test_update = false, test_delete = false, test_select = false;
 
-        //Console.ForegroundColor = ConsoleColor.Yellow;
-        //Console.WriteLine("City name");
-        //Console.ResetColor();
-        //CityDB cdb = new();
-        //CityList cList = cdb.SelectAll();
-        //foreach (City c in cList)
-        //    Console.WriteLine(c.CityName);
-
-
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("City name");
         Console.ResetColor();
         CityDB cdb = new();
         CityList cList = cdb.SelectAll();
-        
+        foreach (City c in cList)
+            Console.WriteLine(c.CityName);
 
-        City cityToUpdate = cList[0];
-        cityToUpdate.CityName = "Rehovot";
-        cdb.Update(cityToUpdate);
-        int x = cdb.SaveChanges();
-        Console.WriteLine($"{x} rows were updated");
+       
 
-        //foreach (City c in cList)
-        //    Console.WriteLine(c.CityName);
-        cdb.PrintTable("city");
+
+        //Console.ForegroundColor = ConsoleColor.Yellow;
+        //Console.WriteLine("City name");
+        //Console.ResetColor();
+        //CityDB cdb = new();
+        //CityList cList = cdb.SelectAll();
+
+
+        //City cityToUpdate = cList[0];
+        //cityToUpdate.CityName = "Rehovot";
+        //cdb.Update(cityToUpdate);
+        //int x = cdb.SaveChanges();
+        //Console.WriteLine($"{x} rows were updated");
+
+        ////foreach (City c in cList)
+        ////    Console.WriteLine(c.CityName);
+        //cdb.PrintTable("city");
 
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("parents id and last name");
@@ -112,11 +114,11 @@ public class Program
         Console.WriteLine("BabySitterRate id");
         Console.ResetColor();
         BabySitterRateDB bdb = new();
-        BabySitterRateList blist = bdb.SelectAll();
+        BabySitterRateList bList = bdb.SelectAll();
 
-        if (blist.Count > 0)
+        if (bList.Count > 0)
         {
-            BabySitterRate BabySitterRateToUpdate = blist[0];
+            BabySitterRate BabySitterRateToUpdate = bList[0];
             BabySitterRateToUpdate.Stars = 5;
             bdb.Update(BabySitterRateToUpdate);
             int l = bdb.SaveChanges();
@@ -231,62 +233,198 @@ public class Program
         updb.PrintTable("UserProfile");
 
 
-        int rows;
+        //int rows;
 
-        User userInserted = new User { FirstName = "New User" + DateTime.Now.Millisecond, LastName = "asdasd", CityNameId = 1, DateOfBirth = DateTime.Now.Date };
-        udb.Insert(userInserted);
-        rows = udb.SaveChanges();
-        Console.WriteLine($"\n[User INSERT] rows={rows} | new ID={userInserted.Id}");
+        //User userInserted = new User { FirstName = "New User" + DateTime.Now.Millisecond, LastName = "asdasd", CityNameId = 1, DateOfBirth = DateTime.Now.Date };
+        //udb.Insert(userInserted);
+        //rows = udb.SaveChanges();
+        //Console.WriteLine($"\n[User INSERT] rows={rows} | new ID={userInserted.Id}");
 
-        Parents parentInserted = new Parents { FirstName = "New parent" + DateTime.Now.Millisecond, LastName = "asdasd", CityNameId = 1, DateOfBirth = DateTime.Now.Date };
-        pdb.Insert(parentInserted);
-        rows = pdb.SaveChanges();
-        Console.WriteLine($"\n[Parent INSERT] rows={rows} | new ID={parentInserted.Id}");
+        //Parents parentInserted = new Parents { FirstName = "New parent" + DateTime.Now.Millisecond, LastName = "asdasd", CityNameId = 1, DateOfBirth = DateTime.Now.Date };
+        //pdb.Insert(parentInserted);
+        //rows = pdb.SaveChanges();
+        //Console.WriteLine($"\n[Parent INSERT] rows={rows} | new ID={parentInserted.Id}");
 
-        BabySitterTeens BabySitterTeensInserted = new BabySitterTeens { FirstName = "New BabySitterTeens", MailOfRecommender = "teen@gmail.com", ProfilePicture = "", LastName = "asdasd", CityNameId = 1, DateOfBirth = DateTime.Now.Date, PriceForAnHour = 50 };
-        bst.Insert(BabySitterTeensInserted);
-        rows = bst.SaveChanges();
-        Console.WriteLine($"\n[BabySitterTeens INSERT] rows={rows} | new ID={BabySitterTeensInserted.Id}");
+        //BabySitterTeens BabySitterTeensInserted = new BabySitterTeens { FirstName = "New BabySitterTeens", MailOfRecommender = "teen@gmail.com", ProfilePicture = "", LastName = "asdasd", CityNameId = 1, DateOfBirth = DateTime.Now.Date, PriceForAnHour = 50 };
+        //bst.Insert(BabySitterTeensInserted);
+        //rows = bst.SaveChanges();
+        //Console.WriteLine($"\n[BabySitterTeens INSERT] rows={rows} | new ID={BabySitterTeensInserted.Id}");
 
-        ChildOfParent ChildOfParentInserted = new ChildOfParent { FirstName = "New ChildOfParent", LastName = "asdasd", CityNameId = 1, DateOfBirth = DateTime.Now.Date };
-        copdb.Insert(ChildOfParentInserted);
-        rows = copdb.SaveChanges();
-        Console.WriteLine($"\n[ChildOfParent INSERT] rows={rows} | new ID={ChildOfParentInserted.Id}");
+        //ChildOfParent ChildOfParentInserted = new ChildOfParent { FirstName = "New ChildOfParent", LastName = "asdasd", CityNameId = 1, DateOfBirth = DateTime.Now.Date };
+        //copdb.Insert(ChildOfParentInserted);
+        //rows = copdb.SaveChanges();
+        //Console.WriteLine($"\n[ChildOfParent INSERT] rows={rows} | new ID={ChildOfParentInserted.Id}");
 
-        City CityInserted = new City { CityName = "New CityName" };
-        cdb.Insert(CityInserted);
-        rows = cdb.SaveChanges();
-        Console.WriteLine($"\n[City INSERT] rows={rows} | new ID={CityInserted.Id}");
+        //City CityInserted = new City { CityName = "New CityName" };
+        //cdb.Insert(CityInserted);
+        //rows = cdb.SaveChanges();
+        //Console.WriteLine($"\n[City INSERT] rows={rows} | new ID={CityInserted.Id}");
 
-        JobHistory JobHistoryInserted = new JobHistory { BabySitterId=jhlist[0].BabySitterId, Parentid=jhlist[0].Parentid, StartTime = DateTime.Now.Date, EndTime = DateTime.Now.Date, TotalPayment = 100 };
-        jhdb.Insert(JobHistoryInserted);
-        rows = jhdb.SaveChanges();
-        Console.WriteLine($"\n[JobHistory INSERT] rows={rows} | new ID={JobHistoryInserted.BabySitterId}");
+        //JobHistory JobHistoryInserted = new JobHistory { BabySitterId=jhlist[0].BabySitterId, Parentid=jhlist[0].Parentid, StartTime = DateTime.Now.Date, EndTime = DateTime.Now.Date, TotalPayment = 100 };
+        //jhdb.Insert(JobHistoryInserted);
+        //rows = jhdb.SaveChanges();
+        //Console.WriteLine($"\n[JobHistory INSERT] rows={rows} | new ID={JobHistoryInserted.BabySitterId}");
 
-        Messages MessagesInserted = new Messages { SenderId=mlist[0].SenderId, MessageText = "segf", TimeSent = DateTime.Now.Date };
-        msgdb.Insert(MessagesInserted);
-        rows = msgdb.SaveChanges();
-        Console.WriteLine($"\n[Messages INSERT] rows={rows} | new ID={MessagesInserted.Id}");
+        //Messages MessagesInserted = new Messages { SenderId=mlist[0].SenderId, MessageText = "segf", TimeSent = DateTime.Now.Date };
+        //msgdb.Insert(MessagesInserted);
+        //rows = msgdb.SaveChanges();
+        //Console.WriteLine($"\n[Messages INSERT] rows={rows} | new ID={MessagesInserted.Id}");
 
-        Requests RequestsInserted = new Requests { Status = "avb", TimeOfRequest = DateTime.Now.Date };
-        rdb.Insert(RequestsInserted);
-        rows = rdb.SaveChanges();
-        Console.WriteLine($"\n[Requests INSERT] rows={rows} | new ID={RequestsInserted.Id}");
+        //Requests RequestsInserted = new Requests { Status = "avb", TimeOfRequest = DateTime.Now.Date };
+        //rdb.Insert(RequestsInserted);
+        //rows = rdb.SaveChanges();
+        //Console.WriteLine($"\n[Requests INSERT] rows={rows} | new ID={RequestsInserted.Id}");
 
-        Reviews ReviewsInserted = new Reviews { Rating = 5, ReviewDate = DateTime.Now.Date };
-        rvdb.Insert(ReviewsInserted);
-        rows = rvdb.SaveChanges();
-        Console.WriteLine($"\n[Reviews INSERT] rows={rows} | new ID={ReviewsInserted.Id}");
+        //Reviews ReviewsInserted = new Reviews { Rating = 5, ReviewDate = DateTime.Now.Date };
+        //rvdb.Insert(ReviewsInserted);
+        //rows = rvdb.SaveChanges();
+        //Console.WriteLine($"\n[Reviews INSERT] rows={rows} | new ID={ReviewsInserted.Id}");
 
-        Schedule ScheduleInserted = new Schedule { BabysitterId = slist[0].BabysitterId, DayOfWeek = "Monday", StartTime = DateTime.Now.Date, EndTime = DateTime.Now.Date };
-        sdb.Insert(ScheduleInserted);
-        rows = sdb.SaveChanges();
-        Console.WriteLine($"\n[Schedule INSERT] rows={rows} | new ID={ScheduleInserted.Id}");
-
-        
+        //Schedule ScheduleInserted = new Schedule { BabysitterId = slist[0].BabysitterId, DayOfWeek = "Monday", StartTime = DateTime.Now.Date, EndTime = DateTime.Now.Date };
+        //sdb.Insert(ScheduleInserted);
+        //rows = sdb.SaveChanges();
+        //Console.WriteLine($"\n[Schedule INSERT] rows={rows} | new ID={ScheduleInserted.Id}");
 
 
+        //Console.WriteLine("\nDelete");
+        //City CityToDelete = cList.Last();
+        //cdb.Delete(CityToDelete);
+        //int ce = cdb.SaveChanges();
+        //Console.WriteLine($"{ce} rows were deleted");
+        //Console.WriteLine("City after delete: ");
+        //cList = cdb.SelectAll();
+        ////foreach (City cee in cList)
+        ////    Console.WriteLine(cee.CityName);
+        //jhdb.PrintTable("City");
 
-}
+        ////Console.WriteLine("\nDelete");
+        ////Parents ParentsToDelete = pList.Last();
+        ////pdb.Delete(ParentsToDelete);
+        ////int te = pdb.SaveChanges();
+        ////Console.WriteLine($"{te} rows were deleted");
+        ////Console.WriteLine("Parents after delete: ");
+        ////pList = pdb.SelectAll();
+        ////foreach (Parents pre in pList)
+        ////    Console.WriteLine(pre.Joining_date);
+
+        //Console.WriteLine("\nDelete");
+        //ChildOfParent ChildOfParentToDelete = list.Last();
+        //copdb.Delete(ChildOfParentToDelete);
+        //int le = copdb.SaveChanges();
+        //Console.WriteLine($"{le} rows were deleted");
+        //Console.WriteLine("ChildOfParent after delete: ");
+        //list = copdb.SelectAll();
+        ////foreach (ChildOfParent cop in list)
+        ////    Console.WriteLine(cop.IdParent);
+        //jhdb.PrintTable("ChildOfParent");
+
+        //Console.WriteLine("\nDelete");
+        //JobHistory JobHistoryToDelete = jhlist.Last();
+        //jhdb.Delete(JobHistoryToDelete);
+        //int jhd = jhdb.SaveChanges();
+        //Console.WriteLine($"{jhd} rows were deleted");
+        //Console.WriteLine("JobHistory after delete: ");
+        //jhlist = jhdb.SelectAll();
+        ////foreach (JobHistory jh in list)
+        ////    Console.WriteLine(jh.BabySitterId);
+        //jhdb.PrintTable("JobHistory");
+
+
+        //Console.WriteLine("\nDelete");
+        //BabySitterTeens BabySitterTeensToDelete = groupList.Last();
+        //bst.Delete(BabySitterTeensToDelete);
+        //int bsdb = bst.SaveChanges();
+        //Console.WriteLine($"{bsdb} rows were deleted");
+        //Console.WriteLine("BabySitterTeens after delete: ");
+        //groupList = bst.SelectAll();
+        ////foreach (BabySitterTeens jh in groupList)
+        ////    Console.WriteLine(jh.BabySitterId);
+        //jhdb.PrintTable("BabySitterTeens");
+
+
+        //Console.WriteLine("\nDelete");
+        //BabySitterRate BabySitterRateToDelete = bList.Last();
+        //bdb.Delete(BabySitterRateToDelete);
+        //int bsrdb = bdb.SaveChanges();
+        //Console.WriteLine($"{bsrdb} rows were deleted");
+        //Console.WriteLine("BabySitterRate after delete: ");
+        //bList = bdb.SelectAll();
+        ////foreach (BabySitterTeens jh in blist)
+        ////    Console.WriteLine(jh.BabySitterId);
+        //jhdb.PrintTable("BabySitterRate");
+
+
+        //Console.WriteLine("\nDelete");
+        //Messages MessagesToDelete = mlist.Last();
+        //msgdb.Delete(MessagesToDelete);
+        //int mdb = msgdb.SaveChanges();
+        //Console.WriteLine($"{mdb} rows were deleted");
+        //Console.WriteLine("Messages after delete: ");
+        //mlist = msgdb.SelectAll();
+        ////foreach (Messages jh in blist)
+        ////    Console.WriteLine(jh.BabySitterId);
+        //jhdb.PrintTable("Messages");
+
+
+        //Console.WriteLine("\nDelete");
+        //Requests RequestsToDelete = rlist.Last();
+        //rdb.Delete(RequestsToDelete);
+        //int rrdb = rdb.SaveChanges();
+        //Console.WriteLine($"{rrdb} rows were deleted");
+        //Console.WriteLine("Requests after delete: ");
+        //rlist = rdb.SelectAll();
+        ////foreach (Messages jh in blist)
+        ////    Console.WriteLine(jh.BabySitterId);
+        //jhdb.PrintTable("Requests");
+
+
+        //Console.WriteLine("\nDelete");
+        //Reviews ReviewsToDelete = rvlist.Last();
+        //rvdb.Delete(ReviewsToDelete);
+        //int rvwdb = rvdb.SaveChanges();
+        //Console.WriteLine($"{rvwdb} rows were deleted");
+        //Console.WriteLine("Reviews after delete: ");
+        //rvlist = rvdb.SelectAll();
+        ////foreach (Messages jh in blist)
+        ////    Console.WriteLine(jh.BabySitterId);
+        //jhdb.PrintTable("Reviews");
+
+
+        //Console.WriteLine("\nDelete");
+        //Schedule ScheduleToDelete = slist.Last();
+        //sdb.Delete(ScheduleToDelete);
+        //int ssdb = sdb.SaveChanges();
+        //Console.WriteLine($"{ssdb} rows were deleted");
+        //Console.WriteLine("Schedule after delete: ");
+        //slist = sdb.SelectAll();
+        ////foreach (Messages jh in blist)
+        ////    Console.WriteLine(jh.BabySitterId);
+        //jhdb.PrintTable("Schedule");
+
+
+        //Console.WriteLine("\nDelete");
+        //User UserToDelete = ulist.Last();
+        //udb.Delete(UserToDelete);
+        //int uudb = udb.SaveChanges();
+        //Console.WriteLine($"{uudb} rows were deleted");
+        //Console.WriteLine("User after delete: ");
+        //ulist = udb.SelectAll();
+        ////foreach (Messages jh in blist)
+        ////    Console.WriteLine(jh.BabySitterId);
+        //jhdb.PrintTable("User");
+
+
+        //Console.WriteLine("\nDelete");
+        //UserProfile UserProfileToDelete = uplist.Last();
+        //updb.Delete(UserProfileToDelete);
+        //int uupdb = updb.SaveChanges();
+        //Console.WriteLine($"{uupdb} rows were deleted");
+        //Console.WriteLine("UseUserProfile after delete: ");
+        //uplist = updb.SelectAll();
+        ////foreach (Messages jh in blist)
+        ////    Console.WriteLine(jh.BabySitterId);
+        //jhdb.PrintTable("UserProfile");
+
+    }
 
 }

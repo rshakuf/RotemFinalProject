@@ -46,9 +46,16 @@ namespace ViewModel
 
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
         {
-            var u = entity as User;
-            cmd.CommandText = "DELETE FROM User WHERE id=@pid";
-            cmd.Parameters.Add(new OleDbParameter("@pid", u.Id));
+            User p = entity as User;
+            if (p != null)
+            {
+                string sqlStr = "DELETE FROM [User] where ID=@pid";
+
+                command.CommandText = sqlStr;
+
+                command.Parameters.Add(new OleDbParameter("@pid", p.Id));
+
+            }
         }
 
 

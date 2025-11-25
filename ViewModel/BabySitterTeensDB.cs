@@ -45,18 +45,29 @@ namespace ViewModel
             return g;
         }
 
-
+       
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
         {
             BabySitterTeens b = entity as BabySitterTeens;
             if (b != null)
             {
-                string sqlStr = $"DELETE FROM BabySitterTeens WHERE id=@pid";
+                string sqlStr = $"DELETE FROM BabySitterTeens WHERE ID=@pid";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@pid", b.Id));
             }
         }
+
+        public virtual void Delete(BaseEntity entity)
+        {
+            BaseEntity reqEntity = this.NewEntity();
+            if (entity != null & entity.GetType() == reqEntity.GetType())
+            {
+                deleted.Add(new ChangeEntity(this.CreateDeletedSQL, entity));
+                deleted.Add(new ChangeEntity(base.CreateUpdatedSQL, entity));
+            }
+        }
+
 
         public override void Insert(BaseEntity entity)
         {
