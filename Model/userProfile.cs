@@ -10,10 +10,10 @@ namespace Model
     {
         private string email;
         private string pass;
-        private int cityId;
+        private City cityId;
 
         public string Email { get => email; set => email = value; }
         public string Pass { get => pass; set => pass = value; }
-        public int CityId { get => cityId; set => cityId = value; }
+        public City CityId { get => cityId; set => cityId = value; }
     }
 }

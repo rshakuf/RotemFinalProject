@@ -20,8 +20,8 @@ namespace ViewModel
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             Messages msg = entity as Messages;
-            msg.SenderId = int.Parse(reader["senderId"].ToString());
-            msg.Receiver = int.Parse(reader["receiver"].ToString());
+            msg.SenderId = UserDB.SelectById( int.Parse(reader["senderId"].ToString()));
+            msg.Receiver = UserDB.SelectById(int.Parse(reader["receiver"].ToString()));
             msg.MessageText = reader["messageText"].ToString();
             msg.TimeSent = DateTime.Parse(reader["timeSent"].ToString());
 
@@ -76,8 +76,8 @@ namespace ViewModel
                                 $"VALUES (?,?,?,?)";
 
                 command.CommandText = sqlStr;
-                command.Parameters.AddWithValue("@sender", m.SenderId);
-                command.Parameters.AddWithValue("@receiver", m.Receiver);
+                command.Parameters.AddWithValue("@sender", m.SenderId.Id);
+                command.Parameters.AddWithValue("@receiver", m.Receiver.Id);
                 command.Parameters.AddWithValue("@text", m.MessageText);
                 command.Parameters.AddWithValue("@time", m.TimeSent);
             }
@@ -93,8 +93,8 @@ namespace ViewModel
                                 $"WHERE id=@id";
 
                 command.CommandText = sqlStr;
-                command.Parameters.Add(new OleDbParameter("@sender", m.SenderId));
-                command.Parameters.Add(new OleDbParameter("@receiver", m.Receiver));
+                command.Parameters.Add(new OleDbParameter("@sender", m.SenderId.Id));
+                command.Parameters.Add(new OleDbParameter("@receiver", m.Receiver.Id));
                 command.Parameters.Add(new OleDbParameter("@text", m.MessageText));
                 command.Parameters.Add(new OleDbParameter("@time", m.TimeSent));
                 command.Parameters.Add(new OleDbParameter("@id", m.Id));

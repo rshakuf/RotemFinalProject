@@ -13,7 +13,7 @@ namespace ViewModel
         public UserProfileList SelectAll()
         {
             command.CommandText = "SELECT * FROM UserProfile";
-            UserProfileList list = new UserProfileList(base.Select());
+            UserProfileList list = new UserProfileList(base.Select()); 
             return list;
         }
 
@@ -22,7 +22,7 @@ namespace ViewModel
             UserProfile up = entity as UserProfile;
             up.Email = reader["email"].ToString();
             up.Pass = reader["pass"].ToString();
-            up.CityId = int.Parse(reader["cityId"].ToString());
+            up.CityId = CityDB.SelectById(int.Parse(reader["cityId"].ToString()));
 
             base.CreateModel(entity); // sets Id
             return up;
@@ -64,7 +64,7 @@ namespace ViewModel
                 "INSERT INTO UserProfile (email, pass, cityId) VALUES (@mail, @pass, @city)";
             cmd.Parameters.Add(new OleDbParameter("@mail", up.Email));
             cmd.Parameters.Add(new OleDbParameter("@pass", up.Pass));
-            cmd.Parameters.Add(new OleDbParameter("@city", up.CityId));
+            cmd.Parameters.Add(new OleDbParameter("@city", up.CityId.Id));
         }
 
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
@@ -74,7 +74,7 @@ namespace ViewModel
                 "UPDATE UserProfile SET email=@mail, pass=@pass, cityId=@city WHERE id=@id";
             cmd.Parameters.Add(new OleDbParameter("@mail", up.Email));
             cmd.Parameters.Add(new OleDbParameter("@pass", up.Pass));
-            cmd.Parameters.Add(new OleDbParameter("@city", up.CityId));
+            cmd.Parameters.Add(new OleDbParameter("@city", up.CityId.Id));
             cmd.Parameters.Add(new OleDbParameter("@id", up.Id));
         }
     }
