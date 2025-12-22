@@ -29,6 +29,7 @@ class Program
         {
             var babysitterService = scope.ServiceProvider.GetRequiredService<ApiService>();
             var allCities = await babysitterService.GetAllCitiesAsync();
+
             int x = allCities.Count;
             // כאן תכתוב את התוכנית שלך 
 
