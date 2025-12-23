@@ -9,30 +9,57 @@ using System.Threading.Tasks;
 class Program
 {
 
+    //static async Task Main(string[] args)
+    //{
+    //    var host = Host.CreateDefaultBuilder(args)
+    //        .ConfigureServices((context, services) =>
+    //        {
+    //            services.AddHttpClient();
+    //            services.AddScoped<ApiService>(sp =>
+    //            {
+    //                var client = sp.GetRequiredService<HttpClient>();
+    //                var baseUri = "https://z9vchnvr-5266.euw.devtunnels.ms"; 
+    //                return new ApiService(client, baseUri);
+    //            });
+    //        })
+    //     .Build();
+
+    // Get the service and use it
+    //using (var scope = host.Services.CreateScope())
+    //{
+    //  var babysitterService = scope.ServiceProvider.GetRequiredService<ApiService>();
+    //  var allCities = await babysitterService.GetAllCitiesAsync();
+    //  int x = allCities.Count;
+    //  // כאן תכתוב את התוכנית שלך 
     static async Task Main(string[] args)
     {
-        var host = Host.CreateDefaultBuilder(args)
-            .ConfigureServices((context, services) =>
-            {
-                services.AddHttpClient();
-                services.AddScoped<ApiService>(sp =>
-                {
-                    var client = sp.GetRequiredService<HttpClient>();
-                    var baseUri = "https://z9vchnvr-5266.euw.devtunnels.ms"; // Replace with your actual API URL
-                    return new ApiService(client, baseUri);
-                });
-            })
-         .Build();
+        //var host = Host.CreateDefaultBuilder(args)
+        //    .ConfigureServices((context, services) =>
+        //    {
+        //        services.AddHttpClient();
+        //        services.AddScoped<ApiService>(sp =>
+        //        {
+        //            var client = sp.GetRequiredService<HttpClient>();
+        //            var baseUri = "https://z9vchnvr-5266.euw.devtunnels.ms";
+        //            return new ApiService(client, baseUri);
+        //        });
+        //    })
+        //    .Build();
 
-        // Get the service and use it
-          using (var scope = host.Services.CreateScope())
-        {
-            var babysitterService = scope.ServiceProvider.GetRequiredService<ApiService>();
-            var allCities = await babysitterService.GetAllCitiesAsync();
-            int x = allCities.Count;
-            // כאן תכתוב את התוכנית שלך 
+        //using (var scope = host.Services.CreateScope())
+        //{
+        //    var api = scope.ServiceProvider.GetRequiredService<ApiService>();
 
-            ApiService api = new ApiService();
+        ////    using (var scope = host.Services.CreateScope())
+        ////{
+        ////    var buyerService = scope.ServiceProvider.GetRequiredService<ApiService>();
+        ////    var buyers = await buyerService.GetBuyers();
+        ////    int x = buyers.Count;
+        //    
+        
+
+
+        ApiService api = new ApiService();
 
             // ===== Cities =====
             var cities = await api.GetAllCitiesAsync();
@@ -159,4 +186,4 @@ class Program
 
     }
 
-}
+//}

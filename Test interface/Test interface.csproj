@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BabysitterApi\BabysitterApi.csproj" />
-    <ProjectReference Include="..\Client Api\Client Api.csproj" />
+    <ProjectReference Include="..\Client Api\ClientApi.csproj" />
     <ProjectReference Include="..\Model\Model.csproj" />
   </ItemGroup>
 

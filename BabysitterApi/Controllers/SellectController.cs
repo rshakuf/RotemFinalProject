@@ -10,14 +10,24 @@ namespace BabysitterApi.Controllers
     [ApiController]
     public class SellectController : ControllerBase
     {
-        [HttpGet]
-        [ActionName("CitySelector")]
-        public CityList SelectAllCity()
+        [HttpGet("CitySelector")]
+        public ActionResult<List<City>> CitySelector()
         {
             CityDB db = new CityDB();
-            CityList City = db.SelectAll();
-            return City;
+            var cities = db.SelectAll();
+            return Ok(cities);
         }
+
+
+
+        //[HttpGet]
+        //[ActionName("CitySelector")]
+        //public CityList SelectAllCity()
+        //{
+        //    CityDB db = new CityDB();
+        //    CityList City = db.SelectAll();
+        //    return City;
+        //}
         [HttpPost]
         public int InsertACity([FromBody] City City)
         {

@@ -32,6 +32,7 @@ namespace ApiInterface
         public Task<CityList> GetAllCitiesAsync() =>
             client.GetFromJsonAsync<CityList>($"{uri}/api/Sellect/CitySelector");
 
+
             public async Task<int> InsertCityAsync(City city) =>
                 (await client.PostAsJsonAsync($"{uri}/api/Sellect/InsertACity", city)).IsSuccessStatusCode ? 1 : 0;
 
