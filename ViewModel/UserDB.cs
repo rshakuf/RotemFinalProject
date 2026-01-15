@@ -23,7 +23,7 @@ namespace ViewModel
             u.FirstName = reader["firstName"].ToString();
             u.LastName = reader["lastName"].ToString();
             u.DateOfBirth = DateTime.Parse(reader["dateOfBirth"].ToString());
-            u.CityNameId = int.Parse(reader["CityNameId"].ToString());
+            u.CityNameId = CityDB.SelectById(int.Parse(reader["CityNameId"].ToString()));
 
             base.CreateModel(entity); 
             return u;
@@ -77,7 +77,7 @@ namespace ViewModel
             cmd.Parameters.Add(new OleDbParameter("@fn", u.FirstName));
             cmd.Parameters.Add(new OleDbParameter("@ln", u.LastName));
             cmd.Parameters.Add(new OleDbParameter("@dob", u.DateOfBirth));
-            cmd.Parameters.Add(new OleDbParameter("@cni", u.CityNameId));
+            cmd.Parameters.Add(new OleDbParameter("@cni", u.CityNameId.Id));
         }
 
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
@@ -88,7 +88,7 @@ namespace ViewModel
             cmd.Parameters.Add(new OleDbParameter("@fn", u.FirstName));
             cmd.Parameters.Add(new OleDbParameter("@ln", u.LastName));
             cmd.Parameters.Add(new OleDbParameter("@dob", u.DateOfBirth));
-            cmd.Parameters.Add(new OleDbParameter("@cni", u.CityNameId));
+            cmd.Parameters.Add(new OleDbParameter("@cni", u.CityNameId.Id));
             cmd.Parameters.Add(new OleDbParameter("@id", u.Id));
         }
     }
