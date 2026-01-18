@@ -10,7 +10,7 @@ namespace ViewModel
        
         public ParentsList SelectAll()
         {
-            command.CommandText = $"SELECT Parents.Id,[User].DateOfBirth,[User].firstName,[User].LastName, [User].CityNameId FROM (Parents INNER JOIN [User] ON Parents.Id = [User].id)";
+            command.CommandText = $"SELECT Parents.Id,Parents.Telephone,[User].DateOfBirth,[User].firstName,[User].LastName, [User].CityNameId FROM (Parents INNER JOIN [User] ON Parents.Id = [User].id)";
             ParentsList pList = new ParentsList(base.Select());
             return pList;
         }
@@ -37,9 +37,7 @@ namespace ViewModel
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             Parents p = entity as Parents;
-            //p.FirstName = reader["firstName"].ToString();
-            //p.LastName = reader["lastName"].ToString();
-            //p.CityNameId = UserDB.SelectById((int)reader["cityNameId"]);
+            p.Telephone =int.Parse( reader["Telephone"].ToString());
             base.CreateModel(entity);
             return p;
         }
@@ -97,9 +95,10 @@ namespace ViewModel
             Parents p = entity as Parents;
             if (p != null)
             {
-                string sqlStr = @"INSERT INTO Parents (ID) VALUES (?);";
+                string sqlStr = @"INSERT INTO Parents (ID,TEL) VALUES (?);";
 
                 cmd.CommandText = sqlStr;
+                cmd.Parameters.AddWithValue("@TEL", p.Telephone);
                 cmd.Parameters.AddWithValue("@ID", p.Id);
 
             }
@@ -111,13 +110,14 @@ namespace ViewModel
             Parents p = entity as Parents;
             if (p != null)
             {
-                string sqlStr = "UPDATE  [User] SET firstName = @fname, lastName = @lname, CityNameId = @cityId WHERE ID = @id";
+                string sqlStr = "UPDATE  [User] SET firstName = @fname, lastName = @lname, CityNameId = @cityId WHERE ID = @id";///ךהוסיף telephone
 
                 cmd.CommandText = sqlStr;
                 cmd.Parameters.Add(new OleDbParameter("@fname", p.FirstName));
                 cmd.Parameters.Add(new OleDbParameter("@lname", p.LastName));
                 cmd.Parameters.Add(new OleDbParameter("@cityId", p.CityNameId));
                 cmd.Parameters.Add(new OleDbParameter("@id", p.Id));
+                cmd.Parameters.Add(new OleDbParameter("@tel", p.Telephone));
             }
         }
     }

@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 namespace Model
 {
     public class Parents : User
+
     {
+        private int telephone;
+
+        public int Telephone { get => telephone; set => telephone = value; }
     }
 }
