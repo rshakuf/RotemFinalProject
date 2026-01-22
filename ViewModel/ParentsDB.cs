@@ -89,6 +89,16 @@ namespace ViewModel
                 inserted.Add(new ChangeEntity(base.CreateInsertdSQL, entity));
                 inserted.Add(new ChangeEntity(this.CreateInsertdSQL, entity));
             }
+
+        }
+        public override void Update(BaseEntity entity)
+        {
+            BaseEntity reqEntity = this.NewEntity(); ;
+            if (entity != null & entity.GetType() == reqEntity.GetType())
+            {
+                updated.Add(new ChangeEntity(base.CreateUpdatedSQL, entity));
+                updated.Add(new ChangeEntity(this.CreateUpdatedSQL, entity));
+            }
         }
         protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
         {
@@ -110,15 +120,13 @@ namespace ViewModel
             Parents p = entity as Parents;
             if (p != null)
             {
-                string sqlStr = "UPDATE  [User] SET firstName = @fname, lastName = @lname, CityNameId = @cityId WHERE ID = @id";///ךהוסיף telephone
+                string sqlStr = "UPDATE   [parents] SET tel= @tel WHERE ID = @id";///ךהוסיף telephone firstName = @fname, lastName = @lname, CityNameId = @cityId
 
                 cmd.CommandText = sqlStr;
-                cmd.Parameters.Add(new OleDbParameter("@fname", p.FirstName));
-                cmd.Parameters.Add(new OleDbParameter("@lname", p.LastName));
-                cmd.Parameters.Add(new OleDbParameter("@cityId", p.CityNameId));
-                cmd.Parameters.Add(new OleDbParameter("@id", p.Id));
                 cmd.Parameters.Add(new OleDbParameter("@tel", p.Telephone));
+                cmd.Parameters.Add(new OleDbParameter("@id", p.Id));
             }
+
         }
     }
 

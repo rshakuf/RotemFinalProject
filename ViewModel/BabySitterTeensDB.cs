@@ -13,7 +13,7 @@ namespace ViewModel
     {
         public BabySitterTeensList SelectAll()
         {
-            command.CommandText = $"SELECT [User].DateOfBirth, [User].firstName, [User].LastName, [User].CityName, [User].CityNameId, BabysitterTeens.MailOfRecommender, BabysitterTeens.PriceForAnHour, BabysitterTeens.ProfilePicture, BabysitterTeens.Id FROM (BabysitterTeens INNER JOIN [User] ON BabysitterTeens.Id = [User].id)";
+            command.CommandText = $"SELECT BabySitterTeens.Id,BabySitterTeens.Telephone, [User].DateOfBirth, [User].firstName, [User].LastName, [User].CityName, [User].CityNameId, BabysitterTeens.MailOfRecommender, BabysitterTeens.PriceForAnHour, BabysitterTeens.ProfilePicture, BabysitterTeens.Id FROM (BabysitterTeens INNER JOIN [User] ON BabysitterTeens.Id = [User].id)";
             BabySitterTeensList groupList = new BabySitterTeensList(base.Select());
             return groupList;
         }
@@ -24,6 +24,7 @@ namespace ViewModel
             bst.MailOfRecommender = reader["mailOfRecommender"].ToString();
             bst.PriceForAnHour = int.Parse(reader["priceForAnHour"].ToString());
             bst.ProfilePicture = reader["profilePicture"].ToString();
+            bst.Telephone = int.Parse(reader["Telephone"].ToString());
 
             base.CreateModel(entity);
             return bst;
@@ -85,14 +86,15 @@ namespace ViewModel
             if (b != null)
             {
                 string sqlStr =
-                    $"INSERT INTO BabySitterTeens (ID, mailOfRecommender, priceForAnHour, profilePicture) " +
-                    $"VALUES (?, ?, ?, ?)";
+                    $"INSERT INTO BabySitterTeens (ID, mailOfRecommender, priceForAnHour, profilePicture, tel) " +
+                    $"VALUES (?, ?, ?, ?, ?)";
 
                 command.CommandText = sqlStr;
                 command.Parameters.AddWithValue("@ID", b.Id);
                 command.Parameters.AddWithValue("@mailOfRecommender", b.MailOfRecommender);
                 command.Parameters.AddWithValue("@priceForAnHour", b.PriceForAnHour);
                 command.Parameters.AddWithValue("@profilePicture", b.ProfilePicture);
+                cmd.Parameters.AddWithValue("@TEL", b.Telephone);
             }
         }
 
@@ -103,13 +105,14 @@ namespace ViewModel
             {
                 string sqlStr =
                     $"UPDATE BabySitterTeens " +
-                    $"SET mailOfRecommender=@mail, priceForAnHour=@price, profilePicture=@pic " +
+                    $"SET mailOfRecommender=@mail, priceForAnHour=@price, profilePicture=@pic, tel= @tel" +
                     $"WHERE id=@id";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@mail", b.MailOfRecommender));
                 command.Parameters.Add(new OleDbParameter("@price", b.PriceForAnHour));
                 command.Parameters.Add(new OleDbParameter("@pic", b.ProfilePicture));
+                command.Parameters.Add(new OleDbParameter("@tel", b.Telephone));
                 command.Parameters.Add(new OleDbParameter("@id", b.Id));
             }
         }
