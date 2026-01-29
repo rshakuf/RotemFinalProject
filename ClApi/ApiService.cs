@@ -170,8 +170,8 @@ namespace ClApi
             (await client.DeleteAsync($"{uri}/api/Sellect/DeleteAUserProfile/{id}")).IsSuccessStatusCode ? 1 : 0;
 
         // ================= Parents =================
-        public Task<ParentsList> GetAllParentsAsync() /*=>*/
-            //client.GetFromJsonAsync<ParentsList>($"{uri}/api/Sellect/SelectAllParents");
+        public Task<ParentsList> GetAllParentsAsync()=>
+           client.GetFromJsonAsync<ParentsList>($"{uri}/api/Sellect/SelectAllParents");
 
         public async Task<int> InsertParentAsync(Parents parent) =>
             (await client.PostAsJsonAsync($"{uri}/api/Sellect/InsertAParents", parent)).IsSuccessStatusCode ? 1 : 0;
@@ -194,6 +194,11 @@ namespace ClApi
 
         public async Task<int> DeleteUserAsync(int id) =>
             (await client.DeleteAsync($"{uri}/api/Sellect/DeleteAUser/{id}")).IsSuccessStatusCode ? 1 : 0;
+
+        public Task<JobHistoryList> GetAllJobHistoriesAsync()
+        {
+            throw new NotImplementedException();
+        }
 
         //public Task<JobHistoryList> GetAllJobHistoriesAsync()
         //{
