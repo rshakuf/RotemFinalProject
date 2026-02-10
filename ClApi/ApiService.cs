@@ -33,7 +33,7 @@ namespace ClApi
 
 
 
-        // ================= City =================
+        // City
         public Task<CityList> GetAllCitiesAsync() =>
             client.GetFromJsonAsync<CityList>(
                 $"{uri}/api/Sellect/CitySelector/CitySelector");
@@ -48,7 +48,7 @@ namespace ClApi
         public async Task<int> DeleteCityAsync(int id) =>
             (await client.DeleteAsync($"{uri}/api/Sellect/DeleteACity/{id}")).IsSuccessStatusCode ? 1 : 0;
 
-        // ================= BabySitterRate =================
+        // BabySitterRate
         public Task<BabySitterRateList> GetAllBabySitterRatesAsync() =>
             client.GetFromJsonAsync<BabySitterRateList>($"{uri}/api/Sellect/SelectAllBabySitterRate");
 
@@ -61,7 +61,7 @@ namespace ClApi
         public async Task<int> DeleteBabySitterRateAsync(int id) =>
             (await client.DeleteAsync($"{uri}/api/Sellect/DeleteABabySitterRate/{id}")).IsSuccessStatusCode ? 1 : 0;
 
-        // ================= BabySitterTeens =================
+        // BabySitterTeens 
         public Task<BabySitterTeensList> GetAllBabySitterTeensAsync() =>
             client.GetFromJsonAsync<BabySitterTeensList>($"{uri}/api/Sellect/SelectAllBabySitterTeens");
 
@@ -74,7 +74,7 @@ namespace ClApi
         public async Task<int> DeleteBabySitterTeenAsync(int id) =>
             (await client.DeleteAsync($"{uri}/api/Sellect/DeleteABabySitterTeens/{id}")).IsSuccessStatusCode ? 1 : 0;
 
-        // ================= ChildOfParent =================
+        // ChildOfParent 
         public Task<ChildOfParentList> GetAllChildrenOfParentsAsync() =>
             client.GetFromJsonAsync<ChildOfParentList>(
                 $"{uri}/api/Sellect/SelectAllChildOfParent");
@@ -91,7 +91,7 @@ namespace ClApi
             (await client.DeleteAsync(
                 $"{uri}/api/Sellect/DeleteAChildOfParent/{id}")).IsSuccessStatusCode ? 1 : 0;
 
-        // ================= JobHistory =================
+        // JobHistory 
         public Task<JobHistoryList> GetAllJobHistoryAsync() =>
             client.GetFromJsonAsync<JobHistoryList>($"{uri}/api/Sellect/SelectAllJobHistory");
 
@@ -104,7 +104,7 @@ namespace ClApi
         public async Task<int> DeleteJobHistoryAsync(int id) =>
             (await client.DeleteAsync($"{uri}/api/Sellect/DeleteAJobHistory/{id}")).IsSuccessStatusCode ? 1 : 0;
 
-        // ================= Messages =================
+        // Messages 
         public Task<MessagesList> GetAllMessagesAsync() =>
             client.GetFromJsonAsync<MessagesList>($"{uri}/api/Sellect/SelectAllMessages");
 
@@ -117,7 +117,7 @@ namespace ClApi
         public async Task<int> DeleteMessageAsync(int id) =>
             (await client.DeleteAsync($"{uri}/api/Sellect/DeleteAMessages/{id}")).IsSuccessStatusCode ? 1 : 0;
 
-        // ================= Requests =================
+        // Requests 
         public Task<RequestsList> GetAllRequestsAsync() =>
             client.GetFromJsonAsync<RequestsList>($"{uri}/api/Sellect/SelectAllRequests");
 
@@ -130,7 +130,7 @@ namespace ClApi
         public async Task<int> DeleteRequestAsync(int id) =>
             (await client.DeleteAsync($"{uri}/api/Sellect/DeleteARequests/{id}")).IsSuccessStatusCode ? 1 : 0;
 
-        // ================= Reviews =================
+        // Reviews
         public Task<ReviewsList> GetAllReviewsAsync() =>
             client.GetFromJsonAsync<ReviewsList>($"{uri}/api/Sellect/SelectAllReviews");
 
@@ -143,7 +143,7 @@ namespace ClApi
         public async Task<int> DeleteReviewAsync(int id) =>
             (await client.DeleteAsync($"{uri}/api/Sellect/DeleteAReviews/{id}")).IsSuccessStatusCode ? 1 : 0;
 
-        // ================= Schedule =================
+        // Schedule 
         public Task<ScheduleList> GetAllSchedulesAsync() =>
             client.GetFromJsonAsync<ScheduleList>($"{uri}/api/Sellect/SelectAllSchedule");
 
@@ -156,7 +156,7 @@ namespace ClApi
         public async Task<int> DeleteScheduleAsync(int id) =>
             (await client.DeleteAsync($"{uri}/api/Sellect/DeleteASchedule/{id}")).IsSuccessStatusCode ? 1 : 0;
 
-        // ================= UserProfile =================
+        // UserProfile 
         public Task<UserProfileList> GetAllUserProfilesAsync() =>
             client.GetFromJsonAsync<UserProfileList>($"{uri}/api/Sellect/SelectAllUserProfile");
 
@@ -169,7 +169,7 @@ namespace ClApi
         public async Task<int> DeleteUserProfileAsync(int id) =>
             (await client.DeleteAsync($"{uri}/api/Sellect/DeleteAUserProfile/{id}")).IsSuccessStatusCode ? 1 : 0;
 
-        // ================= Parents =================
+        // Parents
         public Task<ParentsList> GetAllParentsAsync()=>
            client.GetFromJsonAsync<ParentsList>($"{uri}/api/Sellect/SelectAllParents");
 
@@ -182,7 +182,7 @@ namespace ClApi
         public async Task<int> DeleteParentAsync(int id) =>
             (await client.DeleteAsync($"{uri}/api/Sellect/DeleteAParents/{id}")).IsSuccessStatusCode ? 1 : 0;
 
-        // ================= Users =================
+        // Users 
         public Task<UserList> GetAllUsersAsync() =>
             client.GetFromJsonAsync<UserList>($"{uri}/api/Sellect/SelectAllUser");
 

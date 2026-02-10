@@ -9,8 +9,8 @@ namespace Model
     public class Parents : User
     {
         private int telephone;
-        private int password;
+        private string password;
         public int Telephone { get => telephone; set => telephone = value; }
-        public int Password { get => password; set => password = value; }
+        public string Password { get => password; set => password = value; }
     }
 }

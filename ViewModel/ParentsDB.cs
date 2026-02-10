@@ -10,7 +10,7 @@ namespace ViewModel
        
         public ParentsList SelectAll()
         {
-            command.CommandText = $"SELECT Parents.Id,Parents.Telephone, Parents.Password, [User].DateOfBirth,[User].firstName,[User].LastName, [User].CityNameId FROM (Parents INNER JOIN [User] ON Parents.Id = [User].id)";
+            command.CommandText = $"SELECT Parents.Id,Parents.Telephone, Parents.[Password], [User].DateOfBirth,[User].firstName,[User].LastName, [User].CityNameId FROM (Parents INNER JOIN [User] ON Parents.Id = [User].id)";
             ParentsList pList = new ParentsList(base.Select());
             return pList;
         }
@@ -38,7 +38,7 @@ namespace ViewModel
         {
             Parents p = entity as Parents;
             p.Telephone = int.Parse(reader["Telephone"].ToString());
-            p.Password =int.Parse( reader["Password"].ToString());
+            p.Password = reader["Password"].ToString();
             base.CreateModel(entity);
             return p;
         }
@@ -106,11 +106,11 @@ namespace ViewModel
             Parents p = entity as Parents;
             if (p != null)
             {
-                string sqlStr = @"INSERT INTO Parents (ID,TEL,PAS) VALUES (?);";
+                string sqlStr = @"INSERT INTO Parents (TELEPHONE,[PASSWORD],ID) VALUES (?,?,?);";
 
                 cmd.CommandText = sqlStr;
-                cmd.Parameters.AddWithValue("@PAS", p.Password);
-                cmd.Parameters.AddWithValue("@TEL", p.Telephone);
+                cmd.Parameters.AddWithValue("@TELEPHONE", p.Telephone);
+                cmd.Parameters.AddWithValue("@PASSWORD", p.Password);
                 cmd.Parameters.AddWithValue("@ID", p.Id);
 
             }
@@ -122,10 +122,11 @@ namespace ViewModel
             Parents p = entity as Parents;
             if (p != null)
             {
-                string sqlStr = "UPDATE   [parents] SET tel= @tel WHERE ID = @id";///ךהוסיף telephone firstName = @fname, lastName = @lname, CityNameId = @cityId
+                string sqlStr = "UPDATE   [parents] SET telephone= @telephone , [password]=@password WHERE ID = @id";///ךהוסיף telephone firstName = @fname, lastName = @lname, CityNameId = @cityId
 
                 cmd.CommandText = sqlStr;
-                cmd.Parameters.Add(new OleDbParameter("@tel", p.Telephone));
+                cmd.Parameters.Add(new OleDbParameter("@telephone", p.Telephone));
+                cmd.Parameters.Add(new OleDbParameter("@password", p.Password));
                 cmd.Parameters.Add(new OleDbParameter("@id", p.Id));
             }
 
