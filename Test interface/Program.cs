@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Model;
+using ClApi;
 using System;
 using System.Linq;
 using System.Threading.Tasks;

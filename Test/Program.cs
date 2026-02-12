@@ -207,7 +207,8 @@ public class Program
         UserList ulist = udb.SelectAll();
 
         User UserToUpdate = ulist[0];
-        UserToUpdate.CityNameId = 3;
+        //fake entity - need to rplace in DB entity
+        UserToUpdate.CityNameId = new City() { Id = 2, CityName = "fff"};
         udb.Update(UserToUpdate);
         int u = udb.SaveChanges();
         Console.WriteLine($"{u} rows were updated");

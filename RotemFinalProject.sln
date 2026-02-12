@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36408.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RotemFinalProject", "RotemFinalProject\RotemFinalProject.csproj", "{8301B9DA-E38F-4CA6-8C3A-111FAB1EF1DE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{06A7D854-E817-4A2E-8ABA-65883F9B4051}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModel", "ViewModel\ViewModel.csproj", "{1A378BB6-043D-4E25-A159-D6272D2F838D}"
@@ -25,10 +23,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8301B9DA-E38F-4CA6-8C3A-111FAB1EF1DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8301B9DA-E38F-4CA6-8C3A-111FAB1EF1DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8301B9DA-E38F-4CA6-8C3A-111FAB1EF1DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8301B9DA-E38F-4CA6-8C3A-111FAB1EF1DE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{06A7D854-E817-4A2E-8ABA-65883F9B4051}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{06A7D854-E817-4A2E-8ABA-65883F9B4051}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06A7D854-E817-4A2E-8ABA-65883F9B4051}.Release|Any CPU.ActiveCfg = Release|Any CPU
