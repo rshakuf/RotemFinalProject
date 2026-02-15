@@ -10,7 +10,9 @@ namespace ViewModel
        
         public ParentsList SelectAll()
         {
-            command.CommandText = $"SELECT Parents.Id,Parents.Telephone, Parents.[Password], [User].DateOfBirth,[User].firstName,[User].LastName, [User].CityNameId FROM (Parents INNER JOIN [User] ON Parents.Id = [User].id)";
+            //command.CommandText = $"SELECT [User].DateOfBirth, [User].firstName, [User].LastName, [User].CityNameId, Parents.Id, Parents.telephone, Parents.[password], Parents.numOfKids FROM  (Parents INNER JOIN [User] ON Parents.Id = [User].id))";
+            command.CommandText = $"SELECT  Parents.Id, Parents.telephone, Parents.[password], Parents.numOfKids, [User].DateOfBirth, [User].firstName, [User].LastName, [User].CityNameId FROM   (Parents INNER JOIN     [User] ON Parents.Id = [User].id)";
+
             ParentsList pList = new ParentsList(base.Select());
             return pList;
         }
@@ -39,6 +41,7 @@ namespace ViewModel
             Parents p = entity as Parents;
             p.Telephone = int.Parse(reader["Telephone"].ToString());
             p.Password = reader["Password"].ToString();
+            p.NumOfKids = int.Parse(reader["NumOfKids"].ToString());
             base.CreateModel(entity);
             return p;
         }
@@ -106,11 +109,12 @@ namespace ViewModel
             Parents p = entity as Parents;
             if (p != null)
             {
-                string sqlStr = @"INSERT INTO Parents (TELEPHONE,[PASSWORD],ID) VALUES (?,?,?);";
+                string sqlStr = @"INSERT INTO Parents (TELEPHONE,[PASSWORD], NUMOFKIDS, ID) VALUES (?,?,?,?);";
 
                 cmd.CommandText = sqlStr;
                 cmd.Parameters.AddWithValue("@TELEPHONE", p.Telephone);
                 cmd.Parameters.AddWithValue("@PASSWORD", p.Password);
+                cmd.Parameters.AddWithValue("@NUMOFKIDS", p.NumOfKids);
                 cmd.Parameters.AddWithValue("@ID", p.Id);
 
             }
@@ -122,11 +126,12 @@ namespace ViewModel
             Parents p = entity as Parents;
             if (p != null)
             {
-                string sqlStr = "UPDATE   [parents] SET telephone= @telephone , [password]=@password WHERE ID = @id";///ךהוסיף telephone firstName = @fname, lastName = @lname, CityNameId = @cityId
+                string sqlStr = "UPDATE   [parents] SET telephone= @telephone , [password]=@password , numOfKids=@numodkids, WHERE ID = @id";///ךהוסיף telephone firstName = @fname, lastName = @lname, CityNameId = @cityId
 
                 cmd.CommandText = sqlStr;
                 cmd.Parameters.Add(new OleDbParameter("@telephone", p.Telephone));
                 cmd.Parameters.Add(new OleDbParameter("@password", p.Password));
+                cmd.Parameters.Add(new OleDbParameter("@numodkids", p.NumOfKids));
                 cmd.Parameters.Add(new OleDbParameter("@id", p.Id));
             }
 
