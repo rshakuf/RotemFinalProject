@@ -13,7 +13,7 @@ namespace ViewModel
     {
         public BabySitterTeensList SelectAll()
         {
-            command.CommandText = $"SELECT BabySitterTeens.Id,BabySitterTeens.Telephone,BabySitterTeens.[Password], [User].DateOfBirth, [User].firstName, [User].LastName, [User].CityName, [User].CityNameId, BabysitterTeens.MailOfRecommender, BabysitterTeens.PriceForAnHour, BabysitterTeens.ProfilePicture, BabysitterTeens.Id FROM (BabysitterTeens INNER JOIN [User] ON BabysitterTeens.Id = [User].id)";
+            command.CommandText = $"SELECT  BabysitterTeens.Id, BabysitterTeens.MailOfRecommender, BabysitterTeens.PriceForAnHour, BabysitterTeens.ProfilePicture, BabysitterTeens.telephone, BabysitterTeens.[password], [User].DateOfBirth, [User].firstName,   [User].LastName, [User].CityNameId  FROM   (BabysitterTeens INNER JOIN   [User] ON BabysitterTeens.Id = [User].id)";
             BabySitterTeensList groupList = new BabySitterTeensList(base.Select());
             return groupList;
         }
