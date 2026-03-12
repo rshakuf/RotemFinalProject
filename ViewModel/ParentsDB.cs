@@ -10,7 +10,9 @@ namespace ViewModel
        
         public ParentsList SelectAll()
         {
-            command.CommandText = $"SELECT Parents.Id,[User].DateOfBirth,[User].firstName,[User].LastName, [User].CityNameId FROM (Parents INNER JOIN [User] ON Parents.Id = [User].id)";
+            //command.CommandText = $"SELECT [User].DateOfBirth, [User].firstName, [User].LastName, [User].CityNameId, Parents.Id, Parents.telephone, Parents.[password], Parents.numOfKids FROM  (Parents INNER JOIN [User] ON Parents.Id = [User].id))";
+            command.CommandText = $"SELECT  Parents.Id, Parents.telephone, Parents.[password], Parents.numOfKids, [User].DateOfBirth, [User].firstName, [User].LastName, [User].CityNameId FROM   (Parents INNER JOIN     [User] ON Parents.Id = [User].id)";
+
             ParentsList pList = new ParentsList(base.Select());
             return pList;
         }
@@ -37,9 +39,9 @@ namespace ViewModel
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             Parents p = entity as Parents;
-            //p.FirstName = reader["firstName"].ToString();
-            //p.LastName = reader["lastName"].ToString();
-            //p.CityNameId = UserDB.SelectById((int)reader["cityNameId"]);
+            p.Telephone = int.Parse(reader["Telephone"].ToString());
+            p.Password = reader["Password"].ToString();
+            p.NumOfKids = int.Parse(reader["NumOfKids"].ToString());
             base.CreateModel(entity);
             return p;
         }
@@ -91,15 +93,28 @@ namespace ViewModel
                 inserted.Add(new ChangeEntity(base.CreateInsertdSQL, entity));
                 inserted.Add(new ChangeEntity(this.CreateInsertdSQL, entity));
             }
+
+        }
+        public override void Update(BaseEntity entity)
+        {
+            BaseEntity reqEntity = this.NewEntity(); ;
+            if (entity != null & entity.GetType() == reqEntity.GetType())
+            {
+                updated.Add(new ChangeEntity(base.CreateUpdatedSQL, entity));
+                updated.Add(new ChangeEntity(this.CreateUpdatedSQL, entity));
+            }
         }
         protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
         {
             Parents p = entity as Parents;
             if (p != null)
             {
-                string sqlStr = @"INSERT INTO Parents (ID) VALUES (?);";
+                string sqlStr = @"INSERT INTO Parents (TELEPHONE,[PASSWORD], NUMOFKIDS, ID) VALUES (?,?,?,?);";
 
                 cmd.CommandText = sqlStr;
+                cmd.Parameters.AddWithValue("@TELEPHONE", p.Telephone);
+                cmd.Parameters.AddWithValue("@PASSWORD", p.Password);
+                cmd.Parameters.AddWithValue("@NUMOFKIDS", p.NumOfKids);
                 cmd.Parameters.AddWithValue("@ID", p.Id);
 
             }
@@ -111,14 +126,15 @@ namespace ViewModel
             Parents p = entity as Parents;
             if (p != null)
             {
-                string sqlStr = "UPDATE  [User] SET firstName = @fname, lastName = @lname, CityNameId = @cityId WHERE ID = @id";
+                string sqlStr = "UPDATE   [parents] SET telephone= @telephone , [password]=@password , numOfKids=@numodkids, WHERE ID = @id";///ךהוסיף telephone firstName = @fname, lastName = @lname, CityNameId = @cityId
 
                 cmd.CommandText = sqlStr;
-                cmd.Parameters.Add(new OleDbParameter("@fname", p.FirstName));
-                cmd.Parameters.Add(new OleDbParameter("@lname", p.LastName));
-                cmd.Parameters.Add(new OleDbParameter("@cityId", p.CityNameId));
+                cmd.Parameters.Add(new OleDbParameter("@telephone", p.Telephone));
+                cmd.Parameters.Add(new OleDbParameter("@password", p.Password));
+                cmd.Parameters.Add(new OleDbParameter("@numodkids", p.NumOfKids));
                 cmd.Parameters.Add(new OleDbParameter("@id", p.Id));
             }
+
         }
     }
 

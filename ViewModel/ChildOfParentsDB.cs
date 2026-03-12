@@ -50,7 +50,7 @@ namespace ViewModel
         public virtual void Delete(BaseEntity entity)
         {
             BaseEntity reqEntity = this.NewEntity();
-            if (entity != null & entity.GetType() == reqEntity.GetType())
+            if (entity != null && entity.GetType() == reqEntity.GetType())
             {
                 deleted.Add(new ChangeEntity(this.CreateDeletedSQL, entity));
                 deleted.Add(new ChangeEntity(base.CreateUpdatedSQL, entity));
@@ -91,6 +91,15 @@ namespace ViewModel
                 "VALUES (?,?)";
             cmd.Parameters.AddWithValue("@ID", cop.Id);
             cmd.Parameters.AddWithValue("@idParent", DbVal(cop.IdParent?.Id));
+        }
+        public override void Update(BaseEntity entity)
+        {
+            BaseEntity reqEntity = this.NewEntity(); ;
+            if (entity != null & entity.GetType() == reqEntity.GetType())
+            {
+                updated.Add(new ChangeEntity(base.CreateUpdatedSQL, entity));
+                updated.Add(new ChangeEntity(this.CreateUpdatedSQL, entity));
+            }
         }
 
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)

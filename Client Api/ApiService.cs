@@ -12,8 +12,8 @@ namespace ApiInterface
 
         public ApiService()
         {
-            //uri = "http://localhost:5115";
-            uri = "https://z9vchnvr-5266.euw.devtunnels.ms";
+             uri = "http://localhost:5266/";
+            //uri = "https://z9vchnvr-5266.euw.devtunnels.ms";
             client = new HttpClient();
         }
 
@@ -31,6 +31,7 @@ namespace ApiInterface
         // ================= City =================
         public Task<CityList> GetAllCitiesAsync() =>
             client.GetFromJsonAsync<CityList>($"{uri}/api/Sellect/CitySelector");
+
 
             public async Task<int> InsertCityAsync(City city) =>
                 (await client.PostAsJsonAsync($"{uri}/api/Sellect/InsertACity", city)).IsSuccessStatusCode ? 1 : 0;

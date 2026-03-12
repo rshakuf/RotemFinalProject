@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
+
     public class ChildOfParent : User
     {
         private Parents idParent;
