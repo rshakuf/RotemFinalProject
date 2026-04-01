@@ -15,4 +15,10 @@
     <ProjectReference Include="..\ViewModel\ViewModel.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="ClApi">
+      <HintPath>..\ClApi\bin\Debug\net8.0\ClApi.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
