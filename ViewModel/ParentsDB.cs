@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data.OleDb;
-using System.Reflection;
 
 namespace ViewModel
 {
@@ -12,10 +11,8 @@ namespace ViewModel
         public ParentsList SelectAll()
         {
             //command.CommandText = $"SELECT [User].DateOfBirth, [User].firstName, [User].LastName, [User].CityNameId, Parents.Id, Parents.telephone, Parents.[password], Parents.numOfKids FROM  (Parents INNER JOIN [User] ON Parents.Id = [User].id))";
-            //command.CommandText = $"SELECT  Parents.Id, Parents.telephone, Parents.[password], Parents.numOfKids, [User].DateOfBirth, [User].firstName, [User].LastName, [User].CityNameId,  FROM   (Parents INNER JOIN     [User] ON Parents.Id = [User].id)";
-            command.CommandText = $" SELECT[User].DateOfBirth, [User].firstName, [User].LastName," +
-                $" [User].CityNameId, Parents.Id, Parents.telephone, Parents.[password], Parents.numOfKids " +
-                $" FROM([User] INNER JOIN Parents ON[User].id = Parents.Id)";
+            command.CommandText = $"SELECT  Parents.Id, Parents.telephone, Parents.[password], Parents.numOfKids, [User].DateOfBirth, [User].firstName, [User].LastName, [User].CityNameId FROM   (Parents INNER JOIN     [User] ON Parents.Id = [User].id)";
+
             ParentsList pList = new ParentsList(base.Select());
             return pList;
         }
@@ -42,10 +39,9 @@ namespace ViewModel
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             Parents p = entity as Parents;
-            p.Telephone = int.Parse(reader["telephone"].ToString());
-            p.Password = reader["password"].ToString();
-            p.NumOfKids = int.Parse(reader["numOfKids"].ToString());
-           
+            p.Telephone = int.Parse(reader["Telephone"].ToString());
+            p.Password = reader["Password"].ToString();
+            p.NumOfKids = int.Parse(reader["NumOfKids"].ToString());
             base.CreateModel(entity);
             return p;
         }

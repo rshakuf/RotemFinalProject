@@ -21,11 +21,11 @@ namespace ViewModel
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             BabySitterTeens bst = entity as BabySitterTeens;
-            bst.MailOfRecommender = reader["MailOfRecommender"].ToString();
-            bst.PriceForAnHour = int.Parse(reader["PriceForAnHour"].ToString());
-            bst.ProfilePicture = reader["ProfilePicture"].ToString();
-            bst.Telephone = int.Parse(reader["telephone"].ToString());
-            bst.Password = reader["password"].ToString();
+            bst.MailOfRecommender = reader["mailOfRecommender"].ToString();
+            bst.PriceForAnHour = int.Parse(reader["priceForAnHour"].ToString());
+            bst.ProfilePicture = reader["profilePicture"].ToString();
+            bst.Telephone = int.Parse(reader["Telephone"].ToString());
+            bst.Password = reader["Password"].ToString();
 
             base.CreateModel(entity);
             return bst;
@@ -53,7 +53,7 @@ namespace ViewModel
             BabySitterTeens b = entity as BabySitterTeens;
             if (b != null)
             {
-                string sqlStr = $"DELETE FROM BabysitterTeens WHERE ID=@pid";
+                string sqlStr = $"DELETE FROM BabySitterTeens WHERE ID=@pid";
 
                 command.CommandText = sqlStr;
                 command.Parameters.Add(new OleDbParameter("@pid", b.Id));
@@ -87,7 +87,7 @@ namespace ViewModel
             if (b != null)
             {
                 string sqlStr =
-                    $"INSERT INTO BabysitterTeens (ID, mailOfRecommender, priceForAnHour, profilePicture, telephone, [password]) " +
+                    $"INSERT INTO BabySitterTeens (ID, mailOfRecommender, priceForAnHour, profilePicture, telephone, [password]) " +
                     $"VALUES (?, ?, ?, ?, ?, ?)";
 
                 command.CommandText = sqlStr;
