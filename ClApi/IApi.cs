@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Model;
 using System.Threading.Tasks;
-using Model;
-using BabysitterApi;
 
 namespace ClApi
 {

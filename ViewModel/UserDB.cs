@@ -21,8 +21,8 @@ namespace ViewModel
         {
             User u = entity as User;
             u.FirstName = reader["firstName"].ToString();
-            u.LastName = reader["lastName"].ToString();
-            u.DateOfBirth = DateTime.Parse(reader["dateOfBirth"].ToString());
+            u.LastName = reader["LastName"].ToString();
+            u.DateOfBirth = DateTime.Parse(reader["DateOfBirth"].ToString());
             u.CityNameId = CityDB.SelectById(int.Parse(reader["CityNameId"].ToString()));
 
             base.CreateModel(entity); 
