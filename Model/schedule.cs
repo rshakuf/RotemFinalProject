@@ -9,23 +9,14 @@ namespace Model
     public class Schedule : BaseEntity
     {
         private BabySitterTeens babysitterId;
-        private DateTime avialableDate;
-        private TimeOnly starttime;
-        private TimeOnly endtime;
-        private Parents parentId;
-        private bool isRequested;
-        private bool isApproved;
-      
-
+        private String dayofweek;
+        private DateTime starttime;
+        private DateTime endtime;
 
         public BabySitterTeens BabysitterId { get => babysitterId; set => babysitterId = value; }
+        public String DayOfWeek { get => dayofweek; set => dayofweek = value; }
+        public DateTime StartTime { get => starttime; set => starttime = value; }
+        public DateTime EndTime { get => endtime; set => endtime = value; }
 
-        public DateTime AvialableDate { get => avialableDate; set => avialableDate = value; }
-        public TimeOnly Starttime { get => starttime; set => starttime = value; }
-        public TimeOnly Endtime { get => endtime; set => endtime = value; }
-        public Parents ParentId { get => parentId; set => parentId = value; }
-        public bool IsRequested { get => isRequested; set => isRequested = value; }
-        public bool IsApproved { get => isApproved; set => isApproved = value; }
-       
     }
 }
