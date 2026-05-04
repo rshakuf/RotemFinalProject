@@ -118,7 +118,6 @@ namespace BabysitterApi.Controllers
             int x = db.SaveChanges();
         }
         [HttpGet]
-
         public ChildOfParentList SelectAllChildOfParent()
         {
             ChildOfParentDB db = new ChildOfParentDB();
