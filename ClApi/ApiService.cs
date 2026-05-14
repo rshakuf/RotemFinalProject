@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Model;
 using BabysitterApi;
-
+using System.Text.Json;
 
 namespace ClApi
 {
@@ -155,6 +155,25 @@ namespace ClApi
 
         public async Task<int> DeleteScheduleAsync(int id) =>
             (await client.DeleteAsync($"{uri}/api/Sellect/DeleteASchedule/{id}")).IsSuccessStatusCode ? 1 : 0;
+
+        public async Task<List<Schedule>> GetSchedulesByBabysitterIdAsync(int babysitterId)
+        {
+            HttpResponseMessage response =
+                await client.GetAsync($"{uri}/api/Sellect/GetByBabysitter/{babysitterId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                string json = await response.Content.ReadAsStringAsync();
+
+                return JsonSerializer.Deserialize<List<Schedule>>(json,
+                    new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
+            }
+
+            return new List<Schedule>();
+        }
 
         // UserProfile 
         public Task<UserProfileList> GetAllUserProfilesAsync() =>

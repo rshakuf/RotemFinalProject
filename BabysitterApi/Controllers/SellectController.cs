@@ -344,7 +344,18 @@ namespace BabysitterApi.Controllers
             db.Update(Schedule);
             int x = db.SaveChanges();
         }
+        [HttpGet("{id}")]
+        public List<Schedule> GetByBabysitter(int id)
+        {
+            ScheduleDB db = new ScheduleDB();
 
+            var schedules = db.SelectAll()
+                              .Where(x => x.BabysitterId != null &&
+                                          x.BabysitterId.Id == id)
+                              .ToList();
+
+            return schedules;
+        }
 
         [HttpGet]
         public UserList SelectAllUser()

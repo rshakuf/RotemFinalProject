@@ -7,100 +7,238 @@ namespace ViewModel
 {
     public class ScheduleDB : BaseDB
     {
-        public override BaseEntity NewEntity() => new Schedule();
+        public override BaseEntity NewEntity()
+        {
+            return new Schedule();
+        }
 
         public ScheduleList SelectAll()
         {
-            command.CommandText = "SELECT * FROM Schedule";
-            var list = new ScheduleList();
-            foreach (var e in Select())
-                list.Add(e as Schedule);
+            command.CommandText =
+                "SELECT    BabysitterId, DateAvailable, starttime, endtime, parentId, isRequested, isApproved, id FROM  Schedule";
+
+            ScheduleList list = new ScheduleList();
+
+            foreach (BaseEntity be in Select())
+            {
+                list.Add(be as Schedule);
+            }
+
             return list;
         }
 
         public static Schedule SelectById(int id)
         {
-            var db = new ScheduleDB();
-            db.command.CommandText = "SELECT * FROM Schedule WHERE id=@id";
+            ScheduleDB db = new ScheduleDB();
+
+            db.command.CommandText =
+                "SELECT * FROM Schedule WHERE id=@id";
+
             db.command.Parameters.Clear();
-            db.command.Parameters.Add(new OleDbParameter("@id", id));
-            var list = new List<Schedule>();
-            foreach (var e in db.Select())
-                list.Add(e as Schedule);
-            return list.Count > 0 ? list[0] : null;
+
+            db.command.Parameters.Add(
+                new OleDbParameter("@id", id));
+
+            List<Schedule> list = new List<Schedule>();
+
+            foreach (BaseEntity be in db.Select())
+            {
+                list.Add(be as Schedule);
+            }
+
+            if (list.Count > 0)
+                return list[0];
+
+            return null;
         }
 
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
-            var s = entity as Schedule ?? new Schedule();
+            Schedule s = entity as Schedule;
 
-            if (reader["babysitterId"] != DBNull.Value)
-                s.BabysitterId = BabySitterTeensDB.SelectById(Convert.ToInt32(reader["babysitterId"]));
-
-            if (reader["dayOfWeek"] != DBNull.Value)
-                s.DayOfWeek = Convert.ToString(reader["DayOfWeek"]);
-
-            if (reader["startTime"] != DBNull.Value)
-                s.StartTime = Convert.ToDateTime(reader["startTime"]);
-
-            if (reader["endTime"] != DBNull.Value)
-                s.EndTime = Convert.ToDateTime(reader["endTime"]);
+            if (s == null)
+                s = new Schedule();
 
             base.CreateModel(s);
+
+            if (reader["babysitterId"] != DBNull.Value)
+            {
+                s.BabysitterId =
+                    BabySitterTeensDB.SelectById(
+                        Convert.ToInt32(reader["babysitterId"]));
+            }
+
+            if (reader["parentId"] != DBNull.Value)
+            {
+                s.ParentId =
+                    ParentsDB.SelectById(
+                        Convert.ToInt32(reader["parentId"]));
+            }
+
+            if (reader["dateAvailable"] != DBNull.Value)
+            {
+                s.DateAvailable =
+                    Convert.ToDateTime(reader["dateAvailable"]);
+            }
+
+            if (reader["startTime"] != DBNull.Value)
+            {
+                DateTime dt =
+                    Convert.ToDateTime(reader["startTime"]);
+
+                s.Starttime =
+                    TimeOnly.FromDateTime(dt);
+            }
+
+            if (reader["endTime"] != DBNull.Value)
+            {
+                DateTime dt =
+                    Convert.ToDateTime(reader["endTime"]);
+
+                s.Endtime =
+                    TimeOnly.FromDateTime(dt);
+            }
+
+            if (reader["isRequested"] != DBNull.Value)
+            {
+                s.IsRequested =
+                    Convert.ToBoolean(reader["isRequested"]);
+            }
+
+            if (reader["isApproved"] != DBNull.Value)
+            {
+                s.IsApproved =
+                    Convert.ToBoolean(reader["isApproved"]);
+            }
+
             return s;
         }
 
-        protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
+        protected override void CreateDeletedSQL(
+            BaseEntity entity,
+            OleDbCommand cmd)
         {
-            Schedule p = entity as Schedule;
-            if (p != null)
-            {
-                string sqlStr = "DELETE FROM Schedule where ID=@pid";
+            Schedule s = entity as Schedule;
 
-                command.CommandText = sqlStr;
+            if (s == null)
+                return;
 
-                command.Parameters.Add(new OleDbParameter("@pid", p.Id));
+            cmd.CommandText =
+                "DELETE FROM Schedule WHERE id=?";
 
-            }
+            cmd.Parameters.AddWithValue(
+                "@id",
+                s.Id);
         }
 
         public override void Insert(BaseEntity entity)
         {
-            BaseEntity reqEntity = this.NewEntity(); ;
-            if (entity != null & entity.GetType() == reqEntity.GetType())
+            BaseEntity newEntity = NewEntity();
+
+            if (entity != null &&
+                entity.GetType() == newEntity.GetType())
             {
-                //inserted.Add(new ChangeEntity(base.CreateInsertdSQL, entity));
-                inserted.Add(new ChangeEntity(this.CreateInsertdSQL, entity));
+                inserted.Add(
+                    new ChangeEntity(
+                        CreateInsertdSQL,
+                        entity));
             }
         }
 
-        protected override void CreateInsertdSQL(BaseEntity entity, OleDbCommand cmd)
+        protected override void CreateInsertdSQL(
+            BaseEntity entity,
+            OleDbCommand cmd)
         {
-            if (entity is not Schedule s) return;
+            Schedule s = entity as Schedule;
+
+            if (s == null)
+                return;
 
             cmd.CommandText =
-                "INSERT INTO Schedule (babysitterId, dayOfWeek, startTime, endTime) " +
-                "VALUES (?,?,?,?)";
+                "INSERT INTO Schedule " +
+                "(babysitterId, parentId, dateAvailable, startTime, endTime, isRequested, isApproved) " +
+                "VALUES (?,?,?,?,?,?,?)";
 
-            cmd.Parameters.AddWithValue("@babysitterId", DbVal(s.BabysitterId?.Id));
-            cmd.Parameters.AddWithValue("@dayOfWeek", s.DayOfWeek);
-            cmd.Parameters.AddWithValue("@startTime", s.StartTime);
-            cmd.Parameters.AddWithValue("@endTime", s.EndTime);
+            cmd.Parameters.AddWithValue(
+                "@babysitterId",
+                DbVal(s.BabysitterId?.Id));
+
+            cmd.Parameters.AddWithValue(
+                "@parentId",
+                DbVal(s.ParentId?.Id));
+
+            cmd.Parameters.AddWithValue(
+                "@dateAvailable",
+                s.DateAvailable);
+
+            cmd.Parameters.AddWithValue(
+                "@startTime",
+                s.Starttime.ToString("HH:mm:ss"));
+
+            cmd.Parameters.AddWithValue(
+                "@endTime",
+                s.Endtime.ToString("HH:mm:ss"));
+
+            cmd.Parameters.AddWithValue(
+                "@isRequested",
+                s.IsRequested);
+
+            cmd.Parameters.AddWithValue(
+                "@isApproved",
+                s.IsApproved);
         }
 
-        protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
+        protected override void CreateUpdatedSQL(
+            BaseEntity entity,
+            OleDbCommand cmd)
         {
-            if (entity is not Schedule s) return;
+            Schedule s = entity as Schedule;
+
+            if (s == null)
+                return;
 
             cmd.CommandText =
-                "UPDATE Schedule SET babysitterId=?, dayOfWeek=?, startTime=?, endTime=? " +
+                "UPDATE Schedule SET " +
+                "babysitterId=?, " +
+                "parentId=?, " +
+                "dateAvailable=?, " +
+                "startTime=?, " +
+                "endTime=?, " +
+                "isRequested=?, " +
+                "isApproved=? " +
                 "WHERE id=?";
 
-            cmd.Parameters.Add(new OleDbParameter("@babysitterId", DbVal(s.BabysitterId?.Id)));
-            cmd.Parameters.Add(new OleDbParameter("@dayOfWeek", s.DayOfWeek));
-            cmd.Parameters.Add(new OleDbParameter("@startTime", s.StartTime));
-            cmd.Parameters.Add(new OleDbParameter("@endTime", s.EndTime));
-            cmd.Parameters.Add(new OleDbParameter("@id", s.Id));
+            cmd.Parameters.AddWithValue(
+                "@babysitterId",
+                DbVal(s.BabysitterId?.Id));
+
+            cmd.Parameters.AddWithValue(
+                "@parentId",
+                DbVal(s.ParentId?.Id));
+
+            cmd.Parameters.AddWithValue(
+                "@dateAvailable",
+                s.DateAvailable);
+
+            cmd.Parameters.AddWithValue(
+                "@startTime",
+                s.Starttime.ToString("HH:mm:ss"));
+
+            cmd.Parameters.AddWithValue(
+                "@endTime",
+                s.Endtime.ToString("HH:mm:ss"));
+
+            cmd.Parameters.AddWithValue(
+                "@isRequested",
+                s.IsRequested);
+
+            cmd.Parameters.AddWithValue(
+                "@isApproved",
+                s.IsApproved);
+
+            cmd.Parameters.AddWithValue(
+                "@id",
+                s.Id);
         }
     }
 }
