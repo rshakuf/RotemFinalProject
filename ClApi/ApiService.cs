@@ -18,7 +18,7 @@ namespace ClApi
         public ApiService()
         {
           //  uri = "http://localhost:5266";
-            uri = "https://z9vchnvr-5266.euw.devtunnels.ms";
+            uri = "https://phb804d4-5266.euw.devtunnels.ms";
             client = new HttpClient();
         }
 
@@ -191,7 +191,8 @@ namespace ClApi
         // Parents
         public Task<ParentsList> GetAllParentsAsync()=>
            client.GetFromJsonAsync<ParentsList>($"{uri}/api/Sellect/SelectAllParents");
-
+        // https://phb804d4-5266.euw.devtunnels.ms/api/Sellect/SelectAllParents
+        //https://phb804d4-5266.euw.devtunnels.ms/api/Sellect/SelectAllParents
         public async Task<int> InsertParentAsync(Parents parent) =>
             (await client.PostAsJsonAsync($"{uri}/api/Sellect/InsertAParents", parent)).IsSuccessStatusCode ? 1 : 0;
 

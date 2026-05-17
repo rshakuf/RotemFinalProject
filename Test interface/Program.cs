@@ -130,9 +130,9 @@ class Program
             var schedules = await api.GetAllSchedulesAsync();
             Console.WriteLine($"Schedules count: {schedules.Count}");
 
-            await api.InsertScheduleAsync(new Schedule { DayOfWeek = "Sunday" });
+            await api.InsertScheduleAsync(new Schedule { DateAvailable = DateTime.Now });
             var schedule = schedules.First();
-            schedule.DayOfWeek = "Monday";
+            schedule.DateAvailable = DateTime.Now;
             await api.UpdateScheduleAsync(schedule);
             await api.DeleteScheduleAsync(schedules.Last().Id);
 

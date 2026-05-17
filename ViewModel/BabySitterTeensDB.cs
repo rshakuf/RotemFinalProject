@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.OleDb;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,7 +14,10 @@ namespace ViewModel
     {
         public BabySitterTeensList SelectAll()
         {
-            command.CommandText = $"SELECT  BabysitterTeens.Id, BabysitterTeens.Mail, BabysitterTeens.PriceForAnHour, BabysitterTeens.ProfilePicture, BabysitterTeens.telephone, BabysitterTeens.[password], [User].DateOfBirth, [User].firstName,   [User].LastName, [User].CityNameId  FROM   (BabysitterTeens INNER JOIN   [User] ON BabysitterTeens.Id = [User].id)";
+            command.CommandText = $"SELECT BabysitterTeens.Id, BabysitterTeens.Mail, BabysitterTeens.PriceForAnHour, BabysitterTeens.ProfilePicture, BabysitterTeens.telephone," +
+                $" BabysitterTeens.[password], [User].DateOfBirth, [User].firstName,[User].LastName, [User].CityNameId " +
+                $" FROM(BabysitterTeens INNER JOIN  [User] ON BabysitterTeens.Id = [User].id)";
+                
             BabySitterTeensList groupList = new BabySitterTeensList(base.Select());
             return groupList;
         }

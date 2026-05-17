@@ -98,7 +98,7 @@ public class Program
         BabySitterTeensList groupList = bst.SelectAll();
 
         BabySitterTeens BabySitterTeensToUpdate = groupList[0];
-        BabySitterTeensToUpdate.MailOfRecommender = "lori@gmail.com";
+        BabySitterTeensToUpdate.Mail = "lori@gmail.com";
         //JobHistoryToUpdate.Parentid = pList[0];
         bst.Update(BabySitterTeensToUpdate);
         int a = bst.SaveChanges();
@@ -191,7 +191,7 @@ public class Program
         ScheduleList slist = sdb.SelectAll();
 
         Schedule ScheduleToUpdate = slist[0];
-        ScheduleToUpdate.DayOfWeek = "sunday";
+        ScheduleToUpdate.DateAvailable = DateTime.Now;
         sdb.Update(ScheduleToUpdate);
         int n = sdb.SaveChanges();
         Console.WriteLine($"{n} rows were updated");
