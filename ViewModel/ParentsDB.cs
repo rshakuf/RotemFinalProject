@@ -39,7 +39,7 @@ namespace ViewModel
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             Parents p = entity as Parents;
-            p.Telephone = int.Parse(reader["Telephone"].ToString());
+            p.Telephone = reader["Telephone"].ToString();
             p.Password = reader["Password"].ToString();
             p.NumOfKids = int.Parse(reader["NumOfKids"].ToString());
             base.CreateModel(entity);

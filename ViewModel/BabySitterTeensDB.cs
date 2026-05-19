@@ -28,7 +28,7 @@ namespace ViewModel
             bst.Mail = reader["mail"].ToString();
             bst.PriceForAnHour = int.Parse(reader["priceForAnHour"].ToString());
             bst.ProfilePicture = reader["profilePicture"].ToString();
-            bst.Telephone = int.Parse(reader["Telephone"].ToString());
+            bst.Telephone = reader["Telephone"].ToString();
             bst.Password = reader["Password"].ToString();
 
             base.CreateModel(entity);

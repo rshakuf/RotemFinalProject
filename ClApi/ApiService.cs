@@ -17,9 +17,10 @@ namespace ClApi
 
         public ApiService()
         {
-          //  uri = "http://localhost:5266";
+            //  uri = "http://localhost:5266";
             //uri = "https://phb804d4-5266.euw.devtunnels.ms";
             uri = "https://dzq4hh1r-5266.uks1.devtunnels.ms";
+            //uri = "https://dzq4hh1r-5266.uks1.devtunnels.ms";
             client = new HttpClient();
         }
 

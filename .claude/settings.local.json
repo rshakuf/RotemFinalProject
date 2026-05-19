@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem -Path \"E:\\\\Development\\\\RotemFinalProject\" -Recurse -Directory | Select-Object -First 30 | ForEach-Object { $_.FullName })"
+    ]
+  }
+}
