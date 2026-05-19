@@ -111,7 +111,7 @@ namespace ViewModel
             {
                 string sqlStr =
                     $"UPDATE BabySitterTeens " +
-                    $"SET mailr=@mail, priceForAnHour=@price, profilePicture=@pic, telephone= @telephone, [password]=@password" +
+                    $"SET mail=@mail, priceForAnHour=@price, profilePicture=@pic, telephone=@telephone, [password]=@password " +
                     $"WHERE id=@id";
 
                 command.CommandText = sqlStr;
