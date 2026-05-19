@@ -279,6 +279,18 @@ namespace BabysitterApi.Controllers
             int x = db.SaveChanges();
         }
 
+        [HttpPut("{id}/status")]
+        public IActionResult UpdateRequestStatus(int id, [FromBody] string status)
+        {
+            Requests existing = RequestsDB.SelectById(id);
+            if (existing == null) return NotFound();
+            existing.Status = status;
+            RequestsDB db = new RequestsDB();
+            db.Update(existing);
+            db.SaveChanges();
+            return Ok();
+        }
+
 
         [HttpGet]
         public ReviewsList SelectAllReviews()
@@ -321,12 +333,12 @@ namespace BabysitterApi.Controllers
             return Schedule;
         }
         [HttpPost]
-        public int InsertASchedule([FromBody] Schedule Schedule)
+        public IActionResult InsertASchedule([FromBody] Schedule Schedule)
         {
             ScheduleDB db = new ScheduleDB();
             db.Insert(Schedule);
             int x = db.SaveChanges();
-            return x;
+            return x > 0 ? Ok(x) : StatusCode(500, "Insert failed");
         }
         [HttpDelete("{id}")]
         public int DeleteASchedule(int id)

@@ -11,10 +11,5 @@
     <ProjectReference Include="..\Model\Model.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="ClApi">
-      <HintPath>bin\Debug\net8.0\ClApi.dll</HintPath>
-    </Reference>
-  </ItemGroup>
 
 </Project>

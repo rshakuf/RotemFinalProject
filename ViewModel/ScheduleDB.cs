@@ -173,11 +173,11 @@ namespace ViewModel
 
             cmd.Parameters.AddWithValue(
                 "@startTime",
-                s.Starttime.ToString("HH:mm:ss"));
+                new DateTime(1900, 1, 1, s.Starttime.Hour, s.Starttime.Minute, s.Starttime.Second));
 
             cmd.Parameters.AddWithValue(
                 "@endTime",
-                s.Endtime.ToString("HH:mm:ss"));
+                new DateTime(1900, 1, 1, s.Endtime.Hour, s.Endtime.Minute, s.Endtime.Second));
 
             cmd.Parameters.AddWithValue(
                 "@isRequested",
@@ -222,11 +222,11 @@ namespace ViewModel
 
             cmd.Parameters.AddWithValue(
                 "@startTime",
-                s.Starttime.ToString("HH:mm:ss"));
+                new DateTime(1900, 1, 1, s.Starttime.Hour, s.Starttime.Minute, s.Starttime.Second));
 
             cmd.Parameters.AddWithValue(
                 "@endTime",
-                s.Endtime.ToString("HH:mm:ss"));
+                new DateTime(1900, 1, 1, s.Endtime.Hour, s.Endtime.Minute, s.Endtime.Second));
 
             cmd.Parameters.AddWithValue(
                 "@isRequested",

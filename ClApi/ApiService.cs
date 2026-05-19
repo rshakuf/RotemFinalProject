@@ -18,7 +18,8 @@ namespace ClApi
         public ApiService()
         {
           //  uri = "http://localhost:5266";
-            uri = "https://phb804d4-5266.euw.devtunnels.ms";
+            //uri = "https://phb804d4-5266.euw.devtunnels.ms";
+            uri = "https://dzq4hh1r-5266.uks1.devtunnels.ms";
             client = new HttpClient();
         }
 
@@ -147,8 +148,16 @@ namespace ClApi
         public Task<ScheduleList> GetAllSchedulesAsync() =>
             client.GetFromJsonAsync<ScheduleList>($"{uri}/api/Sellect/SelectAllSchedule");
 
-        public async Task<int> InsertScheduleAsync(Schedule s) =>
-            (await client.PostAsJsonAsync($"{uri}/api/Sellect/InsertASchedule", s)).IsSuccessStatusCode ? 1 : 0;
+        public async Task<int> InsertScheduleAsync(Schedule s)
+        {
+            var response = await client.PostAsJsonAsync($"{uri}/api/Sellect/InsertASchedule", s);
+            if (!response.IsSuccessStatusCode)
+            {
+                string body = await response.Content.ReadAsStringAsync();
+                throw new Exception($"HTTP {(int)response.StatusCode}: {body}");
+            }
+            return 1;
+        }
 
         public async Task<int> UpdateScheduleAsync(Schedule s) =>
             (await client.PutAsJsonAsync($"{uri}/api/Sellect/UpdateASchedule", s)).IsSuccessStatusCode ? 1 : 0;
