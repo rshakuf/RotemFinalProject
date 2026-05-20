@@ -7,7 +7,14 @@
       "Bash(Sort-Object)",
       "Bash(not exist *)",
       "Bash(dotnet build *)",
-      "PowerShell(head -20)"
+      "PowerShell(head -20)",
+      "Bash(Get-ChildItem -Path \"E:\\\\Development\\\\RotemFinalProject\" -Recurse -File -Include \"*.kt\")",
+      "Bash(Select-Object -First 30)",
+      "Bash(Format-Table FullName)",
+      "Bash(xargs grep -l \"Stars\\\\|ranking\\\\|display.*rating\\\\|show.*rate\")",
+      "Bash(grep -E \"\\\\.cs$\")",
+      "Bash(xargs grep -l \"class.*Dto\\\\|class.*ViewModel\\\\|class.*View\")",
+      "Bash(ls \"E:\\\\Development\" -Name)"
     ]
   }
 }

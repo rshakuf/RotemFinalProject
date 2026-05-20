@@ -54,7 +54,9 @@ namespace ViewModel
         private static BabySitterRate HydrateRate(RawRate raw)
         {
             var r = new BabySitterRate { Id = raw.Id, Stars = raw.Stars, DateOfRate = raw.DateOfRate };
-            if (raw.IdBabySitter > 0) r.IdBabySitter = BabySitterTeensDB.SelectById(raw.IdBabySitter);
+            // Use lightweight stub so the Id is always set — avoids a fragile full DB lookup
+            // that can silently return null if any user row has a missing CityNameId.
+            if (raw.IdBabySitter > 0) r.IdBabySitter = new BabySitterTeens { Id = raw.IdBabySitter };
             if (raw.IdParent     > 0) r.IdParent     = ParentsDB.SelectById(raw.IdParent);
             return r;
         }
