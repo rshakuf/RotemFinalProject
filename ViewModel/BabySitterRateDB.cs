@@ -9,39 +9,78 @@ namespace ViewModel
     {
         public override BaseEntity NewEntity() => new BabySitterRate();
 
+        private struct RawRate
+        {
+            public int Id, IdBabySitter, IdParent, Stars;
+            public DateTime DateOfRate;
+        }
+
+        private List<RawRate> ReadRawRates(string sql, OleDbParameter param = null)
+        {
+            var rows = new List<RawRate>();
+            try
+            {
+                if (connection.State != System.Data.ConnectionState.Open)
+                    connection.Open();
+                command.CommandText = sql;
+                command.Parameters.Clear();
+                if (param != null) command.Parameters.Add(param);
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    rows.Add(new RawRate
+                    {
+                        Id           = Convert.ToInt32(reader["id"]),
+                        Stars        = reader["stars"] != DBNull.Value ? Convert.ToInt32(reader["stars"]) : 0,
+                        IdBabySitter = reader["idBabySitter"] != DBNull.Value ? Convert.ToInt32(reader["idBabySitter"]) : 0,
+                        IdParent     = reader["idParent"] != DBNull.Value ? Convert.ToInt32(reader["idParent"]) : 0,
+                        DateOfRate   = reader["dateOfRate"] != DBNull.Value ? Convert.ToDateTime(reader["dateOfRate"]) : default
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("BabySitterRateDB.ReadRaw: " + ex.Message);
+            }
+            finally
+            {
+                reader?.Close();
+                reader = null;
+                command.Parameters.Clear();
+            }
+            return rows;
+        }
+
+        private static BabySitterRate HydrateRate(RawRate raw)
+        {
+            var r = new BabySitterRate { Id = raw.Id, Stars = raw.Stars, DateOfRate = raw.DateOfRate };
+            if (raw.IdBabySitter > 0) r.IdBabySitter = BabySitterTeensDB.SelectById(raw.IdBabySitter);
+            if (raw.IdParent     > 0) r.IdParent     = ParentsDB.SelectById(raw.IdParent);
+            return r;
+        }
+
         public BabySitterRateList SelectAll()
         {
-            command.CommandText = "SELECT  * FROM BabySitterRate";
+            var rows = ReadRawRates("SELECT * FROM BabySitterRate");
             var list = new BabySitterRateList();
-            foreach (var e in Select())
-                list.Add(e as BabySitterRate);
+            foreach (var raw in rows)
+                list.Add(HydrateRate(raw));
             return list;
         }
 
         public static BabySitterRate SelectById(int id)
         {
             var db = new BabySitterRateDB();
-            db.command.CommandText = "SELECT BabySitterRate.* FROM BabySitterRate WHERE id=@id";
-            db.command.Parameters.Clear();
-            db.command.Parameters.Add(new OleDbParameter("@id", id));
-            var list = new List<BabySitterRate>();
-            foreach (var e in db.Select())
-                list.Add(e as BabySitterRate);
-            return list.Count > 0 ? list[0] : null;
+            var rows = db.ReadRawRates("SELECT * FROM BabySitterRate WHERE id=?",
+                new OleDbParameter("@id", id));
+            return rows.Count > 0 ? HydrateRate(rows[0]) : null;
         }
 
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             var r = entity as BabySitterRate ?? new BabySitterRate();
-
-            if (reader["stars"] != DBNull.Value) r.Stars = Convert.ToInt32(reader["stars"]);
-            if (reader["idBabySitter"] != DBNull.Value)
-                r.IdBabySitter = BabySitterTeensDB.SelectById(Convert.ToInt32(reader["idBabySitter"]));
-            if (reader["idParent"] != DBNull.Value)
-                r.IdParent = ParentsDB.SelectById(Convert.ToInt32(reader["idParent"]));
-            if (reader["dateOfRate"] != DBNull.Value)
-                r.DateOfRate = Convert.ToDateTime(reader["dateOfRate"]);
-
+            if (reader["stars"] != DBNull.Value)      r.Stars      = Convert.ToInt32(reader["stars"]);
+            if (reader["dateOfRate"] != DBNull.Value)  r.DateOfRate = Convert.ToDateTime(reader["dateOfRate"]);
             base.CreateModel(r);
             return r;
         }
