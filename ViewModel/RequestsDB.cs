@@ -46,6 +46,9 @@ namespace ViewModel
             if (reader["babysitterId"] != DBNull.Value)
                 r.BabysitterId = BabySitterTeensDB.SelectById(Convert.ToInt32(reader["babysitterId"]));
 
+            if (reader["LenghtTime"] != DBNull.Value)
+                r.LenghtTime = Convert.ToInt32(reader["LenghtTime"]);
+
             base.CreateModel(r);
             return r;
         }
@@ -81,13 +84,14 @@ namespace ViewModel
             if (entity is not Requests r) return;
 
             cmd.CommandText =
-                "INSERT INTO Requests (status, TimeOfRequest, parentsId, babysitterId) " +
-                "VALUES (?,?,?,?)";
+                "INSERT INTO Requests (status, TimeOfRequest, parentsId, babysitterId, LenghtTime) " +
+                "VALUES (?,?,?,?,?)";
 
             cmd.Parameters.Add(new OleDbParameter("@status", r.Status));
             cmd.Parameters.Add(new OleDbParameter("@TimeOfRequest", r.TimeOfRequest));
             cmd.Parameters.Add(new OleDbParameter("@parentsId", DbVal(r.ParentsId?.Id)));
             cmd.Parameters.Add(new OleDbParameter("@babysitterId", DbVal(r.BabysitterId?.Id)));
+            cmd.Parameters.Add(new OleDbParameter("@LenghtTime", r.LenghtTime));
         }
 
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
@@ -95,13 +99,14 @@ namespace ViewModel
             if (entity is not Requests r) return;
 
             cmd.CommandText =
-                "UPDATE Requests SET status=?, TimeOfRequest=?, parentsId=?, babysitterId=? " +
+                "UPDATE Requests SET status=?, TimeOfRequest=?, parentsId=?, babysitterId=?, LenghtTime=? " +
                 "WHERE id=?";
 
             cmd.Parameters.Add(new OleDbParameter("@status", r.Status));
             cmd.Parameters.Add(new OleDbParameter("@TimeOfRequest", r.TimeOfRequest));
             cmd.Parameters.Add(new OleDbParameter("@parentsId", DbVal(r.ParentsId?.Id)));
             cmd.Parameters.Add(new OleDbParameter("@babysitterId", DbVal(r.BabysitterId?.Id)));
+            cmd.Parameters.Add(new OleDbParameter("@LenghtTime", r.LenghtTime));
             cmd.Parameters.Add(new OleDbParameter("@id", r.Id));
         }
     }

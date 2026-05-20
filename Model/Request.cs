@@ -12,10 +12,12 @@ namespace Model
         private BabySitterTeens babysitterId;
         private string status;
         private DateTime timeOfRequest;
+        private int lenghtTime;
 
         public Parents ParentsId { get => parentsId; set => parentsId = value; }
         public BabySitterTeens BabysitterId { get => babysitterId; set => babysitterId = value; }
         public string Status { get => status; set => status = value; }
         public DateTime TimeOfRequest { get => timeOfRequest; set => timeOfRequest = value; }
+        public int LenghtTime { get => lenghtTime; set => lenghtTime = value; }
     }
 }
