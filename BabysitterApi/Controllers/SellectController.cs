@@ -111,11 +111,10 @@ namespace BabysitterApi.Controllers
         }
 
         [HttpPut]
-        public void UpdateABabySitterTeens([FromBody] BabySitterTeens BabySitterTeens)
+        public int UpdateABabySitterTeens([FromBody] BabySitterTeens BabySitterTeens)
         {
             BabySitterTeensDB db = new BabySitterTeensDB();
-            db.Update(BabySitterTeens);
-            int x = db.SaveChanges();
+            return db.UpdateBabySitterProfile(BabySitterTeens);
         }
         [HttpGet]
         public ChildOfParentList SelectAllChildOfParent()

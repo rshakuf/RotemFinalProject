@@ -104,6 +104,76 @@ namespace ViewModel
             }
         }
 
+        public override void Update(BaseEntity entity)
+        {
+            BaseEntity reqEntity = this.NewEntity();
+            if (entity != null & entity.GetType() == reqEntity.GetType())
+            {
+                updated.Add(new ChangeEntity(base.CreateUpdatedSQL, entity));  // [User] table: firstName, lastName, cityNameId
+                updated.Add(new ChangeEntity(this.CreateUpdatedSQL, entity));  // BabySitterTeens table: mail, price, pic, telephone, password
+            }
+        }
+
+        public int UpdateBabySitterProfile(BabySitterTeens b)
+        {
+            int recordsAffected = 0;
+            OleDbTransaction trans = null;
+            try
+            {
+                if (connection.State != System.Data.ConnectionState.Open)
+                    connection.Open();
+
+                trans = connection.BeginTransaction();
+                command.Transaction = trans;
+
+                // Update [User] table
+                command.Parameters.Clear();
+                command.CommandText = "UPDATE [User] SET firstName=@fn, LastName=@ln, DateOfBirth=@dob, CityNameId=@cni WHERE ID=@id";
+                command.Parameters.Add(new OleDbParameter("@fn", b.FirstName ?? ""));
+                command.Parameters.Add(new OleDbParameter("@ln", b.LastName ?? ""));
+                command.Parameters.Add(new OleDbParameter("@dob", b.DateOfBirth));
+                command.Parameters.Add(new OleDbParameter("@cni", b.CityNameId != null ? (object)b.CityNameId.Id : DBNull.Value));
+                command.Parameters.Add(new OleDbParameter("@id", b.Id));
+                recordsAffected += command.ExecuteNonQuery();
+
+                // Update BabySitterTeens table (without profilePicture to avoid MEMO-in-transaction issues)
+                command.Parameters.Clear();
+                command.CommandText = "UPDATE BabySitterTeens SET mail=@mail, priceForAnHour=@price, telephone=@tel, [password]=@pwd WHERE id=@id";
+                command.Parameters.Add(new OleDbParameter("@mail", b.Mail ?? ""));
+                command.Parameters.Add(new OleDbParameter("@price", b.PriceForAnHour));
+                command.Parameters.Add(new OleDbParameter("@tel", b.Telephone ?? ""));
+                command.Parameters.Add(new OleDbParameter("@pwd", b.Password ?? ""));
+                command.Parameters.Add(new OleDbParameter("@id", b.Id));
+                recordsAffected += command.ExecuteNonQuery();
+
+                trans.Commit();
+                trans = null;
+
+                // Update profilePicture separately (MEMO field; keep outside main transaction)
+                if (!string.IsNullOrWhiteSpace(b.ProfilePicture) && b.ProfilePicture.Trim().Length > 10)
+                {
+                    command.Transaction = null;
+                    command.Parameters.Clear();
+                    command.CommandText = "UPDATE BabySitterTeens SET profilePicture=@pic WHERE id=@id";
+                    command.Parameters.Add(new OleDbParameter("@pic", b.ProfilePicture));
+                    command.Parameters.Add(new OleDbParameter("@id", b.Id));
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                try { trans?.Rollback(); } catch { }
+                Console.WriteLine("!!! UpdateBabySitterProfile ERROR: " + ex.Message);
+                return 0;
+            }
+            finally
+            {
+                command.Transaction = null;
+                command.Parameters.Clear();
+            }
+            return recordsAffected;
+        }
+
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
         {
             BabySitterTeens b = entity as BabySitterTeens;

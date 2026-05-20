@@ -5,7 +5,9 @@
       "Bash(Get-ChildItem -Path \"E:\\\\Development\\\\BabySitter\\\\BabySitter\\\\BabySitter\\\\Pages\" -Filter \"*.xaml*\")",
       "Bash(Select-Object -ExpandProperty FullName)",
       "Bash(Sort-Object)",
-      "Bash(not exist *)"
+      "Bash(not exist *)",
+      "Bash(dotnet build *)",
+      "PowerShell(head -20)"
     ]
   }
 }

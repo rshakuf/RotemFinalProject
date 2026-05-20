@@ -70,8 +70,13 @@ namespace ClApi
         public async Task<int> InsertBabySitterTeenAsync(BabySitterTeens teen) =>
             (await client.PostAsJsonAsync($"{uri}/api/Sellect/InsertABabySitterTeens", teen)).IsSuccessStatusCode ? 1 : 0;
 
-        public async Task<int> UpdateBabySitterTeenAsync(BabySitterTeens teen) =>
-            (await client.PutAsJsonAsync($"{uri}/api/Sellect/UpdateABabySitterTeens", teen)).IsSuccessStatusCode ? 1 : 0;
+        public async Task<int> UpdateBabySitterTeenAsync(BabySitterTeens teen)
+        {
+            var response = await client.PutAsJsonAsync($"{uri}/api/Sellect/UpdateABabySitterTeens", teen);
+            if (!response.IsSuccessStatusCode) return 0;
+            var body = await response.Content.ReadAsStringAsync();
+            return int.TryParse(body, out var n) ? n : 1;
+        }
 
         public async Task<int> DeleteBabySitterTeenAsync(int id) =>
             (await client.DeleteAsync($"{uri}/api/Sellect/DeleteABabySitterTeens/{id}")).IsSuccessStatusCode ? 1 : 0;

@@ -126,7 +126,7 @@ namespace ViewModel
             Parents p = entity as Parents;
             if (p != null)
             {
-                string sqlStr = "UPDATE   [parents] SET telephone= @telephone , [password]=@password , numOfKids=@numodkids, WHERE ID = @id";///ךהוסיף telephone firstName = @fname, lastName = @lname, CityNameId = @cityId
+                string sqlStr = "UPDATE [parents] SET telephone=@telephone, [password]=@password, numOfKids=@numodkids WHERE ID=@id";///ךהוסיף telephone firstName = @fname, lastName = @lname, CityNameId = @cityId
 
                 cmd.CommandText = sqlStr;
                 cmd.Parameters.Add(new OleDbParameter("@telephone", p.Telephone));
