@@ -14,7 +14,8 @@
       "Bash(xargs grep -l \"Stars\\\\|ranking\\\\|display.*rating\\\\|show.*rate\")",
       "Bash(grep -E \"\\\\.cs$\")",
       "Bash(xargs grep -l \"class.*Dto\\\\|class.*ViewModel\\\\|class.*View\")",
-      "Bash(ls \"E:\\\\Development\" -Name)"
+      "Bash(ls \"E:\\\\Development\" -Name)",
+      "Bash(dir /s /b \"E:\\\\Development\\\\RotemFinalProject\\\\*Controller*\")"
     ]
   }
 }

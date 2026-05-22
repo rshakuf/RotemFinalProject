@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ViewModel.BabySitterRateDB">
+    <Position X="6" Y="7.5" Width="1.5" />
+    <NestedTypes>
+      <Struct Name="ViewModel.BabySitterRateDB.RawRate" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>BabySitterRateDB.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAKACAAAAAAAAAAEAAgAAIAAAAAAAAAACAAA=</HashCode>
+      <FileName>BabySitterRateDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.BabySitterTeensDB">
+    <Position X="20.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAkAAAKACAAAAAAAAAAAACgEAIAAAAAAAAAACAAA=</HashCode>
+      <FileName>BabySitterTeensDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.BaseDB">
+    <Position X="10.75" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="ViewModel.BaseDB.ChangeEntity" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>BaseDB.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Delegate Name="ViewModel.BaseDB.CreateSql" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>BaseDB.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>gAQAAEAAAIACAAgICAABAAACAhUAIAAAEAAAQEASAAA=</HashCode>
+      <FileName>BaseDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.ChildOfParentDB">
+    <Position X="22.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAkAAAKACAAAAAAAAAAAAAgEAIAAAAAAAAAACAAA=</HashCode>
+      <FileName>ChildOfParentsDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.CityDB">
+    <Position X="8.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAkAAAKACAAAAAAAAAAAAAgAAIAAAAAAAAAACAAA=</HashCode>
+      <FileName>CityDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.JobHistoryDB">
+    <Position X="15.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAKACAAAAAAAAAAAAAgAAIAAAAAAAAAACAAA=</HashCode>
+      <FileName>JobHistoryDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.MessagesDB">
+    <Position X="19.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAkAAAKACAAAAAAAAAAAAAgAAIAAAAAAAAAACAAA=</HashCode>
+      <FileName>MassagesDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.ParentsDB">
+    <Position X="24.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAkAAAKACAAAAAAAAAAAAAgEAIAAAAAAAAAACAAA=</HashCode>
+      <FileName>ParentsDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.RequestsDB">
+    <Position X="10.5" Y="7.5" Width="1.5" />
+    <NestedTypes>
+      <Struct Name="ViewModel.RequestsDB.RawRequest" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>RequestsDB.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAgAAEAAAKAGAAAAAAAAAAAAAgAAIAAAAAAAAAACAAA=</HashCode>
+      <FileName>RequestsDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.ReviewsDB">
+    <Position X="17.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAKACAAAAAAAAAAAAAgAAIAAAAAAAAAACAAA=</HashCode>
+      <FileName>ReviewsDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.ScheduleDB">
+    <Position X="21.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAKACAAAAAAAAAAAAAgAAIAAAAAAAAAACAAA=</HashCode>
+      <FileName>ScheduleDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.UserDB">
+    <Position X="17.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAEAAAKACAAAAAAAAAAAAAgAAIAAAAAAAAAACAAA=</HashCode>
+      <FileName>UserDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ViewModel.UserProfileDB">
+    <Position X="13" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAKACAAAAAAAAAAAAAgAAIAAAAAAAAAACAAA=</HashCode>
+      <FileName>UserProfileDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -11,18 +11,11 @@ namespace Model
         private BabySitterTeens babysitterId;
         private DateTime dateAvailable;
         private TimeOnly starttime;
-        private TimeOnly endtime;       
-        private Parents parentId;
-        private bool isRequested;
-        private bool isApproved;
+        private TimeOnly endtime;
 
         public BabySitterTeens BabysitterId { get => babysitterId; set => babysitterId = value; }
         public DateTime DateAvailable { get => dateAvailable; set => dateAvailable = value; }
         public TimeOnly Starttime { get => starttime; set => starttime = value; }
-        public TimeOnly Endtime { get => endtime; set => endtime = value; }     
-        public Parents ParentId { get => parentId; set => parentId = value; }
-        public bool IsRequested { get => isRequested; set => isRequested = value; }
-        public bool IsApproved { get => isApproved; set => isApproved = value; }
-       
+        public TimeOnly Endtime { get => endtime; set => endtime = value; }
     }
 }

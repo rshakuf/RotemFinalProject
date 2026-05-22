@@ -11,21 +11,12 @@ namespace ViewModel
         public ParentsList SelectAll()
         {
             //command.CommandText = $"SELECT [User].DateOfBirth, [User].firstName, [User].LastName, [User].CityNameId, Parents.Id, Parents.telephone, Parents.[password], Parents.numOfKids FROM  (Parents INNER JOIN [User] ON Parents.Id = [User].id))";
-            command.CommandText = $"SELECT  Parents.Id, Parents.telephone, Parents.[password], Parents.numOfKids, [User].DateOfBirth, [User].firstName, [User].LastName, [User].CityNameId FROM   (Parents INNER JOIN     [User] ON Parents.Id = [User].id)";
+            command.CommandText = "SELECT Parents.Id, Parents.telephone, Parents.[password], Parents.numOfKids, [User].DateOfBirth," +
+                " [User].firstName, [User].LastName, [User].CityNameId FROM (Parents INNER JOIN [User] ON Parents.Id = [User].id)";
 
             ParentsList pList = new ParentsList(base.Select());
             return pList;
-        }
-
-        //public static Parents SelectById(int id)
-        //{
-        //    ParentsDB db = new ParentsDB();
-        //    db.command.CommandText = "SELECT * FROM Owners WHERE ID=?";
-        //    db.command.Parameters.Clear();
-        //    db.command.Parameters.Add(new OleDbParameter("@id", id));
-        //    ParentsList list = new ParentsList(db.Select());
-        //    return list.Count > 0 ? list[0] : null;
-        //}
+        } 
 
         static private ParentsList list = new ParentsList();
         public static Parents SelectById(int id)
@@ -46,21 +37,7 @@ namespace ViewModel
             return p;
         }
 
-        //protected override BaseEntity CreateModel(BaseEntity entity)
-        //{
-        //    Parents o = entity as Parents ?? new Parents();
-
-        //    return o;
-        //}
-
         public override BaseEntity NewEntity() => new Parents();
-
-        //protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
-        //{
-        //    if (entity is not Parents o) return;
-        //    cmd.CommandText = "DELETE FROM Parents WHERE ID=@id";
-        //    cmd.Parameters.Add(new OleDbParameter("@id", o.Id));
-        //}
 
        
         protected override void CreateDeletedSQL(BaseEntity entity, OleDbCommand cmd)
@@ -137,6 +114,15 @@ namespace ViewModel
 
         }
     }
+    //public static Parents SelectById(int id)
+    //{
+    //    ParentsDB db = new ParentsDB();
+    //    db.command.CommandText = "SELECT * FROM Owners WHERE ID=?";
+    //    db.command.Parameters.Clear();
+    //    db.command.Parameters.Add(new OleDbParameter("@id", id));
+    //    ParentsList list = new ParentsList(db.Select());
+    //    return list.Count > 0 ? list[0] : null;
+    //}
 
 }
 

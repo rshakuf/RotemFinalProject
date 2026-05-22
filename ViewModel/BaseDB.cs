@@ -11,12 +11,7 @@ namespace ViewModel
     public abstract class BaseDB
     {
 
-        //@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\User\\source\\repos\\RotemFinalProject1\\ViewModel\\rotembabysitter1.accdb";
-        //protected static string connectionString = @" Provider=Microsoft.ACE.OLEDB.12.0;Data Source = C:\\Users\\User\\source\\repos\\RotemFinalProject1\\ViewModel\\rotem2.accdb";
-        //protected static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source="
-        //              + System.IO.Path.GetFullPath(System.Reflection.Assembly.GetExecutingAssembly().Location
-        //              + "/../../../../../ViewModel/rotembabysitter.accdb");
-
+      
         // this is for class room 
         //protected static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source = C:\\Users\\User\\source\\repos\\RotemFinalProject1\\ViewModel\\rotembabysitter11.accdb";
 
@@ -28,7 +23,6 @@ namespace ViewModel
 
 
 
-        //protected static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Downloads\RotemFinalProject-master (3)\RotemFinalProject-master\ViewModel\rotembabysitter.accdb";
 
         protected static OleDbConnection connection;
         protected OleDbCommand command;
@@ -228,13 +222,13 @@ namespace ViewModel
 
                 int fieldCount = reader.FieldCount;
 
-                // Print column headers
+               
                 for (int i = 0; i < fieldCount; i++)
                     Console.Write($"{reader.GetName(i),-20}");
                 Console.WriteLine();
                 Console.WriteLine(new string('-', fieldCount * 20));
 
-                // Print rows
+                
                 while (reader.Read())
                 {
                     for (int i = 0; i < fieldCount; i++)
@@ -248,7 +242,7 @@ namespace ViewModel
             finally
             {
                 reader?.Close();
-                // do NOT close the connection here if your DB layer keeps it open
+                
             }
         }
 
