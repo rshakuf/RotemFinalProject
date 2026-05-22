@@ -41,7 +41,7 @@ namespace ViewModel
             //    cop.Id = UserDB.SelectById(Convert.ToInt32(reader["id"]));
 
             if (reader["idParent"] != DBNull.Value)
-                cop.IdParent = ParentsDB.SelectById(Convert.ToInt32(reader["idParent"]));
+                cop.IdParent = new Parents { Id = Convert.ToInt32(reader["idParent"]) };
 
             base.CreateModel(cop);
             return cop;
