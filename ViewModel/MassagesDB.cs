@@ -100,41 +100,6 @@ namespace ViewModel
                 command.Parameters.Add(new OleDbParameter("@id", m.Id));
             }
         }
-        //public override void CreateInsertSQL(BaseEntity entity, OleDbCommand command)
-        //{
-        //    Messages m = entity as Messages;
-        //    if (m == null) return;
-
-        //    string sqlStr =
-        //        "INSERT INTO MessagesTbl (senderId, receiver, messageText, timeSent) " +
-        //        "VALUES (@sender, @receiver, @text, @time)";
-
-        //    command.CommandText = sqlStr;
-
-        //    command.Parameters.Add(new OleDbParameter("@sender", m.SenderId));
-        //    command.Parameters.Add(new OleDbParameter("@receiver", m.Receiver));
-        //    command.Parameters.Add(new OleDbParameter("@text", m.MessageText));
-        //    command.Parameters.Add(new OleDbParameter("@time", m.TimeSent));
-        //}
-
-
-        //public override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand command)
-        //{
-        //    Messages m = entity as Messages;
-        //    if (m == null) return;
-
-        //    string sqlStr =
-        //        "UPDATE MessagesTbl " +
-        //        "SET senderId=@sender, receiver=@receiver, messageText=@text, timeSent=@time " +
-        //        "WHERE id=@id";
-
-        //    command.CommandText = sqlStr;
-
-        //    command.Parameters.Add(new OleDbParameter("@sender", m.SenderId));
-        //    command.Parameters.Add(new OleDbParameter("@receiver", m.Receiver));
-        //    command.Parameters.Add(new OleDbParameter("@text", m.MessageText));
-        //    command.Parameters.Add(new OleDbParameter("@time", m.TimeSent));
-        //    command.Parameters.Add(new OleDbParameter("@id", m.Id));
-        //}
+       
     }
 }

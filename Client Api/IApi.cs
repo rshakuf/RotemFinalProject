@@ -15,6 +15,7 @@ namespace ApiInterface
         Task<BabySitterRateList> GetAllBabySitterRatesAsync();
         Task<int> InsertBabySitterRateAsync(BabySitterRate rate);
         Task<int> UpdateBabySitterRateAsync(BabySitterRate rate);
+        Task<int> UpsertBabySitterRateAsync(BabySitterRate rate);
         Task<int> DeleteBabySitterRateAsync(int id);
 
         // ===== BabySitterTeens =====

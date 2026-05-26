@@ -20,14 +20,7 @@ namespace BabysitterApi.Controllers
 
 
 
-        //[HttpGet]
-        //[ActionName("CitySelector")]
-        //public CityList SelectAllCity()
-        //{
-        //    CityDB db = new CityDB();
-        //    CityList City = db.SelectAll();
-        //    return City;
-        //}
+      
         [HttpPost]
         public int InsertACity([FromBody] City City)
         {
@@ -83,6 +76,38 @@ namespace BabysitterApi.Controllers
             BabySitterRateDB db = new BabySitterRateDB();
             db.Update(BabySitterRate);
             int x = db.SaveChanges();
+        }
+
+        /// <summary>
+        /// Insert-or-update a babysitter rate identified by the babysitter+parent pair.
+        /// The caller only needs to send IdBabySitter.Id, IdParent.Id, Stars and DateOfRate —
+        /// no BabySitterRate.Id required.
+        /// </summary>
+        [HttpPut]
+        public IActionResult UpsertBabySitterRate([FromBody] BabySitterRate rate)
+        {
+            if (rate?.IdBabySitter == null || rate?.IdParent == null)
+                return BadRequest("IdBabySitter and IdParent are required");
+
+            BabySitterRateDB db = new BabySitterRateDB();
+            var all      = db.SelectAll();
+            var existing = all.FirstOrDefault(r =>
+                r.IdBabySitter?.Id == rate.IdBabySitter.Id &&
+                r.IdParent?.Id     == rate.IdParent.Id);
+
+            if (existing != null)
+            {
+                existing.Stars      = rate.Stars;
+                existing.DateOfRate = rate.DateOfRate;
+                db.Update(existing);
+            }
+            else
+            {
+                db.Insert(rate);
+            }
+
+            db.SaveChanges();
+            return Ok();
         }
 
         [HttpGet]

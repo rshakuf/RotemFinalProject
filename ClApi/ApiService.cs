@@ -60,6 +60,10 @@ namespace ClApi
         public async Task<int> UpdateBabySitterRateAsync(BabySitterRate rate) =>
             (await client.PutAsJsonAsync($"{uri}/api/Sellect/UpdateABabySitterRate", rate)).IsSuccessStatusCode ? 1 : 0;
 
+        /// <summary>Insert-or-update by babysitter+parent pair — no BabySitterRate.Id required.</summary>
+        public async Task<int> UpsertBabySitterRateAsync(BabySitterRate rate) =>
+            (await client.PutAsJsonAsync($"{uri}/api/Sellect/UpsertBabySitterRate", rate)).IsSuccessStatusCode ? 1 : 0;
+
         public async Task<int> DeleteBabySitterRateAsync(int id) =>
             (await client.DeleteAsync($"{uri}/api/Sellect/DeleteABabySitterRate/{id}")).IsSuccessStatusCode ? 1 : 0;
 

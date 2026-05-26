@@ -26,10 +26,11 @@ namespace ViewModel
         protected override BaseEntity CreateModel(BaseEntity entity)
         {
             BabySitterTeens bst = entity as BabySitterTeens;
-            bst.Mail = reader["mail"].ToString();
-            bst.PriceForAnHour = int.Parse(reader["priceForAnHour"].ToString());
-            bst.Telephone = reader["Telephone"].ToString();
-            bst.Password = reader["Password"].ToString();
+            bst.Mail          = reader["mail"].ToString();
+            bst.PriceForAnHour = reader["priceForAnHour"] != DBNull.Value && !string.IsNullOrWhiteSpace(reader["priceForAnHour"].ToString())
+                ? int.Parse(reader["priceForAnHour"].ToString()) : 0;
+            bst.Telephone     = reader["Telephone"].ToString();
+            bst.Password      = reader["Password"].ToString();
 
             string fileName = reader["profilePicture"]?.ToString() ?? "";
             if (!string.IsNullOrWhiteSpace(fileName))

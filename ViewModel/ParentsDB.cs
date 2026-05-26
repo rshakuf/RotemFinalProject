@@ -31,8 +31,9 @@ namespace ViewModel
         {
             Parents p = entity as Parents;
             p.Telephone = reader["Telephone"].ToString();
-            p.Password = reader["Password"].ToString();
-            p.NumOfKids = int.Parse(reader["NumOfKids"].ToString());
+            p.Password  = reader["Password"].ToString();
+            p.NumOfKids = reader["NumOfKids"] != DBNull.Value && !string.IsNullOrWhiteSpace(reader["NumOfKids"].ToString())
+                ? int.Parse(reader["NumOfKids"].ToString()) : 0;
             base.CreateModel(entity);
             return p;
         }
