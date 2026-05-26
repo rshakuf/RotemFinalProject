@@ -15,14 +15,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="ViewModel.BabySitterTeensDB">
-    <Position X="20.5" Y="1.25" Width="1.5" />
+    <Position X="12" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAkAAAKACAAAAAAAAAAAACgEAIAAAAAAAAAACAAA=</HashCode>
       <FileName>BabySitterTeensDB.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ViewModel.BaseDB">
-    <Position X="10.75" Y="0.5" Width="1.5" />
+    <Position X="7" Y="0.5" Width="1.5" />
     <NestedTypes>
       <Class Name="ViewModel.BaseDB.ChangeEntity" Collapsed="true">
         <TypeIdentifier>
@@ -41,7 +41,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="ViewModel.ChildOfParentDB">
-    <Position X="22.5" Y="1.25" Width="1.5" />
+    <Position X="14" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAkAAAKACAAAAAAAAAAAAAgEAIAAAAAAAAAACAAA=</HashCode>
       <FileName>ChildOfParentsDB.cs</FileName>
@@ -55,21 +55,21 @@
     </TypeIdentifier>
   </Class>
   <Class Name="ViewModel.JobHistoryDB">
-    <Position X="15.25" Y="7.75" Width="1.5" />
+    <Position X="12.5" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAEAAAKACAAAAAAAAAAAAAgAAIAAAAAAAAAACAAA=</HashCode>
       <FileName>JobHistoryDB.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ViewModel.MessagesDB">
-    <Position X="19.5" Y="7.5" Width="1.5" />
+    <Position X="14.75" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAkAAAKACAAAAAAAAAAAAAgAAIAAAAAAAAAACAAA=</HashCode>
       <FileName>MassagesDB.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ViewModel.ParentsDB">
-    <Position X="24.5" Y="1.25" Width="1.5" />
+    <Position X="16" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAkAAAKACAAAAAAAAAAAAAgEAIAAAAAAAAAACAAA=</HashCode>
       <FileName>ParentsDB.cs</FileName>
@@ -89,32 +89,18 @@
       <FileName>RequestsDB.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ViewModel.ReviewsDB">
-    <Position X="17.25" Y="7.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAEAAAKACAAAAAAAAAAAAAgAAIAAAAAAAAAACAAA=</HashCode>
-      <FileName>ReviewsDB.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="ViewModel.ScheduleDB">
-    <Position X="21.5" Y="7.5" Width="1.5" />
+    <Position X="16.75" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAEAAAKACAAAAAAAAAAAAAgAAIAAAAAAAAAACAAA=</HashCode>
       <FileName>ScheduleDB.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ViewModel.UserDB">
-    <Position X="17.75" Y="1.75" Width="1.5" />
+    <Position X="9.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ACAAAEAAAKACAAAAAAAAAAAAAgAAIAAAAAAAAAACAAA=</HashCode>
       <FileName>UserDB.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ViewModel.UserProfileDB">
-    <Position X="13" Y="7.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>ACAAAAAAAKACAAAAAAAAAAAAAgAAIAAAAAAAAAACAAA=</HashCode>
-      <FileName>UserProfileDB.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

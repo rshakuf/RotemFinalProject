@@ -78,11 +78,6 @@ namespace BabysitterApi.Controllers
             int x = db.SaveChanges();
         }
 
-        /// <summary>
-        /// Insert-or-update a babysitter rate identified by the babysitter+parent pair.
-        /// The caller only needs to send IdBabySitter.Id, IdParent.Id, Stars and DateOfRate —
-        /// no BabySitterRate.Id required.
-        /// </summary>
         [HttpPut]
         public IActionResult UpsertBabySitterRate([FromBody] BabySitterRate rate)
         {
@@ -317,39 +312,6 @@ namespace BabysitterApi.Controllers
 
 
         [HttpGet]
-        public ReviewsList SelectAllReviews()
-        {
-            ReviewsDB db = new ReviewsDB();
-            ReviewsList Reviews = db.SelectAll();
-            return Reviews;
-        }
-        [HttpPost]
-        public int InsertAReviews([FromBody] Reviews Reviews)
-        {
-            ReviewsDB db = new ReviewsDB();
-            db.Insert(Reviews);
-            int x = db.SaveChanges();
-            return x;
-        }
-        [HttpDelete("{id}")]
-        public int DeleteAReviews(int id)
-        {
-            Reviews Reviews = ReviewsDB.SelectById(id);
-            ReviewsDB db = new ReviewsDB();
-            db.Delete(Reviews);
-            int x = db.SaveChanges();
-            return x;
-        }
-        [HttpPut]
-        public void UpdateAReviews([FromBody] Reviews Reviews)
-        {
-            ReviewsDB db = new ReviewsDB();
-            db.Update(Reviews);
-            int x = db.SaveChanges();
-        }
-
-
-        [HttpGet]
         public ScheduleList SelectAllSchedule()
         {
             ScheduleDB db = new ScheduleDB();
@@ -426,36 +388,5 @@ namespace BabysitterApi.Controllers
         }
 
 
-        [HttpGet]
-        public UserProfileList SelectAllUserProfile()
-        {
-            UserProfileDB db = new UserProfileDB();
-            UserProfileList UserProfile = db.SelectAll();
-            return UserProfile;
-        }
-        [HttpPost]
-        public int InsertAUserProfile([FromBody] UserProfile UserProfile)
-        {
-            UserProfileDB db = new UserProfileDB();
-            db.Insert(UserProfile);
-            int x = db.SaveChanges();
-            return x;
-        }
-        [HttpDelete("{id}")]
-        public int DeleteAUserProfile(int id)
-        {
-            UserProfile UserProfile = UserProfileDB.SelectById(id);
-            UserProfileDB db = new UserProfileDB();
-            db.Delete(UserProfile);
-            int x = db.SaveChanges();
-            return x;
-        }
-        [HttpPut]
-        public void UpdateAUserProfile([FromBody] UserProfile UserProfile)
-        {
-            UserProfileDB db = new UserProfileDB();
-            db.Update(UserProfile);
-            int x = db.SaveChanges();
-        }
     }
 }

@@ -15,7 +15,10 @@
       "Bash(grep -E \"\\\\.cs$\")",
       "Bash(xargs grep -l \"class.*Dto\\\\|class.*ViewModel\\\\|class.*View\")",
       "Bash(ls \"E:\\\\Development\" -Name)",
-      "Bash(dir /s /b \"E:\\\\Development\\\\RotemFinalProject\\\\*Controller*\")"
+      "Bash(dir /s /b \"E:\\\\Development\\\\RotemFinalProject\\\\*Controller*\")",
+      "Bash(del \"E:\\\\Development\\\\RotemFinalProject\\\\Model\\\\Reviews.cs\")",
+      "Bash(del \"E:\\\\Development\\\\RotemFinalProject\\\\Model\\\\ReviewsList.cs\")",
+      "Bash(del \"E:\\\\Development\\\\RotemFinalProject\\\\ViewModel\\\\ReviewsDB.cs\")"
     ]
   }
 }
