@@ -28,9 +28,14 @@ namespace ViewModel
             BabySitterTeens bst = entity as BabySitterTeens;
             bst.Mail = reader["mail"].ToString();
             bst.PriceForAnHour = int.Parse(reader["priceForAnHour"].ToString());
-            bst.ProfilePicture = reader["profilePicture"].ToString();
             bst.Telephone = reader["Telephone"].ToString();
             bst.Password = reader["Password"].ToString();
+
+            string fileName = reader["profilePicture"]?.ToString() ?? "";
+            if (!string.IsNullOrWhiteSpace(fileName))
+                bst.ProfilePicture = ImageToBase64Converter.ImageFromResourceToBase64(fileName);
+            else
+                bst.ProfilePicture = null;
 
             base.CreateModel(entity);
             return bst;
