@@ -14,7 +14,7 @@ namespace ViewModel
         static private ChildOfParentList list = new ChildOfParentList();
         public ChildOfParentList SelectAll()
         {
-            command.CommandText = "SELECT [User].DateOfBirth, [User].firstName, [User].LastName, [User].CityName, [User].CityNameId," +
+            command.CommandText = "SELECT [User].DateOfBirth, [User].firstName, [User].LastName, [User].CityNameId," +
                 " ChildOfParent.IdParent, ChildOfParent.id FROM  (ChildOfParent INNER JOIN  [User] ON ChildOfParent.id = [User].id)";
             ChildOfParentList pList = new ChildOfParentList(base.Select());
             return pList;
@@ -23,7 +23,7 @@ namespace ViewModel
         public static ChildOfParent SelectById(int id)
         {
             var db = new ChildOfParentDB();
-            db.command.CommandText = "SELECT [User].DateOfBirth, [User].firstName, [User].LastName, [User].CityName, [User].CityNameId," +
+            db.command.CommandText = "SELECT [User].DateOfBirth, [User].firstName, [User].LastName, [User].CityNameId," +
                 " ChildOfParent.IdParent, ChildOfParent.id FROM  (ChildOfParent INNER JOIN [User] ON ChildOfParent.id = [User].id WHERE id=@id)";
             db.command.Parameters.Clear();
             db.command.Parameters.Add(new OleDbParameter("@id", id));

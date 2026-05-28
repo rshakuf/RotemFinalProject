@@ -15,7 +15,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Model.BabySitterTeens">
-    <Position X="14" Y="2.75" Width="1.5" />
+    <Position X="12.75" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAABAEAAACBIAAAwCAAAE=</HashCode>
       <FileName>BabySitterTeens.cs</FileName>
@@ -36,7 +36,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Model.ChildOfParent">
-    <Position X="16" Y="5.75" Width="1.5" />
+    <Position X="14.75" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
       <FileName>ChildOfParent.cs</FileName>
@@ -78,7 +78,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Model.Messages">
-    <Position X="16" Y="2" Width="1.5" />
+    <Position X="14.75" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAGAAAAFgAAABAgAAAAIAAA=</HashCode>
       <FileName>Messages.cs</FileName>
@@ -119,24 +119,10 @@
       <FileName>RequestsList.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Model.Reviews">
-    <Position X="17.75" Y="4" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAIAAAAAAAgAAAAAAAAAQQAAAEkAAgAAAAAAAAA=</HashCode>
-      <FileName>Reviews.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Model.ReviewsList">
-    <Position X="2.5" Y="8" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ReviewsList.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Model.Schedule">
     <Position X="4.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAIAQAIAAEACAAAgACAAIAKgAAACggAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAQAIAAEACAAAgACAAIAAgAAAAAAAAAAAAAAA=</HashCode>
       <FileName>schedule.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -148,7 +134,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Model.User" Collapsed="true">
-    <Position X="14" Y="7.25" Width="1.5" />
+    <Position X="12.75" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>kAAAAMAAAABAAAAAAAAAAAAAAAAQAAAAAAAACAAAAAg=</HashCode>
       <FileName>User.cs</FileName>
@@ -159,20 +145,6 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>UserList.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Model.UserProfile">
-    <Position X="21" Y="11.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAEAAAABACQAAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>userProfile.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Model.UserProfileList">
-    <Position X="7.75" Y="8" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>UserProfileList.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="System.Collections.Generic.List&lt;T&gt;">
@@ -186,12 +158,5 @@
     <TypeIdentifier />
     <Lollipop Position="0.2" />
   </Class>
-  <Interface Name="ApiInterface.IApi">
-    <Position X="12" Y="0.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>IBBAhAAAaVDAAJgIANQAMGCACCADAGCgCEAggCSYAAE=</HashCode>
-      <FileName>IApi.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

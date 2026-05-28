@@ -15,6 +15,7 @@ namespace ApiInterface
         Task<BabySitterRateList> GetAllBabySitterRatesAsync();
         Task<int> InsertBabySitterRateAsync(BabySitterRate rate);
         Task<int> UpdateBabySitterRateAsync(BabySitterRate rate);
+        Task<int> UpsertBabySitterRateAsync(BabySitterRate rate);
         Task<int> DeleteBabySitterRateAsync(int id);
 
         // ===== BabySitterTeens =====
@@ -35,12 +36,6 @@ namespace ApiInterface
         Task<int> UpdateUserAsync(User user);
         Task<int> DeleteUserAsync(int id);
 
-        // ===== UserProfile =====
-        Task<UserProfileList> GetAllUserProfilesAsync();
-        Task<int> InsertUserProfileAsync(UserProfile profile);
-        Task<int> UpdateUserProfileAsync(UserProfile profile);
-        Task<int> DeleteUserProfileAsync(int id);
-
         // ===== Messages =====
         Task<MessagesList> GetAllMessagesAsync();
         Task<int> InsertMessageAsync(Messages message);
@@ -52,12 +47,6 @@ namespace ApiInterface
         Task<int> InsertRequestAsync(Requests request);
         Task<int> UpdateRequestAsync(Requests request);
         Task<int> DeleteRequestAsync(int id);
-
-        // ===== Reviews =====
-        Task<ReviewsList> GetAllReviewsAsync();
-        Task<int> InsertReviewAsync(Reviews review);
-        Task<int> UpdateReviewAsync(Reviews review);
-        Task<int> DeleteReviewAsync(int id);
 
         // ===== Schedule =====
         Task<ScheduleList> GetAllSchedulesAsync();

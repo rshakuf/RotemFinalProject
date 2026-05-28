@@ -20,14 +20,7 @@ namespace BabysitterApi.Controllers
 
 
 
-        //[HttpGet]
-        //[ActionName("CitySelector")]
-        //public CityList SelectAllCity()
-        //{
-        //    CityDB db = new CityDB();
-        //    CityList City = db.SelectAll();
-        //    return City;
-        //}
+      
         [HttpPost]
         public int InsertACity([FromBody] City City)
         {
@@ -83,6 +76,33 @@ namespace BabysitterApi.Controllers
             BabySitterRateDB db = new BabySitterRateDB();
             db.Update(BabySitterRate);
             int x = db.SaveChanges();
+        }
+
+        [HttpPut]
+        public IActionResult UpsertBabySitterRate([FromBody] BabySitterRate rate)
+        {
+            if (rate?.IdBabySitter == null || rate?.IdParent == null)
+                return BadRequest("IdBabySitter and IdParent are required");
+
+            BabySitterRateDB db = new BabySitterRateDB();
+            var all      = db.SelectAll();
+            var existing = all.FirstOrDefault(r =>
+                r.IdBabySitter?.Id == rate.IdBabySitter.Id &&
+                r.IdParent?.Id     == rate.IdParent.Id);
+
+            if (existing != null)
+            {
+                existing.Stars      = rate.Stars;
+                existing.DateOfRate = rate.DateOfRate;
+                db.Update(existing);
+            }
+            else
+            {
+                db.Insert(rate);
+            }
+
+            db.SaveChanges();
+            return Ok();
         }
 
         [HttpGet]
@@ -292,39 +312,6 @@ namespace BabysitterApi.Controllers
 
 
         [HttpGet]
-        public ReviewsList SelectAllReviews()
-        {
-            ReviewsDB db = new ReviewsDB();
-            ReviewsList Reviews = db.SelectAll();
-            return Reviews;
-        }
-        [HttpPost]
-        public int InsertAReviews([FromBody] Reviews Reviews)
-        {
-            ReviewsDB db = new ReviewsDB();
-            db.Insert(Reviews);
-            int x = db.SaveChanges();
-            return x;
-        }
-        [HttpDelete("{id}")]
-        public int DeleteAReviews(int id)
-        {
-            Reviews Reviews = ReviewsDB.SelectById(id);
-            ReviewsDB db = new ReviewsDB();
-            db.Delete(Reviews);
-            int x = db.SaveChanges();
-            return x;
-        }
-        [HttpPut]
-        public void UpdateAReviews([FromBody] Reviews Reviews)
-        {
-            ReviewsDB db = new ReviewsDB();
-            db.Update(Reviews);
-            int x = db.SaveChanges();
-        }
-
-
-        [HttpGet]
         public ScheduleList SelectAllSchedule()
         {
             ScheduleDB db = new ScheduleDB();
@@ -401,36 +388,5 @@ namespace BabysitterApi.Controllers
         }
 
 
-        [HttpGet]
-        public UserProfileList SelectAllUserProfile()
-        {
-            UserProfileDB db = new UserProfileDB();
-            UserProfileList UserProfile = db.SelectAll();
-            return UserProfile;
-        }
-        [HttpPost]
-        public int InsertAUserProfile([FromBody] UserProfile UserProfile)
-        {
-            UserProfileDB db = new UserProfileDB();
-            db.Insert(UserProfile);
-            int x = db.SaveChanges();
-            return x;
-        }
-        [HttpDelete("{id}")]
-        public int DeleteAUserProfile(int id)
-        {
-            UserProfile UserProfile = UserProfileDB.SelectById(id);
-            UserProfileDB db = new UserProfileDB();
-            db.Delete(UserProfile);
-            int x = db.SaveChanges();
-            return x;
-        }
-        [HttpPut]
-        public void UpdateAUserProfile([FromBody] UserProfile UserProfile)
-        {
-            UserProfileDB db = new UserProfileDB();
-            db.Update(UserProfile);
-            int x = db.SaveChanges();
-        }
     }
 }

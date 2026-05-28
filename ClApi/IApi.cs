@@ -40,12 +40,6 @@ namespace ClApi
         Task<int> UpdateUserAsync(User user);
         Task<int> DeleteUserAsync(int id);
 
-        // ===== UserProfile =====
-        Task<UserProfileList> GetAllUserProfilesAsync();
-        Task<int> InsertUserProfileAsync(UserProfile profile);
-        Task<int> UpdateUserProfileAsync(UserProfile profile);
-        Task<int> DeleteUserProfileAsync(int id);
-
         // ===== Messages =====
         Task<MessagesList> GetAllMessagesAsync();
         Task<int> InsertMessageAsync(Messages message);
@@ -57,12 +51,6 @@ namespace ClApi
         Task<int> InsertRequestAsync(Requests request);
         Task<int> UpdateRequestAsync(Requests request);
         Task<int> DeleteRequestAsync(int id);
-
-        // ===== Reviews =====
-        Task<ReviewsList> GetAllReviewsAsync();
-        Task<int> InsertReviewAsync(Reviews review);
-        Task<int> UpdateReviewAsync(Reviews review);
-        Task<int> DeleteReviewAsync(int id);
 
         // ===== Schedule =====
         Task<ScheduleList> GetAllSchedulesAsync();

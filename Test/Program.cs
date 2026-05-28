@@ -169,22 +169,6 @@ public class Program
         rdb.PrintTable("Requests");
 
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("Reviews BabysitterId");
-        Console.ResetColor();
-        ReviewsDB rvdb = new();
-        ReviewsList rvlist = rvdb.SelectAll();
-
-        Reviews ReviewsToUpdate = rvlist[0];
-        ReviewsToUpdate.Rating = 9;
-        rvdb.Update(ReviewsToUpdate);
-        int q = rvdb.SaveChanges();
-        Console.WriteLine($"{q} rows were updated");
-
-        //foreach (Reviews p in rvlist)
-        //    Console.WriteLine(p.Rating);
-        rvdb.PrintTable("Reviews");
-
-        Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("Schedule BabysitterId");
         Console.ResetColor();
         ScheduleDB sdb = new();
@@ -216,23 +200,6 @@ public class Program
         //foreach (User p in ulist)
         //    Console.WriteLine(p.CityNameId);
         udb.PrintTable("User");
-
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("UserProfile Pass");
-        Console.ResetColor();
-        UserProfileDB updb = new();
-        UserProfileList uplist = updb.SelectAll();
-
-        UserProfile UserProfileToUpdate = uplist[0];
-        UserProfileToUpdate.Pass = "4286";
-        updb.Update(UserProfileToUpdate);
-        int h = updb.SaveChanges();
-        Console.WriteLine($"{h} rows were updated");
-
-        //foreach (UserProfile p in uplist)
-        //    Console.WriteLine(p.Pass);
-        updb.PrintTable("UserProfile");
-
 
         //int rows;
 

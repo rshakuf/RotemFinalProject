@@ -52,6 +52,9 @@ namespace ApiInterface
             public async Task<int> UpdateBabySitterRateAsync(BabySitterRate rate) =>
                 (await client.PutAsJsonAsync($"{uri}/api/Sellect/UpdateABabySitterRate", rate)).IsSuccessStatusCode ? 1 : 0;
 
+            public async Task<int> UpsertBabySitterRateAsync(BabySitterRate rate) =>
+                (await client.PutAsJsonAsync($"{uri}/api/Sellect/UpsertBabySitterRate", rate)).IsSuccessStatusCode ? 1 : 0;
+
             public async Task<int> DeleteBabySitterRateAsync(int id) =>
                 (await client.DeleteAsync($"{uri}/api/Sellect/DeleteABabySitterRate/{id}")).IsSuccessStatusCode ? 1 : 0;
 
@@ -124,19 +127,6 @@ namespace ApiInterface
             public async Task<int> DeleteRequestAsync(int id) =>
                 (await client.DeleteAsync($"{uri}/api/Sellect/DeleteARequests/{id}")).IsSuccessStatusCode ? 1 : 0;
 
-            // ================= Reviews =================
-            public Task<ReviewsList> GetAllReviewsAsync() =>
-                client.GetFromJsonAsync<ReviewsList>($"{uri}/api/Sellect/SelectAllReviews");
-
-            public async Task<int> InsertReviewAsync(Reviews r) =>
-                (await client.PostAsJsonAsync($"{uri}/api/Sellect/InsertAReviews", r)).IsSuccessStatusCode ? 1 : 0;
-
-            public async Task<int> UpdateReviewAsync(Reviews r) =>
-                (await client.PutAsJsonAsync($"{uri}/api/Sellect/UpdateAReviews", r)).IsSuccessStatusCode ? 1 : 0;
-
-            public async Task<int> DeleteReviewAsync(int id) =>
-                (await client.DeleteAsync($"{uri}/api/Sellect/DeleteAReviews/{id}")).IsSuccessStatusCode ? 1 : 0;
-
             // ================= Schedule =================
             public Task<ScheduleList> GetAllSchedulesAsync() =>
                 client.GetFromJsonAsync<ScheduleList>($"{uri}/api/Sellect/SelectAllSchedule");
@@ -149,19 +139,6 @@ namespace ApiInterface
 
             public async Task<int> DeleteScheduleAsync(int id) =>
                 (await client.DeleteAsync($"{uri}/api/Sellect/DeleteASchedule/{id}")).IsSuccessStatusCode ? 1 : 0;
-
-            // ================= UserProfile =================
-            public Task<UserProfileList> GetAllUserProfilesAsync() =>
-                client.GetFromJsonAsync<UserProfileList>($"{uri}/api/Sellect/SelectAllUserProfile");
-
-            public async Task<int> InsertUserProfileAsync(UserProfile p) =>
-                (await client.PostAsJsonAsync($"{uri}/api/Sellect/InsertAUserProfile", p)).IsSuccessStatusCode ? 1 : 0;
-
-            public async Task<int> UpdateUserProfileAsync(UserProfile p) =>
-                (await client.PutAsJsonAsync($"{uri}/api/Sellect/UpdateAUserProfile", p)).IsSuccessStatusCode ? 1 : 0;
-
-            public async Task<int> DeleteUserProfileAsync(int id) =>
-                (await client.DeleteAsync($"{uri}/api/Sellect/DeleteAUserProfile/{id}")).IsSuccessStatusCode ? 1 : 0;
 
             // ================= Parents =================
             public Task<ParentsList> GetAllParentsAsync() =>
