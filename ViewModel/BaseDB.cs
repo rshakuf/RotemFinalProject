@@ -11,15 +11,15 @@ namespace ViewModel
     public abstract class BaseDB
     {
 
-      
+
         // this is for class room 
         //protected static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source = C:\\Users\\User\\source\\repos\\RotemFinalProject1\\ViewModel\\rotembabysitter11.accdb";
 
         // this is for Home Main Computer
-        protected static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=E:\\Development\\RotemFinalProject\\ViewModel\\rotembabysitter11.accdb";
+        //protected static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=E:\\Development\\RotemFinalProject\\ViewModel\\rotembabysitter11.accdb";
 
         // this is for Laptop 
-       // protected static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source = C:\\Users\\sshak\\Source\\Repos\\rshakuf\\RotemFinalProject\\ViewModel\\rotembabysitter11.accdb";
+        protected static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source = C:\\Users\\sshak\\Source\\Repos\\rshakuf\\RotemFinalProject\\ViewModel\\rotembabysitter11.accdb";
 
 
 

@@ -18,13 +18,21 @@ namespace ViewModel
             return pList;
         } 
 
-        static private ParentsList list = new ParentsList();
         public static Parents SelectById(int id)
         {
-            ParentsDB db = new ParentsDB();
-            list = db.SelectAll();
-            Parents g = list.Find(x => x.Id == id);
-            return g;
+            // Query only the row we need — avoids a full-table scan per call
+            var db = new ParentsDB();
+            db.command.CommandText =
+                "SELECT Parents.Id, Parents.telephone, Parents.[password], Parents.numOfKids," +
+                " [User].DateOfBirth, [User].firstName, [User].LastName, [User].CityNameId" +
+                " FROM (Parents INNER JOIN [User] ON Parents.Id = [User].id)" +
+                " WHERE Parents.Id = ?";
+            if (connection.State != System.Data.ConnectionState.Open)
+                connection.Open();
+            db.command.Parameters.Clear();
+            db.command.Parameters.Add(new OleDbParameter("@id", id));
+            var results = new ParentsList(db.Select());
+            return results.Count > 0 ? results[0] : null;
         }
 
         protected override BaseEntity CreateModel(BaseEntity entity)

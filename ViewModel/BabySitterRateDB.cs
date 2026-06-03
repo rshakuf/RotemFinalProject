@@ -64,9 +64,21 @@ namespace ViewModel
         public BabySitterRateList SelectAll()
         {
             var rows = ReadRawRates("SELECT * FROM BabySitterRate");
+            if (rows.Count == 0) return new BabySitterRateList();
+
+            // ── N+1 FIX ─────────────────────────────────────────────────────────────
+            // Load all parents once instead of one full-table SELECT per rating row.
+            var parentMap = new ParentsDB().SelectAll()
+                                .ToDictionary(p => p.Id);
+
             var list = new BabySitterRateList();
             foreach (var raw in rows)
-                list.Add(HydrateRate(raw));
+            {
+                var r = new BabySitterRate { Id = raw.Id, Stars = raw.Stars, DateOfRate = raw.DateOfRate };
+                if (raw.IdBabySitter > 0) r.IdBabySitter = new BabySitterTeens { Id = raw.IdBabySitter };
+                if (raw.IdParent     > 0 && parentMap.TryGetValue(raw.IdParent, out var parent)) r.IdParent = parent;
+                list.Add(r);
+            }
             return list;
         }
 

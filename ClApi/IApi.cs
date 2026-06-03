@@ -69,5 +69,12 @@ namespace ClApi
         Task<int> InsertChildOfParentAsync(ChildOfParent child);
         Task<int> UpdateChildOfParentAsync(ChildOfParent child);
         Task<int> DeleteChildOfParentAsync(int id);
+
+        // ===== Profile picture =====
+        /// <summary>
+        /// Uploads a Base64-encoded photo to the server. Returns the saved filename
+        /// (e.g. "user_5_637812345.jpg") to be stored in the DB as ProfilePicture.
+        /// </summary>
+        Task<string> UploadProfilePictureAsync(int babysitterId, string imageBase64);
     }
 }

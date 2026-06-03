@@ -25,10 +25,8 @@ namespace ClApi
 
         public ApiService(HttpClient client, string baseUri)
         {
-          //  uri = "https://z9vchnvr-5266.euw.devtunnels.ms";
-            client = new HttpClient();
             this.client = client ?? throw new ArgumentNullException(nameof(client));
-            this.uri = baseUri ?? throw new ArgumentNullException(nameof(baseUri));
+            this.uri    = baseUri ?? throw new ArgumentNullException(nameof(baseUri));
         }
 
 
@@ -210,6 +208,25 @@ namespace ClApi
         public Task<JobHistoryList> GetAllJobHistoriesAsync()
         {
             throw new NotImplementedException();
+        }
+
+        // Profile picture upload
+        public async Task<string> UploadProfilePictureAsync(int babysitterId, string imageBase64)
+        {
+            var payload = new { BabysitterId = babysitterId, ImageBase64 = imageBase64 };
+            var response = await client.PostAsJsonAsync(
+                $"{uri}/api/Sellect/UploadProfilePicture", payload);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                string err = await response.Content.ReadAsStringAsync();
+                throw new Exception($"Upload failed ({(int)response.StatusCode}): {err}");
+            }
+
+            // Server returns the filename as a plain JSON string, e.g. "user_5_637812345.jpg"
+            string fileName = await response.Content.ReadAsStringAsync();
+            // Strip surrounding quotes that JSON adds around a bare string
+            return fileName.Trim('"');
         }
 
         //public Task<JobHistoryList> GetAllJobHistoriesAsync()

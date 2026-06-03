@@ -47,15 +47,22 @@ namespace ViewModel
             return new BabySitterTeens();
         }
 
-        static private BabySitterTeensList list = new BabySitterTeensList();
-
         public static BabySitterTeens SelectById(int id)
         {
-            BabySitterTeensDB db = new BabySitterTeensDB();
-            list = db.SelectAll();
-
-            BabySitterTeens g = list.Find(item => item.Id == id);
-            return g;
+            // Query only the row we need — avoids a full-table scan per call
+            var db = new BabySitterTeensDB();
+            db.command.CommandText =
+                "SELECT BabysitterTeens.Id, BabysitterTeens.Mail, BabysitterTeens.PriceForAnHour," +
+                " BabysitterTeens.ProfilePicture, BabysitterTeens.telephone," +
+                " BabysitterTeens.[password], [User].DateOfBirth, [User].firstName, [User].LastName, [User].CityNameId" +
+                " FROM (BabysitterTeens INNER JOIN [User] ON BabysitterTeens.Id = [User].id)" +
+                " WHERE BabysitterTeens.Id = ?";
+            if (connection.State != System.Data.ConnectionState.Open)
+                connection.Open();
+            db.command.Parameters.Clear();
+            db.command.Parameters.Add(new OleDbParameter("@id", id));
+            var results = new BabySitterTeensList(db.Select());
+            return results.Count > 0 ? results[0] : null;
         }
 
        

@@ -4,6 +4,13 @@ using Model;
 using System.Reflection;
 using ViewModel;
 
+// DTO used by the profile-picture upload endpoint
+public class ProfilePictureUploadDto
+{
+    public int    BabysitterId { get; set; }
+    public string ImageBase64  { get; set; }
+}
+
 namespace BabysitterApi.Controllers
 {
     [Route("api/[controller]/[action]")]
@@ -387,6 +394,36 @@ namespace BabysitterApi.Controllers
             int x = db.SaveChanges();
         }
 
+        // ── Profile picture upload ──────────────────────────────────────────────────
+        /// <summary>
+        /// Accepts a Base64-encoded image, saves it to the runtime mypictures folder,
+        /// and returns the generated filename to be stored in the DB.
+        /// </summary>
+        [HttpPost]
+        public IActionResult UploadProfilePicture([FromBody] ProfilePictureUploadDto dto)
+        {
+            if (dto == null || string.IsNullOrWhiteSpace(dto.ImageBase64))
+                return BadRequest("No image data");
+
+            if (string.IsNullOrEmpty(ImageToBase64Converter.PicturesFolder))
+                return StatusCode(500, "Pictures folder not configured");
+
+            try
+            {
+                byte[] bytes = Convert.FromBase64String(dto.ImageBase64);
+
+                // Generate a unique filename: user_{id}_{ticks}.jpg
+                string fileName = $"user_{dto.BabysitterId}_{DateTime.Now.Ticks}.jpg";
+                string fullPath = Path.Combine(ImageToBase64Converter.PicturesFolder, fileName);
+                System.IO.File.WriteAllBytes(fullPath, bytes);
+
+                return Ok(fileName);   // client stores this filename in the DB
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Upload failed: " + ex.Message);
+            }
+        }
 
     }
 }

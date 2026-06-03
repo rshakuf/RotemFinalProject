@@ -72,9 +72,30 @@ namespace ViewModel
         public RequestsList SelectAll()
         {
             var rows = ReadRawRequests("SELECT * FROM Requests");
+            if (rows.Count == 0) return new RequestsList();
+
+            // ── N+1 FIX ────────────────────────────────────────────────────────────
+            // Load every parent and every babysitter ONCE, then do O(1) dictionary
+            // lookups per row — instead of one full-table SELECT per request row.
+            var parentMap = new ParentsDB().SelectAll()
+                                .ToDictionary(p => p.Id);
+            var sitterMap = new BabySitterTeensDB().SelectAll()
+                                .ToDictionary(b => b.Id);
+
             var list = new RequestsList();
             foreach (var raw in rows)
-                list.Add(HydrateRequest(raw));
+            {
+                var r = new Requests
+                {
+                    Id            = raw.Id,
+                    Status        = raw.Status,
+                    TimeOfRequest = raw.TimeOfRequest,
+                    LenghtTime    = raw.LenghtTime
+                };
+                if (raw.ParentsId    > 0 && parentMap.TryGetValue(raw.ParentsId,    out var parent)) r.ParentsId    = parent;
+                if (raw.BabysitterId > 0 && sitterMap.TryGetValue(raw.BabysitterId, out var sitter)) r.BabysitterId = sitter;
+                list.Add(r);
+            }
             return list;
         }
 
