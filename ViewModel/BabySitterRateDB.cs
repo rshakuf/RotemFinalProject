@@ -13,6 +13,7 @@ namespace ViewModel
         {
             public int Id, IdBabySitter, IdParent, Stars;
             public DateTime DateOfRate;
+            public string ReviewText, Tags;
         }
 
         private List<RawRate> ReadRawRates(string sql, OleDbParameter param = null)
@@ -34,7 +35,9 @@ namespace ViewModel
                         Stars        = reader["stars"] != DBNull.Value ? Convert.ToInt32(reader["stars"]) : 0,
                         IdBabySitter = reader["idBabySitter"] != DBNull.Value ? Convert.ToInt32(reader["idBabySitter"]) : 0,
                         IdParent     = reader["idParent"] != DBNull.Value ? Convert.ToInt32(reader["idParent"]) : 0,
-                        DateOfRate   = reader["dateOfRate"] != DBNull.Value ? Convert.ToDateTime(reader["dateOfRate"]) : default
+                        DateOfRate   = reader["dateOfRate"] != DBNull.Value ? Convert.ToDateTime(reader["dateOfRate"]) : default,
+                        ReviewText   = reader["ReviewText"] != DBNull.Value ? reader["ReviewText"].ToString() : null,
+                        Tags         = reader["Tags"] != DBNull.Value ? reader["Tags"].ToString() : null
                     });
                 }
             }
@@ -53,9 +56,7 @@ namespace ViewModel
 
         private static BabySitterRate HydrateRate(RawRate raw)
         {
-            var r = new BabySitterRate { Id = raw.Id, Stars = raw.Stars, DateOfRate = raw.DateOfRate };
-            // Use lightweight stub so the Id is always set — avoids a fragile full DB lookup
-            // that can silently return null if any user row has a missing CityNameId.
+            var r = new BabySitterRate { Id = raw.Id, Stars = raw.Stars, DateOfRate = raw.DateOfRate, ReviewText = raw.ReviewText, Tags = raw.Tags };
             if (raw.IdBabySitter > 0) r.IdBabySitter = new BabySitterTeens { Id = raw.IdBabySitter };
             if (raw.IdParent     > 0) r.IdParent     = ParentsDB.SelectById(raw.IdParent);
             return r;
@@ -66,15 +67,12 @@ namespace ViewModel
             var rows = ReadRawRates("SELECT * FROM BabySitterRate");
             if (rows.Count == 0) return new BabySitterRateList();
 
-            // ── N+1 FIX ─────────────────────────────────────────────────────────────
-            // Load all parents once instead of one full-table SELECT per rating row.
-            var parentMap = new ParentsDB().SelectAll()
-                                .ToDictionary(p => p.Id);
+            var parentMap = new ParentsDB().SelectAll().ToDictionary(p => p.Id);
 
             var list = new BabySitterRateList();
             foreach (var raw in rows)
             {
-                var r = new BabySitterRate { Id = raw.Id, Stars = raw.Stars, DateOfRate = raw.DateOfRate };
+                var r = new BabySitterRate { Id = raw.Id, Stars = raw.Stars, DateOfRate = raw.DateOfRate, ReviewText = raw.ReviewText, Tags = raw.Tags };
                 if (raw.IdBabySitter > 0) r.IdBabySitter = new BabySitterTeens { Id = raw.IdBabySitter };
                 if (raw.IdParent     > 0 && parentMap.TryGetValue(raw.IdParent, out var parent)) r.IdParent = parent;
                 list.Add(r);
@@ -120,13 +118,15 @@ namespace ViewModel
             if (entity is not BabySitterRate r) return;
 
             cmd.CommandText =
-                "INSERT INTO BabySitterRate (stars, idBabySitter, idParent, DateOfRate) " +
-                "VALUES (?,?,?,?)";
+                "INSERT INTO BabySitterRate (stars, idBabySitter, idParent, DateOfRate, ReviewText, Tags) " +
+                "VALUES (?,?,?,?,?,?)";
 
             cmd.Parameters.Add(new OleDbParameter("@stars", r.Stars));
             cmd.Parameters.Add(new OleDbParameter("@idBabySitter", DbVal(r.IdBabySitter?.Id)));
             cmd.Parameters.Add(new OleDbParameter("@idParent", DbVal(r.IdParent?.Id)));
             cmd.Parameters.Add(new OleDbParameter("@DateOfRate", r.DateOfRate));
+            cmd.Parameters.Add(new OleDbParameter("@ReviewText", (object)r.ReviewText ?? DBNull.Value));
+            cmd.Parameters.Add(new OleDbParameter("@Tags", (object)r.Tags ?? DBNull.Value));
         }
 
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
@@ -134,13 +134,15 @@ namespace ViewModel
             if (entity is not BabySitterRate r) return;
 
             cmd.CommandText =
-                "UPDATE BabySitterRate SET stars=@stars, idBabySitter=@idBabySitter, idParent=@idParent, DateOfRate=@DateOfRate " +
+                "UPDATE BabySitterRate SET stars=@stars, idBabySitter=@idBabySitter, idParent=@idParent, DateOfRate=@DateOfRate, ReviewText=@ReviewText, Tags=@Tags " +
                 "WHERE ID=@id";
 
             cmd.Parameters.Add(new OleDbParameter("@stars", r.Stars));
             cmd.Parameters.Add(new OleDbParameter("@idBabySitter", DbVal(r.IdBabySitter?.Id)));
             cmd.Parameters.Add(new OleDbParameter("@idParent", DbVal(r.IdParent?.Id)));
             cmd.Parameters.Add(new OleDbParameter("@DateOfRate", r.DateOfRate));
+            cmd.Parameters.Add(new OleDbParameter("@ReviewText", (object)r.ReviewText ?? DBNull.Value));
+            cmd.Parameters.Add(new OleDbParameter("@Tags", (object)r.Tags ?? DBNull.Value));
             cmd.Parameters.Add(new OleDbParameter("@id", r.Id));
         }
     }

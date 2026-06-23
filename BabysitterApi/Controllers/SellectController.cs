@@ -4,7 +4,7 @@ using Model;
 using System.Reflection;
 using ViewModel;
 
-// DTO used by the profile-picture upload endpoint
+
 public class ProfilePictureUploadDto
 {
     public int    BabysitterId { get; set; }
@@ -101,6 +101,8 @@ namespace BabysitterApi.Controllers
             {
                 existing.Stars      = rate.Stars;
                 existing.DateOfRate = rate.DateOfRate;
+                existing.ReviewText = rate.ReviewText;
+                existing.Tags       = rate.Tags;
                 db.Update(existing);
             }
             else

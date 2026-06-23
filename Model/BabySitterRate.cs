@@ -17,5 +17,7 @@ namespace Model
         public BabySitterTeens IdBabySitter { get => idBabySitter; set => idBabySitter = value; }
         public Parents IdParent { get => idParent; set => idParent = value; }
         public DateTime DateOfRate { get => dateOfRate; set => dateOfRate = value; }
+        public string ReviewText { get; set; }
+        public string Tags { get; set; }
     }
 }
