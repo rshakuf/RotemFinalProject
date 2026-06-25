@@ -110,11 +110,11 @@ namespace ViewModel
 
                 command.CommandText = sqlStr;
                 command.Parameters.AddWithValue("@ID", b.Id);
-                command.Parameters.AddWithValue("@mail", b.Mail);
+                command.Parameters.AddWithValue("@mail", (object)b.Mail ?? DBNull.Value);
                 command.Parameters.AddWithValue("@priceForAnHour", b.PriceForAnHour);
-                command.Parameters.AddWithValue("@profilePicture", b.ProfilePicture);
-                cmd.Parameters.AddWithValue("@telephone", b.Telephone);
-                cmd.Parameters.AddWithValue("@password", b.Password);
+                command.Parameters.AddWithValue("@profilePicture", (object)b.ProfilePicture ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@telephone", (object)b.Telephone ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@password", (object)b.Password ?? DBNull.Value);
             }
         }
 
