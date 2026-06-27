@@ -396,6 +396,15 @@ namespace BabysitterApi.Controllers
             int x = db.SaveChanges();
         }
 
+        // ── Profile picture delete ─────────────────────────────────────────────────
+        [HttpDelete("{id}")]
+        public IActionResult DeleteProfilePicture(int id)
+        {
+            var db = new BabySitterTeensDB();
+            db.ClearProfilePicture(id);
+            return Ok();
+        }
+
         // ── Profile picture upload ──────────────────────────────────────────────────
         /// <summary>
         /// Accepts a Base64-encoded image, saves it to the runtime mypictures folder,

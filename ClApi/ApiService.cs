@@ -230,6 +230,12 @@ namespace ClApi
             return fileName.Trim('"');
         }
 
+        public async Task<bool> DeleteProfilePictureAsync(int babysitterId)
+        {
+            var response = await client.DeleteAsync($"{uri}/api/Sellect/DeleteProfilePicture/{babysitterId}");
+            return response.IsSuccessStatusCode;
+        }
+
         //public Task<JobHistoryList> GetAllJobHistoriesAsync()
         //{
         //    throw new NotImplementedException();

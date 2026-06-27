@@ -188,6 +188,17 @@ namespace ViewModel
             return recordsAffected;
         }
 
+        public void ClearProfilePicture(int id)
+        {
+            if (connection.State != System.Data.ConnectionState.Open)
+                connection.Open();
+            command.Parameters.Clear();
+            command.CommandText = "UPDATE BabySitterTeens SET profilePicture=NULL WHERE id=@id";
+            command.Parameters.Add(new OleDbParameter("@id", id));
+            command.ExecuteNonQuery();
+            command.Parameters.Clear();
+        }
+
         protected override void CreateUpdatedSQL(BaseEntity entity, OleDbCommand cmd)
         {
             BabySitterTeens b = entity as BabySitterTeens;
